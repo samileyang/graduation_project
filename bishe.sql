@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 20/01/2019 17:48:25
+ Date: 21/01/2019 22:20:59
 */
 
 SET NAMES utf8mb4;
@@ -49,6 +49,7 @@ CREATE TABLE `classroom`  (
   `classroom_id` int(255) NOT NULL AUTO_INCREMENT,
   `classroom_num` int(255) NULL DEFAULT NULL,
   `classroom_max` int(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL COMMENT '教室是否可用',
   PRIMARY KEY (`classroom_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
@@ -137,6 +138,29 @@ CREATE TABLE `mkt_order`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for poor_cert
+-- ----------------------------
+DROP TABLE IF EXISTS `poor_cert`;
+CREATE TABLE `poor_cert`  (
+  `poor_id` int(255) NOT NULL AUTO_INCREMENT,
+  `student_id` int(255) NULL DEFAULT NULL,
+  `refund` int(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL COMMENT '学生是否确认领取',
+  PRIMARY KEY (`poor_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for scholarship
+-- ----------------------------
+DROP TABLE IF EXISTS `scholarship`;
+CREATE TABLE `scholarship`  (
+  `scholarship_id` int(255) NOT NULL,
+  `student_id` int(255) NULL DEFAULT NULL,
+  `money` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`scholarship_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for stu_choice
 -- ----------------------------
 DROP TABLE IF EXISTS `stu_choice`;
@@ -160,6 +184,7 @@ CREATE TABLE `student`  (
   `stu_money` int(255) NULL DEFAULT NULL,
   `stu_instructor` int(255) NULL DEFAULT NULL,
   `stu_room` int(255) NULL DEFAULT NULL,
+  `stu_credit` int(255) UNSIGNED ZEROFILL NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE,
   INDEX `stu_instructor`(`stu_instructor`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
