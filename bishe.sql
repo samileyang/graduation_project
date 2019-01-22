@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 21/01/2019 22:20:59
+ Date: 22/01/2019 21:48:33
 */
 
 SET NAMES utf8mb4;
@@ -23,11 +23,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `cert_order`;
 CREATE TABLE `cert_order`  (
   `cert_order_id` int(255) NOT NULL AUTO_INCREMENT,
-  `ins_id` int(255) NULL DEFAULT NULL,
+  `ins_id` int(255) NULL DEFAULT NULL COMMENT 'instructor',
   `cert_id` int(255) NULL DEFAULT NULL,
   `cert_score` int(255) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL COMMENT '是否完成认证',
-  PRIMARY KEY (`cert_order_id`) USING BTREE
+  PRIMARY KEY (`cert_order_id`) USING BTREE,
+  INDEX `ins_id`(`ins_id`) USING BTREE,
+  INDEX `cert_id`(`cert_id`) USING BTREE,
+  CONSTRAINT `cert_order_ibfk_1` FOREIGN KEY (`ins_id`) REFERENCES `instructor` (`instructor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cert_order_ibfk_2` FOREIGN KEY (`cert_id`) REFERENCES `cert_tpye` (`cert_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -62,7 +66,11 @@ CREATE TABLE `comment`  (
   `stu_myid` int(255) NULL DEFAULT NULL,
   `stu_aimid` int(255) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`comment_id`) USING BTREE
+  PRIMARY KEY (`comment_id`) USING BTREE,
+  INDEX `stu_myid`(`stu_myid`) USING BTREE,
+  INDEX `stu_aimid`(`stu_aimid`) USING BTREE,
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`stu_myid`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`stu_aimid`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -82,11 +90,19 @@ CREATE TABLE `culti_plan`  (
 DROP TABLE IF EXISTS `final_schedule`;
 CREATE TABLE `final_schedule`  (
   `final_id` int(255) NOT NULL AUTO_INCREMENT,
-  `course_id` int(255) NULL DEFAULT NULL,
-  `student_id` int(255) NULL DEFAULT NULL,
-  `teacher_id` int(255) NULL DEFAULT NULL,
+  `course_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `teacher_id` int(255) NOT NULL,
   `classroom_id` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`final_id`) USING BTREE
+  PRIMARY KEY (`final_id`, `course_id`, `student_id`, `teacher_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  INDEX `classroom_id`(`classroom_id`) USING BTREE,
+  CONSTRAINT `final_schedule_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `stu_choice` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `final_schedule_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `stu_choice` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `final_schedule_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `stu_choice` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `final_schedule_ibfk_4` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`classroom_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -99,7 +115,13 @@ CREATE TABLE `gpa`  (
   `course_id` int(255) NULL DEFAULT NULL,
   `teacher_id` int(255) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`score_id`) USING BTREE
+  PRIMARY KEY (`score_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  CONSTRAINT `gpa_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `final_schedule` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gpa_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `final_schedule` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gpa_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `final_schedule` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -134,7 +156,11 @@ CREATE TABLE `mkt_order`  (
   `student_id` int(255) NULL DEFAULT NULL,
   `amount` int(255) NULL DEFAULT NULL,
   `final_price` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`mkt_order_id`) USING BTREE
+  PRIMARY KEY (`mkt_order_id`) USING BTREE,
+  INDEX `pro_id`(`pro_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  CONSTRAINT `mkt_order_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `inventory` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `mkt_order_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -146,7 +172,9 @@ CREATE TABLE `poor_cert`  (
   `student_id` int(255) NULL DEFAULT NULL,
   `refund` int(255) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL COMMENT '学生是否确认领取',
-  PRIMARY KEY (`poor_id`) USING BTREE
+  PRIMARY KEY (`poor_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  CONSTRAINT `poor_cert_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -157,7 +185,9 @@ CREATE TABLE `scholarship`  (
   `scholarship_id` int(255) NOT NULL,
   `student_id` int(255) NULL DEFAULT NULL,
   `money` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`scholarship_id`) USING BTREE
+  PRIMARY KEY (`scholarship_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  CONSTRAINT `scholarship_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -166,11 +196,16 @@ CREATE TABLE `scholarship`  (
 DROP TABLE IF EXISTS `stu_choice`;
 CREATE TABLE `stu_choice`  (
   `choose_id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_id` int(11) NULL DEFAULT NULL,
-  `student_id` int(11) NULL DEFAULT NULL,
-  `teacher_id` int(11) NULL DEFAULT NULL,
+  `course_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
   `status` int(255) NOT NULL COMMENT '是否完成教室安排',
-  PRIMARY KEY (`choose_id`) USING BTREE
+  PRIMARY KEY (`choose_id`, `course_id`, `student_id`, `teacher_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  INDEX `student_id`(`student_id`) USING BTREE,
+  CONSTRAINT `stu_choice_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `teacher_choice` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `stu_choice_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_choice` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -187,6 +222,21 @@ CREATE TABLE `student`  (
   `stu_credit` int(255) UNSIGNED ZEROFILL NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE,
   INDEX `stu_instructor`(`stu_instructor`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for teacher_choice
+-- ----------------------------
+DROP TABLE IF EXISTS `teacher_choice`;
+CREATE TABLE `teacher_choice`  (
+  `teacher_choice_id` int(255) NOT NULL AUTO_INCREMENT,
+  `course_id` int(255) NOT NULL,
+  `teacher_id` int(255) NOT NULL,
+  PRIMARY KEY (`teacher_choice_id`, `course_id`, `teacher_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  CONSTRAINT `teacher_choice_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `culti_plan` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `teacher_choice_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
