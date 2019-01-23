@@ -11,11 +11,21 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 22/01/2019 21:48:33
+ Date: 23/01/2019 22:07:29
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for ability_cert
+-- ----------------------------
+DROP TABLE IF EXISTS `ability_cert`;
+CREATE TABLE `ability_cert`  (
+  `ability_cert_id` int(255) NOT NULL,
+  `ability_cert_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  PRIMARY KEY (`ability_cert_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for cert_order
@@ -27,11 +37,14 @@ CREATE TABLE `cert_order`  (
   `cert_id` int(255) NULL DEFAULT NULL,
   `cert_score` int(255) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL COMMENT '是否完成认证',
+  `stu_id` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`cert_order_id`) USING BTREE,
   INDEX `ins_id`(`ins_id`) USING BTREE,
   INDEX `cert_id`(`cert_id`) USING BTREE,
+  INDEX `stu_id`(`stu_id`) USING BTREE,
   CONSTRAINT `cert_order_ibfk_1` FOREIGN KEY (`ins_id`) REFERENCES `instructor` (`instructor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `cert_order_ibfk_2` FOREIGN KEY (`cert_id`) REFERENCES `cert_tpye` (`cert_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `cert_order_ibfk_2` FOREIGN KEY (`cert_id`) REFERENCES `cert_tpye` (`cert_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cert_order_ibfk_3` FOREIGN KEY (`stu_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -111,11 +124,11 @@ CREATE TABLE `final_schedule`  (
 DROP TABLE IF EXISTS `gpa`;
 CREATE TABLE `gpa`  (
   `score_id` int(255) NOT NULL AUTO_INCREMENT,
-  `student_id` int(255) NULL DEFAULT NULL,
-  `course_id` int(255) NULL DEFAULT NULL,
-  `teacher_id` int(255) NULL DEFAULT NULL,
+  `student_id` int(255) NOT NULL,
+  `course_id` int(255) NOT NULL,
+  `teacher_id` int(255) NOT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`score_id`) USING BTREE,
+  PRIMARY KEY (`score_id`, `student_id`, `teacher_id`, `course_id`) USING BTREE,
   INDEX `student_id`(`student_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
@@ -191,6 +204,24 @@ CREATE TABLE `scholarship`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for stu_ability
+-- ----------------------------
+DROP TABLE IF EXISTS `stu_ability`;
+CREATE TABLE `stu_ability`  (
+  `stu_ability_id` int(255) NOT NULL,
+  `stu_id` int(255) NULL DEFAULT NULL,
+  `teacher_id` int(255) NULL DEFAULT NULL,
+  `ability_cert_id` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`stu_ability_id`) USING BTREE,
+  INDEX `stu_id`(`stu_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  INDEX `ability_cert_id`(`ability_cert_id`) USING BTREE,
+  CONSTRAINT `stu_ability_ibfk_1` FOREIGN KEY (`stu_id`) REFERENCES `gpa` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `stu_ability_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `gpa` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `stu_ability_ibfk_3` FOREIGN KEY (`ability_cert_id`) REFERENCES `ability_cert` (`ability_cert_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for stu_choice
 -- ----------------------------
 DROP TABLE IF EXISTS `stu_choice`;
@@ -205,7 +236,8 @@ CREATE TABLE `stu_choice`  (
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
   INDEX `student_id`(`student_id`) USING BTREE,
   CONSTRAINT `stu_choice_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `teacher_choice` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `stu_choice_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_choice` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `stu_choice_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_choice` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `stu_choice_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
