@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 23/01/2019 22:07:29
+ Date: 04/03/2019 20:36:45
 */
 
 SET NAMES utf8mb4;
@@ -189,6 +189,18 @@ CREATE TABLE `poor_cert`  (
   INDEX `student_id`(`student_id`) USING BTREE,
   CONSTRAINT `poor_cert_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for rmt_eval
+-- ----------------------------
+DROP TABLE IF EXISTS `rmt_eval`;
+CREATE TABLE `rmt_eval`  (
+  `eval_num` int(11) NOT NULL,
+  `eval_student` int(11) NOT NULL,
+  `aim_student` int(11) NULL DEFAULT NULL,
+  `score` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`eval_num`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for scholarship
