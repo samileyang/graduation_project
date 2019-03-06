@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 04/03/2019 20:36:45
+ Date: 06/03/2019 22:03:42
 */
 
 SET NAMES utf8mb4;
@@ -94,6 +94,11 @@ CREATE TABLE `culti_plan`  (
   `course_id` int(255) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `tech_cert` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `major_id` int(11) NULL DEFAULT NULL,
+  `credits` int(255) NULL DEFAULT NULL,
+  `year_in` date NULL DEFAULT NULL,
+  `education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `certi` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`course_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
@@ -158,6 +163,17 @@ CREATE TABLE `inventory`  (
   `pro_amount` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for lost_book
+-- ----------------------------
+DROP TABLE IF EXISTS `lost_book`;
+CREATE TABLE `lost_book`  (
+  `lost_book_id` int(11) NOT NULL,
+  `stu_id` int(11) NULL DEFAULT NULL,
+  `book_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`lost_book_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mkt_order
@@ -243,6 +259,8 @@ CREATE TABLE `stu_choice`  (
   `student_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
   `status` int(255) NOT NULL COMMENT '是否完成教室安排',
+  `teacher_choice_id` int(11) NULL DEFAULT NULL,
+  `class_time` date NULL DEFAULT NULL,
   PRIMARY KEY (`choose_id`, `course_id`, `student_id`, `teacher_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
@@ -276,6 +294,7 @@ CREATE TABLE `teacher_choice`  (
   `teacher_choice_id` int(255) NOT NULL AUTO_INCREMENT,
   `course_id` int(255) NOT NULL,
   `teacher_id` int(255) NOT NULL,
+  `time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_choice_id`, `course_id`, `teacher_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
