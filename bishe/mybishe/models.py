@@ -1,3 +1,258 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-# Create your models here.
+
+class AddCreditOrder(models.Model):
+    add_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    rule = models.ForeignKey('Rules', models.DO_NOTHING, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'add_credit_order'
+
+
+class Borrow(models.Model):
+    book_id = models.AutoField(primary_key=True)
+    book_name = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'borrow'
+
+
+class BorrowOrder(models.Model):
+    borrow_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
+    startdate = models.DateTimeField(blank=True, null=True)
+    supposedate = models.DateTimeField(blank=True, null=True)
+    actdate = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'borrow_order'
+
+
+class BorrowRule(models.Model):
+    education = models.CharField(primary_key=True, max_length=255)
+    day = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'borrow_rule'
+
+
+class Certification(models.Model):
+    certi_id = models.AutoField(primary_key=True)
+    course = models.ForeignKey('CultivatePlan', models.DO_NOTHING, blank=True, null=True)
+    teacher = models.ForeignKey('Teacher', models.DO_NOTHING, blank=True, null=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'certification'
+
+
+class Classroom(models.Model):
+    classroom_id = models.AutoField(primary_key=True)
+    size = models.IntegerField(blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'classroom'
+
+
+class Credit(models.Model):
+    stu = models.ForeignKey('Student', models.DO_NOTHING, primary_key=True)
+    year = models.TextField(blank=True, null=True)  # This field type is a guess.
+    score = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'credit'
+
+
+class CultivatePlan(models.Model):
+    course_id = models.AutoField(primary_key=True)
+    course_name = models.CharField(max_length=255, blank=True, null=True)
+    major_id = models.IntegerField(blank=True, null=True)
+    credit = models.IntegerField(blank=True, null=True)
+    grade = models.IntegerField(blank=True, null=True)
+    semester = models.IntegerField(blank=True, null=True)
+    time = models.IntegerField(blank=True, null=True)
+    certification = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'cultivate_plan'
+
+
+class Dorm(models.Model):
+    dorm_id = models.AutoField(primary_key=True)
+    bed_id = models.IntegerField(blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'dorm'
+
+
+class Instructor(models.Model):
+    instructor_id = models.AutoField(primary_key=True)
+    instructor_name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'instructor'
+
+
+class LostHistory(models.Model):
+    lost_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'lost_history'
+
+
+class Major(models.Model):
+    major_id = models.AutoField(primary_key=True)
+    major_name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'major'
+
+
+class Orders(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    product = models.ForeignKey('Products', models.DO_NOTHING, blank=True, null=True)
+    buyer = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    seller_comm = models.IntegerField(blank=True, null=True)
+    buyer_comm = models.IntegerField(blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'orders'
+
+
+class Penalty(models.Model):
+    stu_pen_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    pen_money = models.IntegerField(blank=True, null=True)
+    education = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='education', blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'penalty'
+
+
+class Products(models.Model):
+    pro_id = models.AutoField(primary_key=True)
+    pro_name = models.CharField(max_length=255, blank=True, null=True)
+    price_org = models.IntegerField(blank=True, null=True)
+    price_cur = models.IntegerField(blank=True, null=True)
+    seller_id = models.IntegerField(blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'products'
+
+
+class RoommateComment(models.Model):
+    comm_id = models.AutoField(primary_key=True)
+    dorm = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    comm_maker = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    student = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'roommate_comment'
+
+
+class Rules(models.Model):
+    rule_id = models.AutoField(primary_key=True)
+    rule_name = models.CharField(max_length=255, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'rules'
+
+
+class Scholarship(models.Model):
+    sch_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+    stu_comm = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'scholarship'
+
+
+class Student(models.Model):
+    stu_id = models.AutoField(primary_key=True)
+    stu_pwd = models.CharField(max_length=255, blank=True, null=True)
+    stu_name = models.CharField(max_length=255, blank=True, null=True)
+    stu_year = models.TextField(blank=True, null=True)  # This field type is a guess.
+    major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
+    money = models.IntegerField(blank=True, null=True)
+    stu_edu = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='stu_edu')
+    dorm = models.ForeignKey(Dorm, models.DO_NOTHING)
+    bed_id = models.IntegerField(blank=True, null=True)
+    instructor = models.ForeignKey(Instructor, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'student'
+        unique_together = (('stu_id', 'dorm'),)
+
+
+class StudentChoice(models.Model):
+    student_choice_id = models.AutoField(primary_key=True)
+    teacher_choice = models.ForeignKey('TeacherChoice', models.DO_NOTHING, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'student_choice'
+
+
+class Teacher(models.Model):
+    tea_id = models.AutoField(primary_key=True)
+    teacher_name = models.CharField(max_length=255, blank=True, null=True)
+    major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'teacher'
+
+
+class TeacherChoice(models.Model):
+    teacher_choice_id = models.AutoField(primary_key=True)
+    teacher = models.ForeignKey(Teacher, models.DO_NOTHING, blank=True, null=True)
+    course = models.ForeignKey(CultivatePlan, models.DO_NOTHING, blank=True, null=True)
+    course_year = models.TextField(blank=True, null=True)  # This field type is a guess.
+    status = models.CharField(max_length=255, blank=True, null=True)
+    classroom = models.ForeignKey(Classroom, models.DO_NOTHING, db_column='classroom', blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'teacher_choice'
