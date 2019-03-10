@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 10/03/2019 20:08:55
+ Date: 10/03/2019 22:25:46
 */
 
 SET NAMES utf8mb4;
@@ -75,6 +75,12 @@ CREATE TABLE `borrow_rule`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of borrow_rule
+-- ----------------------------
+INSERT INTO `borrow_rule` VALUES ('本科', 90);
+INSERT INTO `borrow_rule` VALUES ('研究生', 120);
+
+-- ----------------------------
 -- Table structure for certification
 -- ----------------------------
 DROP TABLE IF EXISTS `certification`;
@@ -135,11 +141,27 @@ DROP TABLE IF EXISTS `dorm`;
 CREATE TABLE `dorm`  (
   `bed_id` int(255) NOT NULL AUTO_INCREMENT,
   `dorm_id` int(255) NOT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`bed_id`, `dorm_id`) USING BTREE,
   INDEX `bed_id`(`bed_id`) USING BTREE,
   INDEX `dorm_id`(`dorm_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 305 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dorm
+-- ----------------------------
+INSERT INTO `dorm` VALUES (101, 1, 1);
+INSERT INTO `dorm` VALUES (102, 1, 0);
+INSERT INTO `dorm` VALUES (103, 1, 0);
+INSERT INTO `dorm` VALUES (104, 1, 0);
+INSERT INTO `dorm` VALUES (201, 2, 0);
+INSERT INTO `dorm` VALUES (202, 2, 0);
+INSERT INTO `dorm` VALUES (203, 2, 0);
+INSERT INTO `dorm` VALUES (204, 2, 0);
+INSERT INTO `dorm` VALUES (301, 3, 0);
+INSERT INTO `dorm` VALUES (302, 3, 0);
+INSERT INTO `dorm` VALUES (303, 3, 0);
+INSERT INTO `dorm` VALUES (304, 3, 0);
 
 -- ----------------------------
 -- Table structure for instructor
@@ -149,7 +171,13 @@ CREATE TABLE `instructor`  (
   `instructor_id` int(11) NOT NULL AUTO_INCREMENT,
   `instructor_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`instructor_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of instructor
+-- ----------------------------
+INSERT INTO `instructor` VALUES (1, '辅导员1');
+INSERT INTO `instructor` VALUES (2, '辅导员2');
 
 -- ----------------------------
 -- Table structure for lost_history
@@ -171,7 +199,14 @@ CREATE TABLE `major`  (
   `major_id` int(11) NOT NULL AUTO_INCREMENT,
   `major_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`major_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of major
+-- ----------------------------
+INSERT INTO `major` VALUES (1, '信管');
+INSERT INTO `major` VALUES (2, '管科');
+INSERT INTO `major` VALUES (3, '会计');
 
 -- ----------------------------
 -- Table structure for orders
@@ -266,7 +301,14 @@ CREATE TABLE `rules`  (
   `rule_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`rule_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of rules
+-- ----------------------------
+INSERT INTO `rules` VALUES (1, 'A类期刊', 10);
+INSERT INTO `rules` VALUES (2, '志愿者', 1);
+INSERT INTO `rules` VALUES (3, '学生会会长', 5);
 
 -- ----------------------------
 -- Table structure for scholarship
@@ -309,7 +351,12 @@ CREATE TABLE `student`  (
   CONSTRAINT `student_ibfk_4` FOREIGN KEY (`stu_edu`) REFERENCES `borrow_rule` (`education`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `student_ibfk_5` FOREIGN KEY (`bed_id`) REFERENCES `dorm` (`bed_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `student_ibfk_6` FOREIGN KEY (`dorm_id`) REFERENCES `dorm` (`dorm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 100, '本科', 101, 1, 1);
 
 -- ----------------------------
 -- Table structure for student_choice
@@ -338,7 +385,12 @@ CREATE TABLE `teacher`  (
   PRIMARY KEY (`tea_id`) USING BTREE,
   INDEX `major_id`(`major_id`) USING BTREE,
   CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of teacher
+-- ----------------------------
+INSERT INTO `teacher` VALUES (1, 'zxd', 1);
 
 -- ----------------------------
 -- Table structure for teacher_choice
