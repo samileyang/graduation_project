@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 09/03/2019 14:56:34
+ Date: 10/03/2019 20:08:55
 */
 
 SET NAMES utf8mb4;
@@ -55,6 +55,8 @@ CREATE TABLE `borrow_order`  (
   `startdate` datetime(0) NULL DEFAULT NULL,
   `supposedate` datetime(0) NULL DEFAULT NULL,
   `actdate` datetime(0) NULL DEFAULT NULL,
+  `penatly_status` binary(255) NULL DEFAULT NULL,
+  `appeal_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE,
   INDEX `stu_id`(`stu_id`) USING BTREE,
   INDEX `book_id`(`book_id`) USING BTREE,
@@ -190,6 +192,22 @@ CREATE TABLE `orders`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for pen_appeal
+-- ----------------------------
+DROP TABLE IF EXISTS `pen_appeal`;
+CREATE TABLE `pen_appeal`  (
+  `pen_appeal_id` int(11) NOT NULL,
+  `stu_pen_id` int(11) NULL DEFAULT NULL,
+  `teacher_id` int(11) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`pen_appeal_id`) USING BTREE,
+  INDEX `stu_pen_id`(`stu_pen_id`) USING BTREE,
+  INDEX `teacher_id`(`teacher_id`) USING BTREE,
+  CONSTRAINT `pen_appeal_ibfk_1` FOREIGN KEY (`stu_pen_id`) REFERENCES `penalty` (`stu_pen_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `pen_appeal_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`tea_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for penalty
 -- ----------------------------
 DROP TABLE IF EXISTS `penalty`;
@@ -233,11 +251,10 @@ CREATE TABLE `roommate_comment`  (
   `student_id` int(11) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`comm_id`) USING BTREE,
-  INDEX `dorm_id`(`dorm_id`) USING BTREE,
   INDEX `comm_maker_id`(`comm_maker_id`) USING BTREE,
   INDEX `student_id`(`student_id`) USING BTREE,
-  CONSTRAINT `roommate_comment_ibfk_2` FOREIGN KEY (`comm_maker_id`) REFERENCES `student` (`stu_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `roommate_comment_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `student` (`stu_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `roommate_comment_ibfk_2`(`dorm_id`) USING BTREE,
+  CONSTRAINT `roommate_comment_ibfk_2` FOREIGN KEY (`dorm_id`) REFERENCES `dorm` (`dorm_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -282,11 +299,11 @@ CREATE TABLE `student`  (
   `instructor_id` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE,
   INDEX `major_id`(`major_id`) USING BTREE,
-  INDEX `dorm_id`(`dorm_id`) USING BTREE,
   INDEX `instructor_id`(`instructor_id`) USING BTREE,
   INDEX `stu_id`(`stu_id`) USING BTREE,
   INDEX `stu_edu`(`stu_edu`) USING BTREE,
   INDEX `bed_id`(`bed_id`) USING BTREE,
+  INDEX `dorm_id`(`dorm_id`) USING BTREE,
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `student_ibfk_3` FOREIGN KEY (`instructor_id`) REFERENCES `instructor` (`instructor_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `student_ibfk_4` FOREIGN KEY (`stu_edu`) REFERENCES `borrow_rule` (`education`) ON DELETE RESTRICT ON UPDATE RESTRICT,
