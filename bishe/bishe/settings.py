@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mybishe',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'bishe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,8 +80,8 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 3306,
         'USER': 'root',
-        'PASSWORD': 'xxx',
-        'NAME': 'xxx',
+        'PASSWORD': '9299wayy',
+        'NAME': 'bishe',
     }
 }
 
@@ -122,3 +123,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+

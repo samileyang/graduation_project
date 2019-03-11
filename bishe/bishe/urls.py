@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from mybishe import views
+from django.conf.urls import url
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^stu_info/',views.stu_info),
 ]
