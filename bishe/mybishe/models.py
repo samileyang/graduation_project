@@ -36,6 +36,8 @@ class BorrowOrder(models.Model):
     startdate = models.DateTimeField(blank=True, null=True)
     supposedate = models.DateTimeField(blank=True, null=True)
     actdate = models.DateTimeField(blank=True, null=True)
+    penatly_status = models.CharField(max_length=255, blank=True, null=True)
+    appeal_status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         
@@ -53,9 +55,7 @@ class BorrowRule(models.Model):
 
 class Certification(models.Model):
     certi_id = models.AutoField(primary_key=True)
-    course = models.ForeignKey('CultivatePlan', models.DO_NOTHING, blank=True, null=True)
-    teacher = models.ForeignKey('Teacher', models.DO_NOTHING, blank=True, null=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    student_choice = models.ForeignKey('StudentChoice', models.DO_NOTHING, blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -74,7 +74,8 @@ class Classroom(models.Model):
 
 
 class Credit(models.Model):
-    stu = models.ForeignKey('Student', models.DO_NOTHING, primary_key=True)
+    credit_id = models.AutoField(primary_key=True)
+    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
     year = models.TextField(blank=True, null=True)  # This field type is a guess.
     score = models.IntegerField(blank=True, null=True)
 
@@ -99,13 +100,14 @@ class CultivatePlan(models.Model):
 
 
 class Dorm(models.Model):
-    dorm_id = models.AutoField(primary_key=True)
-    bed_id = models.IntegerField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
+    bed_id = models.AutoField(primary_key=True)
+    dorm_id = models.IntegerField()
+    status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
         db_table = 'dorm'
+        unique_together = (('bed_id', 'dorm_id'),)
 
 
 class Instructor(models.Model):
@@ -119,8 +121,7 @@ class Instructor(models.Model):
 
 class LostHistory(models.Model):
     lost_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
+    borrow = models.ForeignKey(BorrowOrder, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         
@@ -149,9 +150,20 @@ class Orders(models.Model):
         db_table = 'orders'
 
 
+class PenAppeal(models.Model):
+    pen_appeal_id = models.IntegerField(primary_key=True)
+    stu_pen = models.ForeignKey('Penalty', models.DO_NOTHING, blank=True, null=True)
+    teacher = models.ForeignKey('Teacher', models.DO_NOTHING, blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'pen_appeal'
+
+
 class Penalty(models.Model):
     stu_pen_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    borrow = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
     pen_money = models.IntegerField(blank=True, null=True)
     education = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='education', blank=True, null=True)
 
@@ -165,7 +177,7 @@ class Products(models.Model):
     pro_name = models.CharField(max_length=255, blank=True, null=True)
     price_org = models.IntegerField(blank=True, null=True)
     price_cur = models.IntegerField(blank=True, null=True)
-    seller_id = models.IntegerField(blank=True, null=True)
+    seller = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
 
@@ -176,9 +188,9 @@ class Products(models.Model):
 
 class RoommateComment(models.Model):
     comm_id = models.AutoField(primary_key=True)
-    dorm = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    comm_maker = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    student = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    dorm_id = models.IntegerField(blank=True, null=True)
+    comm_maker_id = models.IntegerField(blank=True, null=True)
+    student_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -198,7 +210,7 @@ class Rules(models.Model):
 
 class Scholarship(models.Model):
     sch_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    student_choice = models.ForeignKey('StudentChoice', models.DO_NOTHING, blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
     stu_comm = models.CharField(max_length=255, blank=True, null=True)
 
@@ -214,21 +226,21 @@ class Student(models.Model):
     stu_year = models.TextField(blank=True, null=True)  # This field type is a guess.
     major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
     money = models.IntegerField(blank=True, null=True)
-    stu_edu = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='stu_edu')
-    dorm = models.ForeignKey(Dorm, models.DO_NOTHING)
+    stu_edu = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='stu_edu', blank=True, null=True)
     bed_id = models.IntegerField(blank=True, null=True)
+    dorm_id = models.IntegerField(blank=True, null=True)
     instructor = models.ForeignKey(Instructor, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         
         db_table = 'student'
-        unique_together = (('stu_id', 'dorm'),)
 
 
 class StudentChoice(models.Model):
     student_choice_id = models.AutoField(primary_key=True)
     teacher_choice = models.ForeignKey('TeacherChoice', models.DO_NOTHING, blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
+    stu = models.ForeignKey(Student, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         
