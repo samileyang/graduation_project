@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 11/03/2019 21:19:37
+ Date: 14/03/2019 22:07:16
 */
 
 SET NAMES utf8mb4;
@@ -40,9 +40,16 @@ DROP TABLE IF EXISTS `borrow`;
 CREATE TABLE `borrow`  (
   `book_id` int(11) NOT NULL AUTO_INCREMENT,
   `book_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`book_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of borrow
+-- ----------------------------
+INSERT INTO `borrow` VALUES (1, '高等数学', 0);
+INSERT INTO `borrow` VALUES (2, 'python', 0);
+INSERT INTO `borrow` VALUES (3, 'SQL', 1);
 
 -- ----------------------------
 -- Table structure for borrow_order
@@ -55,14 +62,19 @@ CREATE TABLE `borrow_order`  (
   `startdate` datetime(0) NULL DEFAULT NULL,
   `supposedate` datetime(0) NULL DEFAULT NULL,
   `actdate` datetime(0) NULL DEFAULT NULL,
-  `penatly_status` binary(255) NULL DEFAULT NULL,
-  `appeal_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `penatly_status` int(255) NULL DEFAULT NULL,
+  `appeal_status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE,
   INDEX `stu_id`(`stu_id`) USING BTREE,
   INDEX `book_id`(`book_id`) USING BTREE,
   CONSTRAINT `borrow_order_ibfk_1` FOREIGN KEY (`stu_id`) REFERENCES `student` (`stu_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `borrow_order_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `borrow` (`book_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of borrow_order
+-- ----------------------------
+INSERT INTO `borrow_order` VALUES (1, 1, 3, '2019-03-20 21:11:23', '2019-03-15 21:33:15', '2019-03-15 21:33:19', 0, 1);
 
 -- ----------------------------
 -- Table structure for borrow_rule
