@@ -22,7 +22,7 @@ class AddCreditOrder(models.Model):
 class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -32,12 +32,12 @@ class Borrow(models.Model):
 class BorrowOrder(models.Model):
     borrow_id = models.AutoField(primary_key=True)
     stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
+    book = models.ForeignKey(Borrow,models.DO_NOTHING, blank=True, null=True)
     startdate = models.DateTimeField(blank=True, null=True)
     supposedate = models.DateTimeField(blank=True, null=True)
     actdate = models.DateTimeField(blank=True, null=True)
-    penatly_status = models.CharField(max_length=255, blank=True, null=True)
-    appeal_status = models.CharField(max_length=255, blank=True, null=True)
+    penatly_status = models.IntegerField(blank=True, null=True)
+    appeal_status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
