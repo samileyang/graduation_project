@@ -1,0 +1,22 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">编号</th>
+                <th scope="col">书名</th>
+                <th scope="col">状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for borrow in borrows %}
+                <tr>
+                    <td>{{ borrow.book_id }}</td>
+                    <td>{{ borrow.book_name }}</td>
+                    <td><button>借阅</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}
