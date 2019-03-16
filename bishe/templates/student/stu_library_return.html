@@ -1,0 +1,23 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">编号</th>
+                <th scope="col">时间</th>
+                <th scope="col">状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.book.book_id }}</td>
+                    <td>{{ order.startdate }}</td>
+                    <td><button>归还</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}

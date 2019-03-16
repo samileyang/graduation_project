@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery-1.12.4.js"></script>
+</head>
+<body>
+    <div class="menu">
+
+    <ul style="margin-left: 20px;margin-top:10px">
+        <li style="font-size: 16px" onclick="window.location.href='/emp_main'">辅导员|系统</li>
+           <li><a href="">同学评价</a></li>
+        <li><a href="">论文/学生工作申请</a></li>
+        <li><a href="">信用评价</a></li>
+        <li><a href="">商品认证</a></li>
+
+    </ul>
+    <ul style="float: right">
+        <li><a href="">已在 登录</a></li>
+        <li style="font-size: 16px" onclick="window.location.href='/index'">退出</a></li>
+    </ul>
+</div>
+    {% block context %}
+        添加内容
+    {% endblock context %}
+</body>
+</html>

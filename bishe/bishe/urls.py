@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^stu_index/',views.stu_index),
     url(r'^stu_login/',views.stu_login),
     url(r'^jwc_index/',views.jwc_index),
+    url(r'^stu_library_borrow/',views.stu_library_borrow),
+    url(r'^stu_library_return/',views.stu_library_return),
 ]
