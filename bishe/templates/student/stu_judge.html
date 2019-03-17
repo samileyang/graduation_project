@@ -1,0 +1,26 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <form action="/stu_judge/" method="Post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="stu_id">室友编号</label>
+                <select type="text" class="form-control" name="stu_id" id="stu_id">
+                    <option>请选择：</option>
+                    {% for dorm in dorms %}
+                    <option>{{ dorm.stu_id }}</option>
+                    {% endfor %}
+                </select> 
+            </div>
+            <div class="form-group">
+                <label for="score">得分</label>
+                <input type="text" class="form-control" name="score" id="score">
+            </div>
+            <button type="submit" class="btn btn-primary">确定</button>
+            
+        </form>
+    </div>
+
+
+
+{% endblock context %}

@@ -1,0 +1,26 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <form action="/stu_sp_certification/" method="Post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="rule_name">选择你要认证的论文or学生工作</label>
+                <select type="text" class="form-control" name="rule_name" id="rule_name">
+                    <option>请选择：</option>
+                    {% for certification in certifications %}
+                    <option>{{ certification.rule_name }}</option>
+                    {% endfor %}
+                </select> 
+            </div>
+            <div class="form-group">
+                <label for="comments">申请原因</label>
+                <input type="text" class="form-control" name="comments" id="comments">
+            </div>
+            <button type="submit" class="btn btn-primary">确定</button>
+            
+        </form>
+    </div>
+
+
+
+{% endblock context %}
