@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from mybishe import views
 from django.conf.urls import url
+
 urlpatterns = [
     url(r'^stu_info/',views.stu_info),
     url(r'^stu_index/',views.stu_index),
     url(r'^stu_login/',views.stu_login),
     url(r'^jwc_index/',views.jwc_index),
     url(r'^stu_library_borrow/',views.stu_library_borrow),
-    url(r'^stu_library_return/',views.stu_library_return),
+    url(r'^library_return/',views.library_return),
+    url(r'^stu_judge/',views.stu_judge),
+    url(r'^stu_sp_certification/',views.stu_sp_certification),
+    url(r'^stu_products/',views.stu_products),
 ]
