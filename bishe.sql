@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 17/03/2019 22:00:53
+ Date: 18/03/2019 22:38:23
 */
 
 SET NAMES utf8mb4;
@@ -103,7 +103,7 @@ CREATE TABLE `certification`  (
   PRIMARY KEY (`certi_id`) USING BTREE,
   INDEX `student_choice_id`(`student_choice_id`) USING BTREE,
   CONSTRAINT `certification_ibfk_1` FOREIGN KEY (`student_choice_id`) REFERENCES `student_choice` (`student_choice_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for classroom
@@ -112,9 +112,15 @@ DROP TABLE IF EXISTS `classroom`;
 CREATE TABLE `classroom`  (
   `classroom_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` int(11) NULL DEFAULT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`classroom_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of classroom
+-- ----------------------------
+INSERT INTO `classroom` VALUES (1, 10, 0);
+INSERT INTO `classroom` VALUES (2, 5, 0);
 
 -- ----------------------------
 -- Table structure for credit
@@ -281,11 +287,17 @@ CREATE TABLE `products`  (
   `price_cur` int(255) NULL DEFAULT NULL,
   `seller_id` int(11) NULL DEFAULT NULL,
   `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE,
   INDEX `seller_id`(`seller_id`) USING BTREE,
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`seller_id`) REFERENCES `student` (`stu_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of products
+-- ----------------------------
+INSERT INTO `products` VALUES (1, 'iPhone', 5999, 3999, 1, '操场', 0);
+INSERT INTO `products` VALUES (2, 'iPad', 4999, 2999, 1, '南校门', 1);
 
 -- ----------------------------
 -- Table structure for roommate_comment
