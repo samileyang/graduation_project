@@ -1,0 +1,28 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">发布学生</th>
+                <th scope="col">商品名称</th>
+                <th scope="col">原价</th>
+                <th scope="col">现价</th>
+                <th scope="col">交易地点</th>
+                <th scope="col">交易</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.seller_id }}</td>
+                    <td>{{ product.pro_name }}</td>
+                    <td>{{ product.price_org }}</td>
+                    <td>{{ product.price_cur }}</td>
+                    <td>{{ product.location }}</td>
+                    <td><button>购买</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}
