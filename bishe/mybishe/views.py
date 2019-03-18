@@ -39,6 +39,37 @@ def stu_library_borrow(request):
 	borrows = models.Borrow.objects.filter(status ='0')
 	return render(request,'student/stu_library_borrow.html',{'borrows':borrows})
 
-def stu_library_return(request):
+def library_return(request):
 	orders = models.BorrowOrder.objects.all()
-	return render(request,'student/stu_library_return.html',{'orders':orders})
+	return render(request,'jwc/library_return.html',{'orders':orders})
+
+def stu_judge(request):
+	dorms = models.Student.objects.filter(dorm_id=1)
+	try:
+		stu_id = request.POST.get('stu_id')
+		score = request.POST.get('score')
+	except:
+		pass
+	return render(request,'student/stu_judge.html',{'dorms':dorms})
+
+def stu_sp_certification(request):
+	certifications = models.Rules.objects.all()
+	return render(request,'student/stu_sp_certification.html',{'certifications':certifications})
+
+def stu_products(request):
+	try:
+		pro_name = request.POST.get('pro_name')
+		price_org = request.POST.get('price_org')
+		price_cur = request.POST.get('price_cur')
+		location = request.POST.get('location')
+	except:
+		pass
+	return render(request,'student/stu_products.html')
+
+def instructor_pro_review(request):
+	products = models.Products.objects.filter(status=0)
+	return render(request,'instructor/instructor_pro_review.html',{'products':products})
+
+def stu_pro_purchase(request):
+	products = models.Products.objects.filter(status=1)
+	return render(request,'student/stu_pro_purchase.html',{'products':products})
