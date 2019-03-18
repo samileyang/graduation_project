@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^library_return/',views.library_return),
     url(r'^stu_judge/',views.stu_judge),
     url(r'^stu_sp_certification/',views.stu_sp_certification),
+    url(r'^instructor_pro_review/',views.instructor_pro_review),
     url(r'^stu_products/',views.stu_products),
+    url(r'^stu_pro_purchase/',views.stu_pro_purchase),
 ]
