@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 18/03/2019 22:38:23
+ Date: 19/03/2019 22:42:22
 */
 
 SET NAMES utf8mb4;
@@ -147,10 +147,18 @@ CREATE TABLE `cultivate_plan`  (
   `credit` int(255) NULL DEFAULT NULL,
   `grade` int(255) NULL DEFAULT NULL,
   `semester` int(255) NULL DEFAULT NULL,
-  `time` int(255) NULL DEFAULT NULL COMMENT '用数字代表时间 如果数字有重复 则不可重复选择',
-  `certification` binary(255) NULL DEFAULT NULL COMMENT '是否可以被认证',
+  `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '用数字代表时间 如果数字有重复 则不可重复选择',
+  `certification` int(255) NULL DEFAULT NULL COMMENT '是否可以被认证',
   PRIMARY KEY (`course_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cultivate_plan
+-- ----------------------------
+INSERT INTO `cultivate_plan` VALUES (1, '大数据', 1, 3, 3, 1, '周一下午', 1);
+INSERT INTO `cultivate_plan` VALUES (2, 'Python', 1, 2, 3, 2, '周三上午', 1);
+INSERT INTO `cultivate_plan` VALUES (3, '基础会计', 3, 2, 2, 1, '周一上午', 0);
+INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0);
 
 -- ----------------------------
 -- Table structure for dorm
@@ -422,8 +430,9 @@ CREATE TABLE `teacher_choice`  (
   `teacher_id` int(11) NULL DEFAULT NULL,
   `course_id` int(11) NULL DEFAULT NULL,
   `course_year` year NULL DEFAULT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   `classroom` int(255) NULL DEFAULT NULL,
+  `time` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_choice_id`) USING BTREE,
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
@@ -431,6 +440,11 @@ CREATE TABLE `teacher_choice`  (
   CONSTRAINT `teacher_choice_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`tea_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `teacher_choice_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `cultivate_plan` (`course_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `teacher_choice_ibfk_3` FOREIGN KEY (`classroom`) REFERENCES `classroom` (`classroom_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of teacher_choice
+-- ----------------------------
+INSERT INTO `teacher_choice` VALUES (1, 1, 1, 2018, 0, NULL, '周一下午');
 
 SET FOREIGN_KEY_CHECKS = 1;
