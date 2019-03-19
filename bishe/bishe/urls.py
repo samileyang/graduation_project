@@ -30,4 +30,6 @@ urlpatterns = [
     url(r'^instructor_pro_review/',views.instructor_pro_review),
     url(r'^stu_products/',views.stu_products),
     url(r'^stu_pro_purchase/',views.stu_pro_purchase),
+    url(r'^teacher_choose_course/',views.teacher_choose_course),
+    url(r'^stu_choose_course/',views.stu_choose_course),
 ]
