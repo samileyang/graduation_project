@@ -32,7 +32,7 @@ class Borrow(models.Model):
 class BorrowOrder(models.Model):
     borrow_id = models.AutoField(primary_key=True)
     stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    book = models.ForeignKey(Borrow,models.DO_NOTHING, blank=True, null=True)
+    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
     startdate = models.DateTimeField(blank=True, null=True)
     supposedate = models.DateTimeField(blank=True, null=True)
     actdate = models.DateTimeField(blank=True, null=True)
@@ -66,7 +66,7 @@ class Certification(models.Model):
 class Classroom(models.Model):
     classroom_id = models.AutoField(primary_key=True)
     size = models.IntegerField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -91,8 +91,8 @@ class CultivatePlan(models.Model):
     credit = models.IntegerField(blank=True, null=True)
     grade = models.IntegerField(blank=True, null=True)
     semester = models.IntegerField(blank=True, null=True)
-    time = models.IntegerField(blank=True, null=True)
-    certification = models.CharField(max_length=255, blank=True, null=True)
+    time = models.CharField(max_length=255, blank=True, null=True)
+    certification = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -179,7 +179,7 @@ class Products(models.Model):
     price_cur = models.IntegerField(blank=True, null=True)
     seller = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -262,8 +262,9 @@ class TeacherChoice(models.Model):
     teacher = models.ForeignKey(Teacher, models.DO_NOTHING, blank=True, null=True)
     course = models.ForeignKey(CultivatePlan, models.DO_NOTHING, blank=True, null=True)
     course_year = models.TextField(blank=True, null=True)  # This field type is a guess.
-    status = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
     classroom = models.ForeignKey(Classroom, models.DO_NOTHING, db_column='classroom', blank=True, null=True)
+    time = models.CharField(max_length=225, blank=True, null=True)
 
     class Meta:
         

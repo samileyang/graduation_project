@@ -73,3 +73,12 @@ def instructor_pro_review(request):
 def stu_pro_purchase(request):
 	products = models.Products.objects.filter(status=1)
 	return render(request,'student/stu_pro_purchase.html',{'products':products})
+
+def teacher_choose_course(request):
+	courses = models.CultivatePlan.objects.all()
+	return render(request,'teacher/teacher_choose_course.html',{'courses':courses})
+
+
+def stu_choose_course(request):
+	courses = models.TeacherChoice.objects.all()
+	return render(request,'student/stu_choose_course.html',{'courses':courses})
