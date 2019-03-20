@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^stu_pro_purchase/',views.stu_pro_purchase),
     url(r'^teacher_choose_course/',views.teacher_choose_course),
     url(r'^stu_choose_course/',views.stu_choose_course),
+    url(r'^stu_book_lost/',views.stu_book_lost),
 ]
