@@ -82,3 +82,7 @@ def teacher_choose_course(request):
 def stu_choose_course(request):
 	courses = models.TeacherChoice.objects.all()
 	return render(request,'student/stu_choose_course.html',{'courses':courses})
+
+def stu_book_lost(request):
+	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
+	return render(request,'student/stu_book_lost.html',{'books':books})

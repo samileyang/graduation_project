@@ -23,6 +23,7 @@ class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         
@@ -38,6 +39,8 @@ class BorrowOrder(models.Model):
     actdate = models.DateTimeField(blank=True, null=True)
     penatly_status = models.IntegerField(blank=True, null=True)
     appeal_status = models.IntegerField(blank=True, null=True)
+    return_status = models.IntegerField(blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         
@@ -61,16 +64,6 @@ class Certification(models.Model):
     class Meta:
         
         db_table = 'certification'
-
-
-class Classroom(models.Model):
-    classroom_id = models.AutoField(primary_key=True)
-    size = models.IntegerField(blank=True, null=True)
-    status = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        
-        db_table = 'classroom'
 
 
 class Credit(models.Model):
@@ -263,7 +256,6 @@ class TeacherChoice(models.Model):
     course = models.ForeignKey(CultivatePlan, models.DO_NOTHING, blank=True, null=True)
     course_year = models.TextField(blank=True, null=True)  # This field type is a guess.
     status = models.IntegerField(blank=True, null=True)
-    classroom = models.ForeignKey(Classroom, models.DO_NOTHING, db_column='classroom', blank=True, null=True)
     time = models.CharField(max_length=225, blank=True, null=True)
 
     class Meta:
