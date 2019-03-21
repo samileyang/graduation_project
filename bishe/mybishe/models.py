@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
@@ -15,7 +15,7 @@ class AddCreditOrder(models.Model):
     score = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'add_credit_order'
 
 
@@ -26,7 +26,7 @@ class Borrow(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'borrow'
 
 
@@ -43,7 +43,7 @@ class BorrowOrder(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'borrow_order'
 
 
@@ -52,7 +52,7 @@ class BorrowRule(models.Model):
     day = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'borrow_rule'
 
 
@@ -62,7 +62,7 @@ class Certification(models.Model):
     status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'certification'
 
 
@@ -73,7 +73,7 @@ class Credit(models.Model):
     score = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'credit'
 
 
@@ -88,7 +88,7 @@ class CultivatePlan(models.Model):
     certification = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'cultivate_plan'
 
 
@@ -98,7 +98,7 @@ class Dorm(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'dorm'
         unique_together = (('bed_id', 'dorm_id'),)
 
@@ -108,7 +108,7 @@ class Instructor(models.Model):
     instructor_name = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'instructor'
 
 
@@ -117,7 +117,7 @@ class LostHistory(models.Model):
     borrow = models.ForeignKey(BorrowOrder, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'lost_history'
 
 
@@ -126,7 +126,7 @@ class Major(models.Model):
     major_name = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'major'
 
 
@@ -139,7 +139,7 @@ class Orders(models.Model):
     price = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'orders'
 
 
@@ -150,7 +150,7 @@ class PenAppeal(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'pen_appeal'
 
 
@@ -161,7 +161,7 @@ class Penalty(models.Model):
     education = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='education', blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'penalty'
 
 
@@ -175,7 +175,7 @@ class Products(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'products'
 
 
@@ -187,7 +187,7 @@ class RoommateComment(models.Model):
     score = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'roommate_comment'
 
 
@@ -197,7 +197,7 @@ class Rules(models.Model):
     score = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'rules'
 
 
@@ -208,7 +208,7 @@ class Scholarship(models.Model):
     stu_comm = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'scholarship'
 
 
@@ -225,7 +225,7 @@ class Student(models.Model):
     instructor = models.ForeignKey(Instructor, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'student'
 
 
@@ -236,7 +236,7 @@ class StudentChoice(models.Model):
     stu = models.ForeignKey(Student, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'student_choice'
 
 
@@ -246,7 +246,7 @@ class Teacher(models.Model):
     major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'teacher'
 
 
@@ -257,7 +257,8 @@ class TeacherChoice(models.Model):
     course_year = models.TextField(blank=True, null=True)  # This field type is a guess.
     status = models.IntegerField(blank=True, null=True)
     time = models.CharField(max_length=225, blank=True, null=True)
+    certification = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        
+        managed = False
         db_table = 'teacher_choice'

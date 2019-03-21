@@ -86,3 +86,11 @@ def stu_choose_course(request):
 def stu_book_lost(request):
 	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
+
+def teacher_give_score(request):
+	students = models.StudentChoice.objects.filter(score = 0)
+	return render(request,'teacher/teacher_give_score.html',{'students':students})
+
+def stu_skills_order(request):
+	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = 1)
+	return render(request,'student/stu_skills_order.html',{'courses':courses})

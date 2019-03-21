@@ -1,0 +1,26 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">课程名称</th>
+                <th scope="col">教师编号</th>
+                <th scope="col">上课时间</th>
+                <th scope="col">教室</th>
+                <th scope="col">选择</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.course_id }}</td>
+                    <td>{{ course.teacher_id }}</td>
+                    <td>{{ course.time }}</td>
+                    <td>{{ course.classroom }}</td>
+                    <td><button>选择</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}
