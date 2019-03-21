@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 20/03/2019 22:43:10
+ Date: 21/03/2019 22:25:36
 */
 
 SET NAMES utf8mb4;
@@ -395,10 +395,10 @@ CREATE TABLE `student_choice`  (
 -- ----------------------------
 -- Records of student_choice
 -- ----------------------------
-INSERT INTO `student_choice` VALUES (1, 1, NULL, 1);
-INSERT INTO `student_choice` VALUES (2, 1, NULL, 2);
-INSERT INTO `student_choice` VALUES (3, 1, NULL, 3);
-INSERT INTO `student_choice` VALUES (4, 1, NULL, 4);
+INSERT INTO `student_choice` VALUES (1, 1, 95, 1);
+INSERT INTO `student_choice` VALUES (2, 1, 95, 2);
+INSERT INTO `student_choice` VALUES (3, 1, 85, 3);
+INSERT INTO `student_choice` VALUES (4, 1, 0, 4);
 
 -- ----------------------------
 -- Table structure for teacher
@@ -429,6 +429,7 @@ CREATE TABLE `teacher_choice`  (
   `course_year` year NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   `time` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `certification` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_choice_id`) USING BTREE,
   INDEX `teacher_id`(`teacher_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
@@ -439,6 +440,6 @@ CREATE TABLE `teacher_choice`  (
 -- ----------------------------
 -- Records of teacher_choice
 -- ----------------------------
-INSERT INTO `teacher_choice` VALUES (1, 1, 1, 2018, 0, '周一下午');
+INSERT INTO `teacher_choice` VALUES (1, 1, 1, 2018, 0, '周一下午', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
