@@ -94,3 +94,7 @@ def teacher_give_score(request):
 def stu_skills_order(request):
 	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = 1)
 	return render(request,'student/stu_skills_order.html',{'courses':courses})
+
+def instructor_sp_confirm(request):
+	students = models.AddCreditOrder.objects.filter(status = 0)
+	return render(request,'instructor/instructor_sp_confirm.html',{"students":students})
