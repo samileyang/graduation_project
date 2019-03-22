@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 21/03/2019 22:25:36
+ Date: 22/03/2019 21:30:34
 */
 
 SET NAMES utf8mb4;
@@ -26,12 +26,20 @@ CREATE TABLE `add_credit_order`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `rule_id` int(11) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`add_id`) USING BTREE,
   INDEX `stu_id`(`stu_id`) USING BTREE,
   INDEX `rule_id`(`rule_id`) USING BTREE,
   CONSTRAINT `add_credit_order_ibfk_1` FOREIGN KEY (`stu_id`) REFERENCES `student` (`stu_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `add_credit_order_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `rules` (`rule_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of add_credit_order
+-- ----------------------------
+INSERT INTO `add_credit_order` VALUES (1, 1, 1, 10, 0);
+INSERT INTO `add_credit_order` VALUES (2, 2, 2, 1, 0);
+INSERT INTO `add_credit_order` VALUES (3, 3, 3, 5, 0);
 
 -- ----------------------------
 -- Table structure for borrow
