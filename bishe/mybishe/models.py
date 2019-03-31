@@ -10,8 +10,8 @@ from django.db import models
 
 class AddCreditOrder(models.Model):
     add_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    rule = models.ForeignKey('Rules', models.DO_NOTHING, blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
+    rule_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
 
@@ -33,8 +33,8 @@ class Borrow(models.Model):
 
 class BorrowOrder(models.Model):
     borrow_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
-    book = models.ForeignKey(Borrow, models.DO_NOTHING, blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
+    book_id = models.IntegerField(blank=True, null=True)
     startdate = models.DateTimeField(blank=True, null=True)
     supposedate = models.DateTimeField(blank=True, null=True)
     actdate = models.DateTimeField(blank=True, null=True)
@@ -59,7 +59,7 @@ class BorrowRule(models.Model):
 
 class Certification(models.Model):
     certi_id = models.AutoField(primary_key=True)
-    student_choice = models.ForeignKey('StudentChoice', models.DO_NOTHING, blank=True, null=True)
+    student_choice_id = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -69,7 +69,7 @@ class Certification(models.Model):
 
 class Credit(models.Model):
     credit_id = models.AutoField(primary_key=True)
-    stu = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
     year = models.TextField(blank=True, null=True)  # This field type is a guess.
     score = models.IntegerField(blank=True, null=True)
 
@@ -115,7 +115,7 @@ class Instructor(models.Model):
 
 class LostHistory(models.Model):
     lost_id = models.AutoField(primary_key=True)
-    borrow = models.ForeignKey(BorrowOrder, models.DO_NOTHING, blank=True, null=True)
+    borrow_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -133,8 +133,8 @@ class Major(models.Model):
 
 class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
-    product = models.ForeignKey('Products', models.DO_NOTHING, blank=True, null=True)
-    buyer = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    product_id = models.IntegerField(blank=True, null=True)
+    buyer_id = models.IntegerField(blank=True, null=True)
     seller_comm = models.IntegerField(blank=True, null=True)
     buyer_comm = models.IntegerField(blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
@@ -146,8 +146,8 @@ class Orders(models.Model):
 
 class PenAppeal(models.Model):
     pen_appeal_id = models.IntegerField(primary_key=True)
-    stu_pen = models.ForeignKey('Penalty', models.DO_NOTHING, blank=True, null=True)
-    teacher = models.ForeignKey('Teacher', models.DO_NOTHING, blank=True, null=True)
+    stu_pen_id = models.IntegerField(blank=True, null=True)
+    teacher_id = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -157,9 +157,9 @@ class PenAppeal(models.Model):
 
 class Penalty(models.Model):
     stu_pen_id = models.AutoField(primary_key=True)
-    borrow = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    borrow_id = models.IntegerField(blank=True, null=True)
     pen_money = models.IntegerField(blank=True, null=True)
-    education = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='education', blank=True, null=True)
+    education = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         
@@ -171,7 +171,7 @@ class Products(models.Model):
     pro_name = models.CharField(max_length=255, blank=True, null=True)
     price_org = models.IntegerField(blank=True, null=True)
     price_cur = models.IntegerField(blank=True, null=True)
-    seller = models.ForeignKey('Student', models.DO_NOTHING, blank=True, null=True)
+    seller_id = models.IntegerField(blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
 
@@ -204,7 +204,7 @@ class Rules(models.Model):
 
 class Scholarship(models.Model):
     sch_id = models.AutoField(primary_key=True)
-    student_choice = models.ForeignKey('StudentChoice', models.DO_NOTHING, blank=True, null=True)
+    student_choice_id = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=255, blank=True, null=True)
     stu_comm = models.CharField(max_length=255, blank=True, null=True)
 
@@ -218,12 +218,11 @@ class Student(models.Model):
     stu_pwd = models.CharField(max_length=255, blank=True, null=True)
     stu_name = models.CharField(max_length=255, blank=True, null=True)
     stu_year = models.TextField(blank=True, null=True)  # This field type is a guess.
-    major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
+    major_id = models.IntegerField(blank=True, null=True)
     money = models.IntegerField(blank=True, null=True)
-    stu_edu = models.ForeignKey(BorrowRule, models.DO_NOTHING, db_column='stu_edu', blank=True, null=True)
+    stu_edu = models.CharField(max_length=255, blank=True, null=True)
     bed_id = models.IntegerField(blank=True, null=True)
-    dorm_id = models.IntegerField(blank=True, null=True)
-    instructor = models.ForeignKey(Instructor, models.DO_NOTHING, blank=True, null=True)
+    instructor_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -232,9 +231,9 @@ class Student(models.Model):
 
 class StudentChoice(models.Model):
     student_choice_id = models.AutoField(primary_key=True)
-    teacher_choice = models.ForeignKey('TeacherChoice', models.DO_NOTHING, blank=True, null=True)
+    teacher_choice_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
-    stu = models.ForeignKey(Student, models.DO_NOTHING, blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -244,7 +243,7 @@ class StudentChoice(models.Model):
 class Teacher(models.Model):
     tea_id = models.AutoField(primary_key=True)
     teacher_name = models.CharField(max_length=255, blank=True, null=True)
-    major = models.ForeignKey(Major, models.DO_NOTHING, blank=True, null=True)
+    major_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -253,8 +252,8 @@ class Teacher(models.Model):
 
 class TeacherChoice(models.Model):
     teacher_choice_id = models.AutoField(primary_key=True)
-    teacher = models.ForeignKey(Teacher, models.DO_NOTHING, blank=True, null=True)
-    course = models.ForeignKey(CultivatePlan, models.DO_NOTHING, blank=True, null=True)
+    teacher_id = models.IntegerField(blank=True, null=True)
+    course_id = models.IntegerField(blank=True, null=True)
     course_year = models.TextField(blank=True, null=True)  # This field type is a guess.
     status = models.IntegerField(blank=True, null=True)
     time = models.CharField(max_length=225, blank=True, null=True)

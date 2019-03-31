@@ -10,14 +10,14 @@ def stu_info(request):
 	stu_name = request.POST.get('stu_name')
 	bed_id = request.POST.get('bed_id')
 	year = request.POST.get('year')
-	money = 0
 	major_id = request.POST.get('major_id')
+	money = 100
 	stu_edu = request.POST.get('stu_edu')
 	instructor_id = request.POST.get('instructor_id')
+	students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major_id=major_id,stu_edu=stu_edu,instructor_id=instructor_id,bed_id=bed_id,money = money)
+	students.save()
 	try:
-		dorm = models.Dorm.objects.get(bed_id=bed_id)
-		students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major=major_id,stu_edu=stu_edu,instructor_id=instructor_id,dorm_id=dorm_id,bed_id=bed_id,money = money)
-		students.save()
+		dorm = models.Dorm.objects.get(bed_id = bed_id)
 		dorm.status = 1
 		dorm.save()
 	except:
@@ -42,15 +42,6 @@ def stu_library_borrow(request):
 def library_return(request):
 	orders = models.BorrowOrder.objects.all()
 	return render(request,'jwc/library_return.html',{'orders':orders})
-
-def stu_judge(request):
-	dorms = models.Student.objects.filter(dorm_id=1)
-	try:
-		stu_id = request.POST.get('stu_id')
-		score = request.POST.get('score')
-	except:
-		pass
-	return render(request,'student/stu_judge.html',{'dorms':dorms})
 
 def stu_sp_certification(request):
 	certifications = models.Rules.objects.all()

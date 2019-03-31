@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^jwc_index/',views.jwc_index),
     url(r'^stu_library_borrow/',views.stu_library_borrow),
     url(r'^library_return/',views.library_return),
-    url(r'^stu_judge/',views.stu_judge),
     url(r'^stu_sp_certification/',views.stu_sp_certification),
     url(r'^instructor_pro_review/',views.instructor_pro_review),
     url(r'^stu_products/',views.stu_products),
