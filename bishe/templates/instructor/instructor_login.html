@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>instructor_login</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery-1.12.4.js"></script>
+</head>
+<body>
+    <div style="height:100%; padding: 10% 30%">
+        <form action="instructor_login/" method="post">
+                <div class="alert alert-warning">{{ message }}</div>
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="instructor_id">学号</label>
+            <input type="text" class="form-control" name="instructor_id" id="instructor_id"  placeholder="请输入用户名">
+          </div>
+          <div class="form-group">
+            <label for="instructor_pwd">密码</label>
+            <input type="password" name="instructor_pwd" class="form-control" id="instructor_pwd" placeholder="请输入密码">
+          </div>
+          <button type="submit" class="btn btn-primary">登录</button>
+          <button type="button" onclick="window.location.href=''" class="btn btn-primary">注册</button>
+        </form>
+    </div>
+</body>
+</html>
+

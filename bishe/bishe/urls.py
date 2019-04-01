@@ -19,6 +19,7 @@ from mybishe import views
 from django.conf.urls import url
 
 urlpatterns = [
+    url(r'^index/',views.index),
     url(r'^stu_info/',views.stu_info),
     url(r'^stu_index/',views.stu_index),
     url(r'^stu_login/',views.stu_login),
@@ -35,4 +36,8 @@ urlpatterns = [
     url(r'^teacher_give_score/',views.teacher_give_score),
     url(r'^stu_skills_order/',views.stu_skills_order),
     url(r'^instructor_sp_confirm/',views.instructor_sp_confirm),
+    url(r'^teacher_login/',views.teacher_login),
+    url(r'^teacher_index/',views.teacher_index),
+    url(r'^jwc_index/',views.jwc_index),
+    url(r'^instructor_login/',views.instructor_login),
 ]

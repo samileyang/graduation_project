@@ -93,6 +93,8 @@ class CultivatePlan(models.Model):
         db_table = 'cultivate_plan'
 
 
+
+
 class Dorm(models.Model):
     bed_id = models.AutoField(primary_key=True)
     dorm_id = models.IntegerField(blank=True, null=True)
@@ -106,7 +108,7 @@ class Dorm(models.Model):
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
     instructor_name = models.CharField(max_length=255, blank=True, null=True)
-
+    instructor_pwd = models.CharField(max_length=255, blank=True, null=True)
     class Meta:
         
         db_table = 'instructor'
@@ -232,6 +234,7 @@ class Teacher(models.Model):
     tea_id = models.AutoField(primary_key=True)
     teacher_name = models.CharField(max_length=255, blank=True, null=True)
     major_id = models.IntegerField(blank=True, null=True)
+    tea_pwd = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         

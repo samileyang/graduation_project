@@ -54,13 +54,17 @@ def stu_sp_certification(request):
 
 def stu_products(request):
 	try:
-		pro_name = request.POST.get('pro_name')
+		pro_name = request.POST.get('product_name')
 		price_org = request.POST.get('price_org')
 		price_cur = request.POST.get('price_cur')
 		location = request.POST.get('location')
+		seller_id = request.session.get('stu_id',None)
+		status = 0
+		products = models.Products(pro_name = pro_name,price_org = price_org,price_cur = price_cur,seller_id = seller_id,location = location,status = status)
+		products.save()
+		return render(request,'student/stu_products.html')
 	except:
-		pass
-	return render(request,'student/stu_products.html')
+		return render(request,'student/stu_products.html')
 
 def instructor_pro_review(request):
 	products = models.Products.objects.filter(status=0)
@@ -94,3 +98,30 @@ def stu_skills_order(request):
 def instructor_sp_confirm(request):
 	students = models.AddCreditOrder.objects.filter(status = 0)
 	return render(request,'instructor/instructor_sp_confirm.html',{"students":students})
+
+def teacher_login(request):
+	if request.method == 'GET':
+		return render(request, 'teacher/teacher_login.html')
+	if request.method == 'POST':
+		user = models.Teacher.objects.get(tea_id = request.POST['teacher_id'])
+		request.session['teacher_name'] = user.teacher_name
+		request.session['teacher_id'] = user.tea_id
+		return render(request,'teacher/teacher_index.html')
+
+def teacher_index(request):
+	return render(request,'teacher/teacher_index.html')
+
+def jwc_index(request):
+	return render(request,'jwc/jwc_index.html')
+
+def index(request):
+	return render(request,'index.html')
+
+def instructor_login(request):
+	if request.method == 'GET':
+		return render(request, 'instructor/instructor_login.html')
+	if request.method == 'POST':
+		user = models.Instructor.objects.get(instructor_id = request.POST['instructor_id'])
+		request.session['instructor_name'] = user.instructor_name
+		request.session['instructor_id'] = user.instructor_id
+		return render(request,'instructor/instructor_pro_review.html')
