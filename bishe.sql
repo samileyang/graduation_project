@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 01/04/2019 11:53:04
+ Date: 01/04/2019 11:59:59
 */
 
 SET NAMES utf8mb4;
@@ -27,9 +27,7 @@ CREATE TABLE `add_credit_order`  (
   `rule_id` int(11) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`add_id`) USING BTREE,
-  INDEX `stu_id`(`stu_id`) USING BTREE,
-  INDEX `rule_id`(`rule_id`) USING BTREE
+  PRIMARY KEY (`add_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -73,9 +71,7 @@ CREATE TABLE `borrow_order`  (
   `appeal_status` int(255) NULL DEFAULT NULL,
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`borrow_id`) USING BTREE,
-  INDEX `stu_id`(`stu_id`) USING BTREE,
-  INDEX `book_id`(`book_id`) USING BTREE
+  PRIMARY KEY (`borrow_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -107,8 +103,7 @@ CREATE TABLE `certification`  (
   `certi_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_choice_id` int(11) NULL DEFAULT NULL,
   `status` binary(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`certi_id`) USING BTREE,
-  INDEX `student_choice_id`(`student_choice_id`) USING BTREE
+  PRIMARY KEY (`certi_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -120,8 +115,7 @@ CREATE TABLE `credit`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `year` year NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`credit_id`) USING BTREE,
-  INDEX `stu_id`(`stu_id`) USING BTREE
+  PRIMARY KEY (`credit_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -154,11 +148,9 @@ INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0)
 DROP TABLE IF EXISTS `dorm`;
 CREATE TABLE `dorm`  (
   `bed_id` int(255) NOT NULL AUTO_INCREMENT,
-  `dorm_id` int(255) NOT NULL,
+  `dorm_id` int(255) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`bed_id`, `dorm_id`) USING BTREE,
-  INDEX `bed_id`(`bed_id`) USING BTREE,
-  INDEX `dorm_id`(`dorm_id`) USING BTREE
+  PRIMARY KEY (`bed_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 305 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -200,8 +192,7 @@ DROP TABLE IF EXISTS `lost_history`;
 CREATE TABLE `lost_history`  (
   `lost_id` int(11) NOT NULL AUTO_INCREMENT,
   `borrow_id` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`lost_id`) USING BTREE,
-  INDEX `borrow_id`(`borrow_id`) USING BTREE
+  PRIMARY KEY (`lost_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -246,9 +237,7 @@ CREATE TABLE `pen_appeal`  (
   `stu_pen_id` int(11) NULL DEFAULT NULL,
   `teacher_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`pen_appeal_id`) USING BTREE,
-  INDEX `stu_pen_id`(`stu_pen_id`) USING BTREE,
-  INDEX `teacher_id`(`teacher_id`) USING BTREE
+  PRIMARY KEY (`pen_appeal_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -260,9 +249,7 @@ CREATE TABLE `penalty`  (
   `borrow_id` int(11) NULL DEFAULT NULL,
   `pen_money` int(255) NULL DEFAULT NULL,
   `education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`stu_pen_id`) USING BTREE,
-  INDEX `stu_id`(`borrow_id`) USING BTREE,
-  INDEX `education`(`education`) USING BTREE
+  PRIMARY KEY (`stu_pen_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -277,8 +264,7 @@ CREATE TABLE `products`  (
   `seller_id` int(11) NULL DEFAULT NULL,
   `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`pro_id`) USING BTREE,
-  INDEX `seller_id`(`seller_id`) USING BTREE
+  PRIMARY KEY (`pro_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -314,8 +300,7 @@ CREATE TABLE `scholarship`  (
   `student_choice_id` int(255) NULL DEFAULT NULL,
   `status` binary(255) NULL DEFAULT NULL,
   `stu_comm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`sch_id`) USING BTREE,
-  INDEX `student_choice_id`(`student_choice_id`) USING BTREE
+  PRIMARY KEY (`sch_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -333,13 +318,7 @@ CREATE TABLE `student`  (
   `bed_id` int(255) NULL DEFAULT NULL,
   `dorm_id` int(255) NULL DEFAULT NULL,
   `instructor_id` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`stu_id`) USING BTREE,
-  INDEX `major_id`(`major_id`) USING BTREE,
-  INDEX `instructor_id`(`instructor_id`) USING BTREE,
-  INDEX `stu_id`(`stu_id`) USING BTREE,
-  INDEX `stu_edu`(`stu_edu`) USING BTREE,
-  INDEX `bed_id`(`bed_id`) USING BTREE,
-  INDEX `dorm_id`(`dorm_id`) USING BTREE
+  PRIMARY KEY (`stu_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -359,9 +338,7 @@ CREATE TABLE `student_choice`  (
   `teacher_choice_id` int(11) NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   `stu_id` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`student_choice_id`) USING BTREE,
-  INDEX `teacher_choice_id`(`teacher_choice_id`) USING BTREE,
-  INDEX `stu_id`(`stu_id`) USING BTREE
+  PRIMARY KEY (`student_choice_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -380,8 +357,7 @@ CREATE TABLE `teacher`  (
   `tea_id` int(255) NOT NULL AUTO_INCREMENT,
   `teacher_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `major_id` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`tea_id`) USING BTREE,
-  INDEX `major_id`(`major_id`) USING BTREE
+  PRIMARY KEY (`tea_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -401,9 +377,7 @@ CREATE TABLE `teacher_choice`  (
   `status` int(255) NULL DEFAULT NULL,
   `time` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `certification` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`teacher_choice_id`) USING BTREE,
-  INDEX `teacher_id`(`teacher_id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE
+  PRIMARY KEY (`teacher_choice_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
