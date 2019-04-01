@@ -95,13 +95,12 @@ class CultivatePlan(models.Model):
 
 class Dorm(models.Model):
     bed_id = models.AutoField(primary_key=True)
-    dorm_id = models.IntegerField()
+    dorm_id = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
         db_table = 'dorm'
-        unique_together = (('bed_id', 'dorm_id'),)
 
 
 class Instructor(models.Model):
@@ -180,18 +179,6 @@ class Products(models.Model):
         db_table = 'products'
 
 
-class RoommateComment(models.Model):
-    comm_id = models.AutoField(primary_key=True)
-    dorm_id = models.IntegerField(blank=True, null=True)
-    comm_maker_id = models.IntegerField(blank=True, null=True)
-    student_id = models.IntegerField(blank=True, null=True)
-    score = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        
-        db_table = 'roommate_comment'
-
-
 class Rules(models.Model):
     rule_id = models.AutoField(primary_key=True)
     rule_name = models.CharField(max_length=255, blank=True, null=True)
@@ -222,6 +209,7 @@ class Student(models.Model):
     money = models.IntegerField(blank=True, null=True)
     stu_edu = models.CharField(max_length=255, blank=True, null=True)
     bed_id = models.IntegerField(blank=True, null=True)
+    dorm_id = models.IntegerField(blank=True, null=True)
     instructor_id = models.IntegerField(blank=True, null=True)
 
     class Meta:

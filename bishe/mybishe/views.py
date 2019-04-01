@@ -25,9 +25,14 @@ def stu_info(request):
 	return render(request,'jwc/stu_info.html',{'dorms': dorms,'majors' : majors,'educations': educations,'instructors': instructors})
 
 def stu_login(request):
-	stu_id = request.POST.get('stu_id')
-	stu_pwd = request.POST.get('stu_pwd')
-	return render(request,'student/stu_login.html')
+	if request.method == 'GET':
+		return render(request, 'student/stu_login.html')
+	if request.method == 'POST':
+		user = models.Student.objects.get(stu_id = request.POST['stu_id'])
+		request.session['stu_name'] = user.stu_name
+		request.session['stu_id'] = user.stu_id
+		return render(request,'student/stu_index.html')
+
 
 def jwc_index(request):
 	return render(request,'jwc/jwc_index.html')
