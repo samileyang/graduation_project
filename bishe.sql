@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 01/04/2019 11:59:59
+ Date: 02/04/2019 22:07:58
 */
 
 SET NAMES utf8mb4;
@@ -38,6 +38,208 @@ INSERT INTO `add_credit_order` VALUES (2, 2, 2, 1, 0);
 INSERT INTO `add_credit_order` VALUES (3, 3, 3, 5, 0);
 
 -- ----------------------------
+-- Table structure for auth_group
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_group`;
+CREATE TABLE `auth_group`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auth_group_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_group_permissions`;
+CREATE TABLE `auth_group_permissions`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `auth_group_permissions_group_id_permission_id_0cd325b0_uniq`(`group_id`, `permission_id`) USING BTREE,
+  INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id`) USING BTREE,
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auth_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_permission`;
+CREATE TABLE `auth_permission`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id`, `codename`) USING BTREE,
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of auth_permission
+-- ----------------------------
+INSERT INTO `auth_permission` VALUES (1, 'Can add log entry', 1, 'add_logentry');
+INSERT INTO `auth_permission` VALUES (2, 'Can change log entry', 1, 'change_logentry');
+INSERT INTO `auth_permission` VALUES (3, 'Can delete log entry', 1, 'delete_logentry');
+INSERT INTO `auth_permission` VALUES (4, 'Can view log entry', 1, 'view_logentry');
+INSERT INTO `auth_permission` VALUES (5, 'Can add permission', 2, 'add_permission');
+INSERT INTO `auth_permission` VALUES (6, 'Can change permission', 2, 'change_permission');
+INSERT INTO `auth_permission` VALUES (7, 'Can delete permission', 2, 'delete_permission');
+INSERT INTO `auth_permission` VALUES (8, 'Can view permission', 2, 'view_permission');
+INSERT INTO `auth_permission` VALUES (9, 'Can add group', 3, 'add_group');
+INSERT INTO `auth_permission` VALUES (10, 'Can change group', 3, 'change_group');
+INSERT INTO `auth_permission` VALUES (11, 'Can delete group', 3, 'delete_group');
+INSERT INTO `auth_permission` VALUES (12, 'Can view group', 3, 'view_group');
+INSERT INTO `auth_permission` VALUES (13, 'Can add user', 4, 'add_user');
+INSERT INTO `auth_permission` VALUES (14, 'Can change user', 4, 'change_user');
+INSERT INTO `auth_permission` VALUES (15, 'Can delete user', 4, 'delete_user');
+INSERT INTO `auth_permission` VALUES (16, 'Can view user', 4, 'view_user');
+INSERT INTO `auth_permission` VALUES (17, 'Can add content type', 5, 'add_contenttype');
+INSERT INTO `auth_permission` VALUES (18, 'Can change content type', 5, 'change_contenttype');
+INSERT INTO `auth_permission` VALUES (19, 'Can delete content type', 5, 'delete_contenttype');
+INSERT INTO `auth_permission` VALUES (20, 'Can view content type', 5, 'view_contenttype');
+INSERT INTO `auth_permission` VALUES (21, 'Can add session', 6, 'add_session');
+INSERT INTO `auth_permission` VALUES (22, 'Can change session', 6, 'change_session');
+INSERT INTO `auth_permission` VALUES (23, 'Can delete session', 6, 'delete_session');
+INSERT INTO `auth_permission` VALUES (24, 'Can view session', 6, 'view_session');
+INSERT INTO `auth_permission` VALUES (25, 'Can add add credit order', 7, 'add_addcreditorder');
+INSERT INTO `auth_permission` VALUES (26, 'Can change add credit order', 7, 'change_addcreditorder');
+INSERT INTO `auth_permission` VALUES (27, 'Can delete add credit order', 7, 'delete_addcreditorder');
+INSERT INTO `auth_permission` VALUES (28, 'Can view add credit order', 7, 'view_addcreditorder');
+INSERT INTO `auth_permission` VALUES (29, 'Can add borrow', 8, 'add_borrow');
+INSERT INTO `auth_permission` VALUES (30, 'Can change borrow', 8, 'change_borrow');
+INSERT INTO `auth_permission` VALUES (31, 'Can delete borrow', 8, 'delete_borrow');
+INSERT INTO `auth_permission` VALUES (32, 'Can view borrow', 8, 'view_borrow');
+INSERT INTO `auth_permission` VALUES (33, 'Can add borrow order', 9, 'add_borroworder');
+INSERT INTO `auth_permission` VALUES (34, 'Can change borrow order', 9, 'change_borroworder');
+INSERT INTO `auth_permission` VALUES (35, 'Can delete borrow order', 9, 'delete_borroworder');
+INSERT INTO `auth_permission` VALUES (36, 'Can view borrow order', 9, 'view_borroworder');
+INSERT INTO `auth_permission` VALUES (37, 'Can add borrow rule', 10, 'add_borrowrule');
+INSERT INTO `auth_permission` VALUES (38, 'Can change borrow rule', 10, 'change_borrowrule');
+INSERT INTO `auth_permission` VALUES (39, 'Can delete borrow rule', 10, 'delete_borrowrule');
+INSERT INTO `auth_permission` VALUES (40, 'Can view borrow rule', 10, 'view_borrowrule');
+INSERT INTO `auth_permission` VALUES (41, 'Can add certification', 11, 'add_certification');
+INSERT INTO `auth_permission` VALUES (42, 'Can change certification', 11, 'change_certification');
+INSERT INTO `auth_permission` VALUES (43, 'Can delete certification', 11, 'delete_certification');
+INSERT INTO `auth_permission` VALUES (44, 'Can view certification', 11, 'view_certification');
+INSERT INTO `auth_permission` VALUES (45, 'Can add credit', 12, 'add_credit');
+INSERT INTO `auth_permission` VALUES (46, 'Can change credit', 12, 'change_credit');
+INSERT INTO `auth_permission` VALUES (47, 'Can delete credit', 12, 'delete_credit');
+INSERT INTO `auth_permission` VALUES (48, 'Can view credit', 12, 'view_credit');
+INSERT INTO `auth_permission` VALUES (49, 'Can add cultivate plan', 13, 'add_cultivateplan');
+INSERT INTO `auth_permission` VALUES (50, 'Can change cultivate plan', 13, 'change_cultivateplan');
+INSERT INTO `auth_permission` VALUES (51, 'Can delete cultivate plan', 13, 'delete_cultivateplan');
+INSERT INTO `auth_permission` VALUES (52, 'Can view cultivate plan', 13, 'view_cultivateplan');
+INSERT INTO `auth_permission` VALUES (53, 'Can add dorm', 14, 'add_dorm');
+INSERT INTO `auth_permission` VALUES (54, 'Can change dorm', 14, 'change_dorm');
+INSERT INTO `auth_permission` VALUES (55, 'Can delete dorm', 14, 'delete_dorm');
+INSERT INTO `auth_permission` VALUES (56, 'Can view dorm', 14, 'view_dorm');
+INSERT INTO `auth_permission` VALUES (57, 'Can add instructor', 15, 'add_instructor');
+INSERT INTO `auth_permission` VALUES (58, 'Can change instructor', 15, 'change_instructor');
+INSERT INTO `auth_permission` VALUES (59, 'Can delete instructor', 15, 'delete_instructor');
+INSERT INTO `auth_permission` VALUES (60, 'Can view instructor', 15, 'view_instructor');
+INSERT INTO `auth_permission` VALUES (61, 'Can add lost history', 16, 'add_losthistory');
+INSERT INTO `auth_permission` VALUES (62, 'Can change lost history', 16, 'change_losthistory');
+INSERT INTO `auth_permission` VALUES (63, 'Can delete lost history', 16, 'delete_losthistory');
+INSERT INTO `auth_permission` VALUES (64, 'Can view lost history', 16, 'view_losthistory');
+INSERT INTO `auth_permission` VALUES (65, 'Can add major', 17, 'add_major');
+INSERT INTO `auth_permission` VALUES (66, 'Can change major', 17, 'change_major');
+INSERT INTO `auth_permission` VALUES (67, 'Can delete major', 17, 'delete_major');
+INSERT INTO `auth_permission` VALUES (68, 'Can view major', 17, 'view_major');
+INSERT INTO `auth_permission` VALUES (69, 'Can add orders', 18, 'add_orders');
+INSERT INTO `auth_permission` VALUES (70, 'Can change orders', 18, 'change_orders');
+INSERT INTO `auth_permission` VALUES (71, 'Can delete orders', 18, 'delete_orders');
+INSERT INTO `auth_permission` VALUES (72, 'Can view orders', 18, 'view_orders');
+INSERT INTO `auth_permission` VALUES (73, 'Can add penalty', 19, 'add_penalty');
+INSERT INTO `auth_permission` VALUES (74, 'Can change penalty', 19, 'change_penalty');
+INSERT INTO `auth_permission` VALUES (75, 'Can delete penalty', 19, 'delete_penalty');
+INSERT INTO `auth_permission` VALUES (76, 'Can view penalty', 19, 'view_penalty');
+INSERT INTO `auth_permission` VALUES (77, 'Can add pen appeal', 20, 'add_penappeal');
+INSERT INTO `auth_permission` VALUES (78, 'Can change pen appeal', 20, 'change_penappeal');
+INSERT INTO `auth_permission` VALUES (79, 'Can delete pen appeal', 20, 'delete_penappeal');
+INSERT INTO `auth_permission` VALUES (80, 'Can view pen appeal', 20, 'view_penappeal');
+INSERT INTO `auth_permission` VALUES (81, 'Can add products', 21, 'add_products');
+INSERT INTO `auth_permission` VALUES (82, 'Can change products', 21, 'change_products');
+INSERT INTO `auth_permission` VALUES (83, 'Can delete products', 21, 'delete_products');
+INSERT INTO `auth_permission` VALUES (84, 'Can view products', 21, 'view_products');
+INSERT INTO `auth_permission` VALUES (85, 'Can add rules', 22, 'add_rules');
+INSERT INTO `auth_permission` VALUES (86, 'Can change rules', 22, 'change_rules');
+INSERT INTO `auth_permission` VALUES (87, 'Can delete rules', 22, 'delete_rules');
+INSERT INTO `auth_permission` VALUES (88, 'Can view rules', 22, 'view_rules');
+INSERT INTO `auth_permission` VALUES (89, 'Can add scholarship', 23, 'add_scholarship');
+INSERT INTO `auth_permission` VALUES (90, 'Can change scholarship', 23, 'change_scholarship');
+INSERT INTO `auth_permission` VALUES (91, 'Can delete scholarship', 23, 'delete_scholarship');
+INSERT INTO `auth_permission` VALUES (92, 'Can view scholarship', 23, 'view_scholarship');
+INSERT INTO `auth_permission` VALUES (93, 'Can add student', 24, 'add_student');
+INSERT INTO `auth_permission` VALUES (94, 'Can change student', 24, 'change_student');
+INSERT INTO `auth_permission` VALUES (95, 'Can delete student', 24, 'delete_student');
+INSERT INTO `auth_permission` VALUES (96, 'Can view student', 24, 'view_student');
+INSERT INTO `auth_permission` VALUES (97, 'Can add student choice', 25, 'add_studentchoice');
+INSERT INTO `auth_permission` VALUES (98, 'Can change student choice', 25, 'change_studentchoice');
+INSERT INTO `auth_permission` VALUES (99, 'Can delete student choice', 25, 'delete_studentchoice');
+INSERT INTO `auth_permission` VALUES (100, 'Can view student choice', 25, 'view_studentchoice');
+INSERT INTO `auth_permission` VALUES (101, 'Can add teacher', 26, 'add_teacher');
+INSERT INTO `auth_permission` VALUES (102, 'Can change teacher', 26, 'change_teacher');
+INSERT INTO `auth_permission` VALUES (103, 'Can delete teacher', 26, 'delete_teacher');
+INSERT INTO `auth_permission` VALUES (104, 'Can view teacher', 26, 'view_teacher');
+INSERT INTO `auth_permission` VALUES (105, 'Can add teacher choice', 27, 'add_teacherchoice');
+INSERT INTO `auth_permission` VALUES (106, 'Can change teacher choice', 27, 'change_teacherchoice');
+INSERT INTO `auth_permission` VALUES (107, 'Can delete teacher choice', 27, 'delete_teacherchoice');
+INSERT INTO `auth_permission` VALUES (108, 'Can view teacher choice', 27, 'view_teacherchoice');
+
+-- ----------------------------
+-- Table structure for auth_user
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_user`;
+CREATE TABLE `auth_user`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `last_login` datetime(6) NULL DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `last_name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `username`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auth_user_groups
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_user_groups`;
+CREATE TABLE `auth_user_groups`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `auth_user_groups_user_id_group_id_94350c0c_uniq`(`user_id`, `group_id`) USING BTREE,
+  INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id`) USING BTREE,
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for auth_user_user_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+CREATE TABLE `auth_user_user_permissions`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq`(`user_id`, `permission_id`) USING BTREE,
+  INDEX `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm`(`permission_id`) USING BTREE,
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for borrow
 -- ----------------------------
 DROP TABLE IF EXISTS `borrow`;
@@ -47,7 +249,7 @@ CREATE TABLE `borrow`  (
   `status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`book_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow
@@ -55,6 +257,12 @@ CREATE TABLE `borrow`  (
 INSERT INTO `borrow` VALUES (1, '高等数学', 0, 10.00);
 INSERT INTO `borrow` VALUES (2, 'python', 0, 20.00);
 INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
+INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
+INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
+INSERT INTO `borrow` VALUES (6, '孟子', 0, 15.00);
+INSERT INTO `borrow` VALUES (7, '庄子', 0, 20.00);
+INSERT INTO `borrow` VALUES (8, 'java', 0, 30.00);
+INSERT INTO `borrow` VALUES (9, 'R', 0, 19.00);
 
 -- ----------------------------
 -- Table structure for borrow_order
@@ -131,16 +339,135 @@ CREATE TABLE `cultivate_plan`  (
   `semester` int(255) NULL DEFAULT NULL,
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '用数字代表时间 如果数字有重复 则不可重复选择',
   `certification` int(255) NULL DEFAULT NULL COMMENT '是否可以被认证',
+  `class` int(255) NULL DEFAULT NULL,
+  `limit` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`course_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cultivate_plan
 -- ----------------------------
-INSERT INTO `cultivate_plan` VALUES (1, '大数据', 1, 3, 3, 1, '周一下午', 1);
-INSERT INTO `cultivate_plan` VALUES (2, 'Python', 1, 2, 3, 2, '周三上午', 1);
-INSERT INTO `cultivate_plan` VALUES (3, '基础会计', 3, 2, 2, 1, '周一上午', 0);
-INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0);
+INSERT INTO `cultivate_plan` VALUES (1, '大数据', 1, 3, 3, 1, '周一下午', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (2, 'Python', 1, 2, 3, 2, '周三上午', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (3, '基础会计', 3, 2, 2, 1, '周一上午', 0, 0, 2);
+INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0, 0, 1);
+
+-- ----------------------------
+-- Table structure for django_admin_log
+-- ----------------------------
+DROP TABLE IF EXISTS `django_admin_log`;
+CREATE TABLE `django_admin_log`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `object_repr` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `action_flag` smallint(5) UNSIGNED NOT NULL,
+  `change_message` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `content_type_id` int(11) NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `django_admin_log_content_type_id_c4bce8eb_fk_django_co`(`content_type_id`) USING BTREE,
+  INDEX `django_admin_log_user_id_c564eba6_fk_auth_user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for django_content_type
+-- ----------------------------
+DROP TABLE IF EXISTS `django_content_type`;
+CREATE TABLE `django_content_type`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `model` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of django_content_type
+-- ----------------------------
+INSERT INTO `django_content_type` VALUES (1, 'admin', 'logentry');
+INSERT INTO `django_content_type` VALUES (3, 'auth', 'group');
+INSERT INTO `django_content_type` VALUES (2, 'auth', 'permission');
+INSERT INTO `django_content_type` VALUES (4, 'auth', 'user');
+INSERT INTO `django_content_type` VALUES (5, 'contenttypes', 'contenttype');
+INSERT INTO `django_content_type` VALUES (7, 'mybishe', 'addcreditorder');
+INSERT INTO `django_content_type` VALUES (8, 'mybishe', 'borrow');
+INSERT INTO `django_content_type` VALUES (9, 'mybishe', 'borroworder');
+INSERT INTO `django_content_type` VALUES (10, 'mybishe', 'borrowrule');
+INSERT INTO `django_content_type` VALUES (11, 'mybishe', 'certification');
+INSERT INTO `django_content_type` VALUES (12, 'mybishe', 'credit');
+INSERT INTO `django_content_type` VALUES (13, 'mybishe', 'cultivateplan');
+INSERT INTO `django_content_type` VALUES (14, 'mybishe', 'dorm');
+INSERT INTO `django_content_type` VALUES (15, 'mybishe', 'instructor');
+INSERT INTO `django_content_type` VALUES (16, 'mybishe', 'losthistory');
+INSERT INTO `django_content_type` VALUES (17, 'mybishe', 'major');
+INSERT INTO `django_content_type` VALUES (18, 'mybishe', 'orders');
+INSERT INTO `django_content_type` VALUES (19, 'mybishe', 'penalty');
+INSERT INTO `django_content_type` VALUES (20, 'mybishe', 'penappeal');
+INSERT INTO `django_content_type` VALUES (21, 'mybishe', 'products');
+INSERT INTO `django_content_type` VALUES (22, 'mybishe', 'rules');
+INSERT INTO `django_content_type` VALUES (23, 'mybishe', 'scholarship');
+INSERT INTO `django_content_type` VALUES (24, 'mybishe', 'student');
+INSERT INTO `django_content_type` VALUES (25, 'mybishe', 'studentchoice');
+INSERT INTO `django_content_type` VALUES (26, 'mybishe', 'teacher');
+INSERT INTO `django_content_type` VALUES (27, 'mybishe', 'teacherchoice');
+INSERT INTO `django_content_type` VALUES (6, 'sessions', 'session');
+
+-- ----------------------------
+-- Table structure for django_migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `django_migrations`;
+CREATE TABLE `django_migrations`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of django_migrations
+-- ----------------------------
+INSERT INTO `django_migrations` VALUES (1, 'contenttypes', '0001_initial', '2019-04-01 04:03:22.236048');
+INSERT INTO `django_migrations` VALUES (2, 'auth', '0001_initial', '2019-04-01 04:03:32.353874');
+INSERT INTO `django_migrations` VALUES (3, 'admin', '0001_initial', '2019-04-01 04:03:34.412578');
+INSERT INTO `django_migrations` VALUES (4, 'admin', '0002_logentry_remove_auto_add', '2019-04-01 04:03:34.465474');
+INSERT INTO `django_migrations` VALUES (5, 'admin', '0003_logentry_add_action_flag_choices', '2019-04-01 04:03:34.524529');
+INSERT INTO `django_migrations` VALUES (6, 'contenttypes', '0002_remove_content_type_name', '2019-04-01 04:03:35.926393');
+INSERT INTO `django_migrations` VALUES (7, 'auth', '0002_alter_permission_name_max_length', '2019-04-01 04:03:36.690710');
+INSERT INTO `django_migrations` VALUES (8, 'auth', '0003_alter_user_email_max_length', '2019-04-01 04:03:37.628504');
+INSERT INTO `django_migrations` VALUES (9, 'auth', '0004_alter_user_username_opts', '2019-04-01 04:03:37.688664');
+INSERT INTO `django_migrations` VALUES (10, 'auth', '0005_alter_user_last_login_null', '2019-04-01 04:03:38.358809');
+INSERT INTO `django_migrations` VALUES (11, 'auth', '0006_require_contenttypes_0002', '2019-04-01 04:03:38.401319');
+INSERT INTO `django_migrations` VALUES (12, 'auth', '0007_alter_validators_add_error_messages', '2019-04-01 04:03:38.453874');
+INSERT INTO `django_migrations` VALUES (13, 'auth', '0008_alter_user_username_max_length', '2019-04-01 04:03:39.335887');
+INSERT INTO `django_migrations` VALUES (14, 'auth', '0009_alter_user_last_name_max_length', '2019-04-01 04:03:40.701335');
+INSERT INTO `django_migrations` VALUES (15, 'mybishe', '0001_initial', '2019-04-01 04:03:40.836457');
+INSERT INTO `django_migrations` VALUES (16, 'sessions', '0001_initial', '2019-04-01 04:03:41.482670');
+
+-- ----------------------------
+-- Table structure for django_session
+-- ----------------------------
+DROP TABLE IF EXISTS `django_session`;
+CREATE TABLE `django_session`  (
+  `session_key` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `session_data` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`) USING BTREE,
+  INDEX `django_session_expire_date_a5c62663`(`expire_date`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of django_session
+-- ----------------------------
+INSERT INTO `django_session` VALUES ('2fyfvcvhhx6mcurm88dlevtj8ereepfe', 'MjQ2Y2YyOThmNDlhNzdlODFjMGEzZjc3M2EzYzY2MDhlN2U2MmFiODp7InVzZXJfaWQiOjEsInVzZXJfbmFtZSI6Inl5aCIsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-15 07:49:56.194934');
+INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:41:20.631504');
+INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMDI4ZGQ1NzA3NGM5MzU2MWNmNTU2Mjg2MjljNDU0N2VmNTJjMzp7Imluc3RydWN0b3JfbmFtZSI6Ilx1OGY4NVx1NWJmY1x1NTQ1ODEiLCJpbnN0cnVjdG9yX2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJzdHVfbmFtZSI6Inl5aCIsInN0dV9pZCI6MX0=', '2019-04-16 13:05:25.282626');
+INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
+INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
+INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
 -- Table structure for dorm
@@ -176,14 +503,15 @@ DROP TABLE IF EXISTS `instructor`;
 CREATE TABLE `instructor`  (
   `instructor_id` int(11) NOT NULL AUTO_INCREMENT,
   `instructor_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `instructor_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`instructor_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of instructor
 -- ----------------------------
-INSERT INTO `instructor` VALUES (1, '辅导员1');
-INSERT INTO `instructor` VALUES (2, '辅导员2');
+INSERT INTO `instructor` VALUES (1, '辅导员1', '000');
+INSERT INTO `instructor` VALUES (2, '辅导员2', '000');
 
 -- ----------------------------
 -- Table structure for lost_history
@@ -265,13 +593,17 @@ CREATE TABLE `products`  (
   `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
 INSERT INTO `products` VALUES (1, 'iPhone', 5999, 3999, 1, '操场', 0);
 INSERT INTO `products` VALUES (2, 'iPad', 4999, 2999, 1, '南校门', 1);
+INSERT INTO `products` VALUES (4, 'iPhone XR', 8999, 5999, 1, '南校', 0);
+INSERT INTO `products` VALUES (6, 'iphone XS', 8999, 6999, 1, '南校', 0);
+INSERT INTO `products` VALUES (7, NULL, NULL, NULL, 1, NULL, 0);
+INSERT INTO `products` VALUES (8, NULL, NULL, NULL, 1, NULL, 0);
 
 -- ----------------------------
 -- Table structure for rules
@@ -319,7 +651,7 @@ CREATE TABLE `student`  (
   `dorm_id` int(255) NULL DEFAULT NULL,
   `instructor_id` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
@@ -345,9 +677,9 @@ CREATE TABLE `student_choice`  (
 -- Records of student_choice
 -- ----------------------------
 INSERT INTO `student_choice` VALUES (1, 1, 95, 1);
-INSERT INTO `student_choice` VALUES (2, 1, 95, 2);
-INSERT INTO `student_choice` VALUES (3, 1, 85, 3);
-INSERT INTO `student_choice` VALUES (4, 1, 0, 4);
+INSERT INTO `student_choice` VALUES (2, 1, 95, 1);
+INSERT INTO `student_choice` VALUES (3, 1, 95, 2);
+INSERT INTO `student_choice` VALUES (4, 1, 0, 1);
 
 -- ----------------------------
 -- Table structure for teacher
@@ -357,13 +689,14 @@ CREATE TABLE `teacher`  (
   `tea_id` int(255) NOT NULL AUTO_INCREMENT,
   `teacher_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `major_id` int(255) NULL DEFAULT NULL,
+  `tea_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`tea_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES (1, 'zxd', 1);
+INSERT INTO `teacher` VALUES (1, 'zxd', 1, '000');
 
 -- ----------------------------
 -- Table structure for teacher_choice
@@ -378,11 +711,12 @@ CREATE TABLE `teacher_choice`  (
   `time` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `certification` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher_choice
 -- ----------------------------
 INSERT INTO `teacher_choice` VALUES (1, 1, 1, 2018, 0, '周一下午', 1);
+INSERT INTO `teacher_choice` VALUES (13, 1, 2, 2019, 0, '周三上午', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
