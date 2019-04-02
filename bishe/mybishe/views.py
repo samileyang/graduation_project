@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from mybishe import models
+from django.db.models import F
 # Create your views here.
 def stu_info(request):
 	dorms = models.Dorm.objects.all()
@@ -32,10 +33,6 @@ def stu_login(request):
 		request.session['stu_name'] = user.stu_name
 		request.session['stu_id'] = user.stu_id
 		return render(request,'student/stu_index.html')
-
-
-def jwc_index(request):
-	return render(request,'jwc/jwc_index.html')
 
 def stu_index(request):
 	return render(request,'student/stu_index.html')
@@ -75,7 +72,7 @@ def stu_pro_purchase(request):
 	return render(request,'student/stu_pro_purchase.html',{'products':products})
 
 def teacher_choose_course(request):
-	courses = models.CultivatePlan.objects.all()
+	courses = models.CultivatePlan.objects.filter(class_field__lt=F('limit'))
 	return render(request,'teacher/teacher_choose_course.html',{'courses':courses})
 
 
@@ -92,7 +89,7 @@ def teacher_give_score(request):
 	return render(request,'teacher/teacher_give_score.html',{'students':students})
 
 def stu_skills_order(request):
-	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = 1)
+	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'))
 	return render(request,'student/stu_skills_order.html',{'courses':courses})
 
 def instructor_sp_confirm(request):
@@ -125,3 +122,18 @@ def instructor_login(request):
 		request.session['instructor_name'] = user.instructor_name
 		request.session['instructor_id'] = user.instructor_id
 		return render(request,'instructor/instructor_pro_review.html')
+
+def teacher_choose_order(request):
+	cultivate = models.CultivatePlan.objects.get(course_id = request.GET.get('course_id',None))
+	cultivate.class_field += 1
+	status = 0
+	time = cultivate.time
+	teacher_id = request.session.get('teacher_id',None)
+	certification = cultivate.certification
+	year = 2019
+	teacher_choose = models.TeacherChoice(course_year = year,status = status,time = time,certification = certification,teacher_id = teacher_id,course_id = request.GET.get('course_id'))
+	teacher_choose.save()
+	cultivate.save()
+	courses = models.CultivatePlan.objects.filter(class_field__lt=F('limit'))
+	return render(request,'teacher/teacher_choose_course.html',{'courses':courses})
+

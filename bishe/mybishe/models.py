@@ -87,12 +87,12 @@ class CultivatePlan(models.Model):
     semester = models.IntegerField(blank=True, null=True)
     time = models.CharField(max_length=255, blank=True, null=True)
     certification = models.IntegerField(blank=True, null=True)
+    class_field = models.IntegerField(db_column='class', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    limit = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
         db_table = 'cultivate_plan'
-
-
 
 
 class Dorm(models.Model):
@@ -109,6 +109,7 @@ class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
     instructor_name = models.CharField(max_length=255, blank=True, null=True)
     instructor_pwd = models.CharField(max_length=255, blank=True, null=True)
+
     class Meta:
         
         db_table = 'instructor'

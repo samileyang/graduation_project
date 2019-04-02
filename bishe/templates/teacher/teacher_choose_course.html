@@ -17,7 +17,7 @@
                     <td>{{ course.major_id }}</td>
                     <td>{{ course.grade }}</td>
                     <td>{{ course.time }}</td>
-                    <td><button>选择</button></td>
+                    <td><button type="submit" class="btn btn-danger" onclick="window.location.href='/teacher_choose_order?course_id={{ course.course_id }}'">选择</button></td>
                 </tr>
             {% endfor %}
             </tbody>

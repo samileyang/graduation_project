@@ -10,13 +10,11 @@
             </thead>
             <tbody>
             {% for course in courses %}
-                {% if course.teacher_choice.certification == 1 %}
-                    <tr>
-                        <td>{{ course.teacher_choice.course_id }}</td>
-                        <td>{{ course.score }}</td>
-                        <td><button>确认</button></td>
-                    </tr>
-                {% endif %}
+                <tr>
+                    <td>{{ course.student_choice_id }}</td>
+                    <td>{{ course.score }}</td>
+                    <td><button>确认</button></td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
