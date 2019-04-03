@@ -7,12 +7,23 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/jquery-1.12.4.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="menu">
     <ul style="margin-left: 20px,margin-top:10px">
         <li style="font-size: 16px, margin: 0 0 0 10px" onclick="window.location.href='/stu_index'">学生|系统</li>
-        <li style="margin: 0 0 0 10px"><a href="/stu_pro_purchase">二手商品</a></li>
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                二手商品
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/stu_pro_purchase">商品购买</a></li>
+                <li><a href="/stu_products">商品出售</a></li>
+            </ul>
+        </li>
         <li style="margin: 0 0 0 10px"><a href="/stu_choose_course">选课</a></li>
         <li style="margin: 0 0 0 10px"><a href="/stu_library_borrow">图书馆</a></li>
         <li style="margin: 0 0 0 10px"><a href="/stu_skills_order">技能认证</a></li>
