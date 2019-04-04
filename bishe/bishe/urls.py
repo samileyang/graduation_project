@@ -41,4 +41,6 @@ urlpatterns = [
     url(r'^jwc_index/',views.jwc_index),
     url(r'^instructor_login/',views.instructor_login),
     url(r'^teacher_choose_order/',views.teacher_choose_order),
+    url(r'^stu_choose_order/',views.stu_choose_order),
+    url(r'^stu_delete_order/',views.stu_delete_order),
 ]

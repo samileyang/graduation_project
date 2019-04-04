@@ -75,10 +75,13 @@ def teacher_choose_course(request):
 	courses = models.CultivatePlan.objects.filter(class_field__lt=F('limit'))
 	return render(request,'teacher/teacher_choose_course.html',{'courses':courses})
 
-
 def stu_choose_course(request):
+	students = models.StudentChoice.objects.filter(stu_id=request.session.get("stu_id"))
+	stu_list = []
+	for student in students:
+		stu_list.append(student.course_id)
 	courses = models.TeacherChoice.objects.all()
-	return render(request,'student/stu_choose_course.html',{'courses':courses})
+	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
 def stu_book_lost(request):
 	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
@@ -137,3 +140,25 @@ def teacher_choose_order(request):
 	courses = models.CultivatePlan.objects.filter(class_field__lt=F('limit'))
 	return render(request,'teacher/teacher_choose_course.html',{'courses':courses})
 
+def stu_choose_order(request):
+	teacher_course = models.TeacherChoice.objects.get(teacher_choice_id = request.GET.get('teacher_choice_id',None))
+	teacher_choice_id = request.GET.get('teacher_choice_id',None)
+	stu_id = request.session.get("stu_id")
+	course_id = teacher_course.course_id
+	save_course = models.StudentChoice(teacher_choice_id= teacher_choice_id,stu_id = stu_id, course_id =course_id)
+	save_course.save()
+	students = models.StudentChoice.objects.filter(stu_id=request.session.get("stu_id"))
+	stu_list = []
+	for student in students:
+		stu_list.append(student.course_id)
+	courses = models.TeacherChoice.objects.all()
+	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
+
+def stu_delete_order(request):
+	models.StudentChoice.objects.get(teacher_choice_id = request.GET.get('teacher_choice_id',None)).delete()
+	students = models.StudentChoice.objects.filter(stu_id=request.session.get("stu_id"))
+	stu_list = []
+	for student in students:
+		stu_list.append(student.course_id)
+	courses = models.TeacherChoice.objects.all()
+	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})

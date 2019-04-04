@@ -225,7 +225,7 @@ class StudentChoice(models.Model):
     teacher_choice_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
-
+    course_id = models.IntegerField(blank=True, null=True)
     class Meta:
         
         db_table = 'student_choice'
