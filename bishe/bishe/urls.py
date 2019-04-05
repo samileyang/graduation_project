@@ -43,4 +43,5 @@ urlpatterns = [
     url(r'^teacher_choose_order/',views.teacher_choose_order),
     url(r'^stu_choose_order/',views.stu_choose_order),
     url(r'^stu_delete_order/',views.stu_delete_order),
+    url(r'^stu_borrow_order/',views.stu_borrow_order),
 ]

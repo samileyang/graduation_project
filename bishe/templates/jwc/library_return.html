@@ -5,7 +5,8 @@
         <table class="table table-hover">
             <tr>
                 <th scope="col">编号</th>
-                <th scope="col">时间</th>
+                <th scope="col">开始</th>
+                <th scope="col">结束</th>
                 <th scope="col">状态</th>
             </tr>
             </thead>
@@ -14,7 +15,12 @@
                 <tr>
                     <td>{{ order.book_id }}</td>
                     <td>{{ order.startdate }}</td>
-                    <td><button>归还</button></td>
+                    <td>{{ order.supposedate }}</td>
+                    {% if order.startdate < order.supposedate %}
+                    <td><button class="btn btn-primary">归还</button></td>
+                    {% else %}
+                    <td><button class="btn btn-danger">罚款</button></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ borrow.book_id }}</td>
                     <td>{{ borrow.book_name }}</td>
-                    <td><button>借阅</button></td>
+                    <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/stu_borrow_order?book_id={{ borrow.book_id }}'">借阅</button></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from mybishe import models
 from django.db.models import F
+import datetime
 # Create your views here.
 def stu_info(request):
 	dorms = models.Dorm.objects.all()
@@ -38,6 +39,21 @@ def stu_index(request):
 	return render(request,'student/stu_index.html')
 
 def stu_library_borrow(request):
+	borrows = models.Borrow.objects.filter(status ='0')
+	return render(request,'student/stu_library_borrow.html',{'borrows':borrows})
+
+def stu_borrow_order(request):
+	mybook = models.Borrow.objects.get(book_id = request.GET.get('book_id',None))
+	stu_id = request.session.get('stu_id',None)
+	book_id = request.GET.get('book_id',None)
+	now = datetime.datetime.now()
+	delta = datetime.timedelta(days=90)
+	n_days = now + delta
+	price = mybook.price
+	borrow_order = models.BorrowOrder(stu_id = stu_id,book_id=book_id,startdate=now,supposedate = n_days, penatly_status = 0,appeal_status = 0, return_status = 0,price = price)
+	mybook.status = '1'
+	mybook.save()
+	borrow_order.save()
 	borrows = models.Borrow.objects.filter(status ='0')
 	return render(request,'student/stu_library_borrow.html',{'borrows':borrows})
 

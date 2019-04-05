@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 04/04/2019 23:07:40
+ Date: 05/04/2019 15:12:27
 */
 
 SET NAMES utf8mb4;
@@ -254,8 +254,8 @@ CREATE TABLE `borrow`  (
 -- ----------------------------
 -- Records of borrow
 -- ----------------------------
-INSERT INTO `borrow` VALUES (1, '高等数学', 0, 10.00);
-INSERT INTO `borrow` VALUES (2, 'python', 0, 20.00);
+INSERT INTO `borrow` VALUES (1, '高等数学', 1, 10.00);
+INSERT INTO `borrow` VALUES (2, 'python', 1, 20.00);
 INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
 INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
 INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
@@ -280,12 +280,13 @@ CREATE TABLE `borrow_order`  (
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow_order
 -- ----------------------------
-INSERT INTO `borrow_order` VALUES (1, 1, 3, '2019-03-20 21:11:23', '2019-03-15 21:33:15', '2019-03-15 21:33:19', 0, 1, 0, 20.00);
+INSERT INTO `borrow_order` VALUES (2, 1, 2, '2019-04-05 14:52:18', '2019-07-04 14:52:18', NULL, 0, 0, 0, 20.00);
+INSERT INTO `borrow_order` VALUES (3, 1, 3, '2019-04-05 14:52:20', '2018-07-04 14:52:20', NULL, 0, 0, 0, 20.00);
 
 -- ----------------------------
 -- Table structure for borrow_rule
@@ -463,7 +464,7 @@ CREATE TABLE `django_session`  (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('2fyfvcvhhx6mcurm88dlevtj8ereepfe', 'MjQ2Y2YyOThmNDlhNzdlODFjMGEzZjc3M2EzYzY2MDhlN2U2MmFiODp7InVzZXJfaWQiOjEsInVzZXJfbmFtZSI6Inl5aCIsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-15 07:49:56.194934');
-INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'OTM4MzU0MDI4ZThkMWJjNzNjZTNmNzM3MThhMjIwYzI5N2QyMDc0NTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-18 14:26:58.856385');
+INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'OTM4MzU0MDI4ZThkMWJjNzNjZTNmNzM3MThhMjIwYzI5N2QyMDc0NTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-19 06:50:59.810108');
 INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMDI4ZGQ1NzA3NGM5MzU2MWNmNTU2Mjg2MjljNDU0N2VmNTJjMzp7Imluc3RydWN0b3JfbmFtZSI6Ilx1OGY4NVx1NWJmY1x1NTQ1ODEiLCJpbnN0cnVjdG9yX2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJzdHVfbmFtZSI6Inl5aCIsInN0dV9pZCI6MX0=', '2019-04-16 13:05:25.282626');
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
@@ -681,7 +682,7 @@ CREATE TABLE `student_choice`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `course_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for teacher
