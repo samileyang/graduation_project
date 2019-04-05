@@ -44,4 +44,6 @@ urlpatterns = [
     url(r'^stu_choose_order/',views.stu_choose_order),
     url(r'^stu_delete_order/',views.stu_delete_order),
     url(r'^stu_borrow_order/',views.stu_borrow_order),
+    url(r'^stu_book_return/',views.stu_book_return),
+    url(r'^give_score/',views.give_score),
 ]

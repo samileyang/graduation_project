@@ -17,7 +17,7 @@
                     <td>{{ order.startdate }}</td>
                     <td>{{ order.supposedate }}</td>
                     {% if order.startdate < order.supposedate %}
-                    <td><button class="btn btn-primary">归还</button></td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/stu_book_return?book_id={{ order.book_id }}'">归还</button></td>
                     {% else %}
                     <td><button class="btn btn-danger">罚款</button></td>
                     {% endif %}

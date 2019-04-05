@@ -58,8 +58,19 @@ def stu_borrow_order(request):
 	return render(request,'student/stu_library_borrow.html',{'borrows':borrows})
 
 def library_return(request):
-	orders = models.BorrowOrder.objects.all()
+	orders = models.BorrowOrder.objects.filter(return_status = '0')
 	return render(request,'jwc/library_return.html',{'orders':orders})
+
+def stu_book_return(request):
+	book_id = request.GET.get('book_id',None)
+	borrow_order = models.BorrowOrder.objects.get(return_status = '0', book_id = book_id)
+	models.Borrow.objects.filter(book_id = book_id).update(status = '0')
+	borrow_order.return_status = 1
+	borrow_order.actdate = datetime.datetime.now()
+	borrow_order.save()
+	orders = models.BorrowOrder.objects.filter(return_status = '0')
+	return render(request,'jwc/library_return.html',{'orders':orders})
+
 
 def stu_sp_certification(request):
 	certifications = models.Rules.objects.all()
@@ -104,8 +115,19 @@ def stu_book_lost(request):
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
 def teacher_give_score(request):
-	students = models.StudentChoice.objects.filter(score = 0)
+	students = models.StudentChoice.objects.filter(score__isnull=True)
 	return render(request,'teacher/teacher_give_score.html',{'students':students})
+
+def give_score(request):
+	student_choice_id = request.GET.get('student_choice_id',None)
+	score = request.POST.get('score')
+	print(score)
+	give_score = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
+	give_score.score = score
+	give_score.save()
+	students = models.StudentChoice.objects.filter(score__isnull=True)
+	return render(request,'teacher/teacher_give_score.html',{'students':students})
+
 
 def stu_skills_order(request):
 	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'))
