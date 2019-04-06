@@ -111,6 +111,22 @@ def stu_choose_course(request):
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
 def stu_book_lost(request):
+
+	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
+	return render(request,'student/stu_book_lost.html',{'books':books})
+
+def book_lost(request):
+	borrow_id = request.GET.get('borrow_id',None)
+	mybook = models.BorrowOrder.objects.get(borrow_id=borrow_id)
+	mybook.actdate = datetime.datetime.now()
+	mybook.penatly_status = 1
+	mybook.return_status = 1
+	stu_id = mybook.stu_id
+	students = models.Student.objects.get(stu_id = stu_id)
+	price = mybook.price
+	penatly = models.Penalty(borrow_id = borrow_id,stu_id = stu_id, pen_money = price)
+	mybook.save()
+	penatly.save()
 	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
@@ -120,14 +136,15 @@ def teacher_give_score(request):
 
 def give_score(request):
 	student_choice_id = request.GET.get('student_choice_id',None)
-	score = request.POST.get('score')
+	print(student_choice_id)
+	score = request.POST['score_{}'.format(student_choice_id)]
+	print('score_{}'.format(student_choice_id))
 	print(score)
 	give_score = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
 	give_score.score = score
 	give_score.save()
 	students = models.StudentChoice.objects.filter(score__isnull=True)
 	return render(request,'teacher/teacher_give_score.html',{'students':students})
-
 
 def stu_skills_order(request):
 	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'))

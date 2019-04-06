@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ book.book_id }}</td>
                     <td>{{ book.price }}</td>
-                    <td><button>丢失</button></td>
+                    <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/book_lost?borrow_id={{ book.borrow_id }}'">丢失</button></td>
                 </tr>
             {% endfor %}
             </tbody>

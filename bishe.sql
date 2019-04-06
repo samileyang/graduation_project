@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 05/04/2019 22:51:02
+ Date: 06/04/2019 19:44:11
 */
 
 SET NAMES utf8mb4;
@@ -254,9 +254,9 @@ CREATE TABLE `borrow`  (
 -- ----------------------------
 -- Records of borrow
 -- ----------------------------
-INSERT INTO `borrow` VALUES (1, '高等数学', 0, 10.00);
-INSERT INTO `borrow` VALUES (2, 'python', 0, 20.00);
-INSERT INTO `borrow` VALUES (3, 'SQL', 0, 20.00);
+INSERT INTO `borrow` VALUES (1, '高等数学', 1, 10.00);
+INSERT INTO `borrow` VALUES (2, 'python', 1, 20.00);
+INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
 INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
 INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
 INSERT INTO `borrow` VALUES (6, '孟子', 0, 15.00);
@@ -280,7 +280,7 @@ CREATE TABLE `borrow_order`  (
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow_order
@@ -290,6 +290,9 @@ INSERT INTO `borrow_order` VALUES (10, 1, 2, '2019-04-05 18:39:33', '2019-07-04 
 INSERT INTO `borrow_order` VALUES (11, 1, 3, '2019-04-05 18:39:34', '2019-07-04 18:39:34', '2019-04-05 18:40:32', 0, 0, 1, 20.00);
 INSERT INTO `borrow_order` VALUES (12, 1, 4, '2019-04-05 18:39:34', '2019-07-04 18:39:34', '2019-04-05 18:40:33', 0, 0, 1, 20.00);
 INSERT INTO `borrow_order` VALUES (13, 1, 5, '2019-04-05 18:39:36', '2019-07-04 18:39:36', '2019-04-05 18:40:33', 0, 0, 1, 15.00);
+INSERT INTO `borrow_order` VALUES (14, 1, 1, '2019-04-06 19:15:40', '2019-07-05 19:15:40', '2019-04-06 19:41:01', 1, 0, 1, 10.00);
+INSERT INTO `borrow_order` VALUES (15, 1, 2, '2019-04-06 19:15:41', '2019-07-05 19:15:41', NULL, 0, 0, 0, 20.00);
+INSERT INTO `borrow_order` VALUES (16, 1, 3, '2019-04-06 19:15:42', '2019-07-05 19:15:42', NULL, 0, 0, 0, 20.00);
 
 -- ----------------------------
 -- Table structure for borrow_rule
@@ -467,10 +470,11 @@ CREATE TABLE `django_session`  (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('2fyfvcvhhx6mcurm88dlevtj8ereepfe', 'MjQ2Y2YyOThmNDlhNzdlODFjMGEzZjc3M2EzYzY2MDhlN2U2MmFiODp7InVzZXJfaWQiOjEsInVzZXJfbmFtZSI6Inl5aCIsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-15 07:49:56.194934');
-INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'YTIyY2VmZjE0MzdhOTRiNGY4OTA2NGQ1MTcwYTQ3Y2RlNjQ5YTU4ZTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieHhjIiwic3R1X2lkIjoyfQ==', '2019-04-19 14:19:55.600392');
+INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'YTIyY2VmZjE0MzdhOTRiNGY4OTA2NGQ1MTcwYTQ3Y2RlNjQ5YTU4ZTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieHhjIiwic3R1X2lkIjoyfQ==', '2019-04-20 08:30:11.685330');
 INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMDI4ZGQ1NzA3NGM5MzU2MWNmNTU2Mjg2MjljNDU0N2VmNTJjMzp7Imluc3RydWN0b3JfbmFtZSI6Ilx1OGY4NVx1NWJmY1x1NTQ1ODEiLCJpbnN0cnVjdG9yX2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJzdHVfbmFtZSI6Inl5aCIsInN0dV9pZCI6MX0=', '2019-04-16 13:05:25.282626');
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
+INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'OTM4MzU0MDI4ZThkMWJjNzNjZTNmNzM3MThhMjIwYzI5N2QyMDc0NTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-20 11:15:34.223106');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -580,9 +584,14 @@ CREATE TABLE `penalty`  (
   `stu_pen_id` int(255) NOT NULL AUTO_INCREMENT,
   `borrow_id` int(11) NULL DEFAULT NULL,
   `pen_money` int(255) NULL DEFAULT NULL,
-  `education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `stu_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_pen_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of penalty
+-- ----------------------------
+INSERT INTO `penalty` VALUES (1, 14, 10, 1);
 
 -- ----------------------------
 -- Table structure for products

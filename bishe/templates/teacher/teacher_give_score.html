@@ -14,8 +14,13 @@
                 <tr>
                     <td>{{ student.stu_id }}</td>
                     <td>{{ student.course_id }}</td>
-                    <td><input type="int" name="score" id="score" placeholder="请输入成绩"></td>
-                    <td><button class="btn btn-primary" onclick="window.location.href='/give_score?student_choice_id={{ student.student_choice_id }}'">确认</button></td>
+                    <td>
+                        <form action = "/give_score/" method="post">
+                            {% csrf_token %}
+                            <input name="score_{{ student.student_choice_id }}" id = "score_{{ student.student_choice_id }}">
+                        </form>
+                    </td>
+                    <td><button type="submit" class="btn btn-primary">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

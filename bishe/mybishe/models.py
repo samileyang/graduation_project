@@ -161,8 +161,7 @@ class Penalty(models.Model):
     stu_pen_id = models.AutoField(primary_key=True)
     borrow_id = models.IntegerField(blank=True, null=True)
     pen_money = models.IntegerField(blank=True, null=True)
-    education = models.CharField(max_length=255, blank=True, null=True)
-
+    stu_id = models.IntegerField(blank=True, null=True)
     class Meta:
         
         db_table = 'penalty'

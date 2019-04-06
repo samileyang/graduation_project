@@ -1,0 +1,21 @@
+{% extends "teacher/teacher_header.html" %}
+{% block context %}
+    <script>
+    let showAlert = { show_alert }
+        if(showAlert === 'true'){}
+        alert("感谢您的打分！")
+    </script>
+    <div class="container">
+        <h5>学生打分</h5>
+        <form action="give_score?student_choice_id={{ student.student_choice_id }}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="hidden" name="student_choice_id" value="{{ student.student_choice_id }}">
+                <label for="comment">得分</label>
+                <input type="number" class="form-control" name="score" id="score">
+            </div>
+            <button type="submit" class="btn btn-primary">完成</button>
+            <button type="button" onclick="window.location.href='/teacher_give_score'" class="btn btn-primary">返回</button>
+        </form>
+    </div>
+{% endblock context %}
