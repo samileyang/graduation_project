@@ -217,3 +217,26 @@ def stu_delete_order(request):
 		stu_list.append(student.course_id)
 	courses = models.TeacherChoice.objects.all()
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
+
+def stu_job_certification(request):
+	try:
+		stu_id = request.session.get('stu_id')
+		job_name = request.POST.get("job_name")
+		days = request.POST.get("days")
+		jobs = models.JobCertification(stu_id = stu_id,job_name = job_name,days=days,status = 0)
+		jobs.save()
+		return render(request,'student/stu_job_certification.html')
+	except:
+		return render(request,'student/stu_job_certification.html')
+
+def job_review(request):
+	job_id = request.GET.get('job_id')
+	thisjob = models.JobCertification.objects.get(job_id = job_id)
+	thisjob.status = 1
+	thisjob.save()
+	jobs = models.JobCertification.objects.all()
+	return render(request,'instructor/instructor_job_review.html',{'jobs':jobs})
+
+def instructor_job_review(request):
+	jobs = models.JobCertification.objects.all()
+	return render(request,'instructor/instructor_job_review.html',{'jobs':jobs})

@@ -1,0 +1,27 @@
+{% extends "instructor/instructor_header.html" %}
+{% block context %}
+
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">工作性质</th>
+                <th scope="col">工作时常</th>
+                <th scope="col">学生编号</th>
+                <th scope="col">确认</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                {% if job.status == 0 %}
+                <tr>
+                    <td>{{ job.job_name }}</td>
+                    <td>{{ job.days }}</td>
+                    <td>{{ job.stu_id }}</td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/job_review?job_id={{ job.job_id }}'">确认</button></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}

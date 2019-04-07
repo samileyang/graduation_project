@@ -20,6 +20,7 @@ class AddCreditOrder(models.Model):
         db_table = 'add_credit_order'
 
 
+
 class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
@@ -95,6 +96,7 @@ class CultivatePlan(models.Model):
         db_table = 'cultivate_plan'
 
 
+
 class Dorm(models.Model):
     bed_id = models.AutoField(primary_key=True)
     dorm_id = models.IntegerField(blank=True, null=True)
@@ -113,6 +115,17 @@ class Instructor(models.Model):
     class Meta:
         
         db_table = 'instructor'
+
+
+class JobCertification(models.Model):
+    stu_id = models.IntegerField()
+    job_id = models.AutoField(primary_key=True)
+    job_name = models.CharField(max_length=255, blank=True, null=True)
+    days = models.IntegerField(blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
+    class Meta:
+        
+        db_table = 'job_certification'
 
 
 class LostHistory(models.Model):
@@ -162,6 +175,7 @@ class Penalty(models.Model):
     borrow_id = models.IntegerField(blank=True, null=True)
     pen_money = models.IntegerField(blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
+
     class Meta:
         
         db_table = 'penalty'
@@ -225,6 +239,7 @@ class StudentChoice(models.Model):
     score = models.IntegerField(blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
     course_id = models.IntegerField(blank=True, null=True)
+
     class Meta:
         
         db_table = 'student_choice'
