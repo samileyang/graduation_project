@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 06/04/2019 19:44:11
+ Date: 07/04/2019 17:00:57
 */
 
 SET NAMES utf8mb4;
@@ -474,7 +474,7 @@ INSERT INTO `django_session` VALUES ('3e1x3hi160k89ghe9pcfmjbwp7po9e46', 'YTIyY2
 INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMDI4ZGQ1NzA3NGM5MzU2MWNmNTU2Mjg2MjljNDU0N2VmNTJjMzp7Imluc3RydWN0b3JfbmFtZSI6Ilx1OGY4NVx1NWJmY1x1NTQ1ODEiLCJpbnN0cnVjdG9yX2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJzdHVfbmFtZSI6Inl5aCIsInN0dV9pZCI6MX0=', '2019-04-16 13:05:25.282626');
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
-INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'OTM4MzU0MDI4ZThkMWJjNzNjZTNmNzM3MThhMjIwYzI5N2QyMDc0NTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxfQ==', '2019-04-20 11:15:34.223106');
+INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-21 08:45:09.809714');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -520,6 +520,24 @@ CREATE TABLE `instructor`  (
 -- ----------------------------
 INSERT INTO `instructor` VALUES (1, '辅导员1', '000');
 INSERT INTO `instructor` VALUES (2, '辅导员2', '000');
+
+-- ----------------------------
+-- Table structure for job_certification
+-- ----------------------------
+DROP TABLE IF EXISTS `job_certification`;
+CREATE TABLE `job_certification`  (
+  `status` int(255) NULL DEFAULT NULL,
+  `stu_id` int(11) NULL DEFAULT NULL,
+  `job_id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `days` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`job_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of job_certification
+-- ----------------------------
+INSERT INTO `job_certification` VALUES (1, 1, 2, 'lalall', 9);
 
 -- ----------------------------
 -- Table structure for lost_history
