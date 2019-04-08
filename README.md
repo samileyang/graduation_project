@@ -1,6 +1,6 @@
 # 毕业设计
 毕业设计 for Dr.Xiaodong Zhu via Python  
-~~学生登录 
+~~学生登录  
 教师登录  
 辅导员登录  
 学生信息录入  
