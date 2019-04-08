@@ -20,7 +20,6 @@ class AddCreditOrder(models.Model):
         db_table = 'add_credit_order'
 
 
-
 class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
@@ -95,8 +94,6 @@ class CultivatePlan(models.Model):
         
         db_table = 'cultivate_plan'
 
-
-
 class Dorm(models.Model):
     bed_id = models.AutoField(primary_key=True)
     dorm_id = models.IntegerField(blank=True, null=True)
@@ -118,11 +115,12 @@ class Instructor(models.Model):
 
 
 class JobCertification(models.Model):
-    stu_id = models.IntegerField()
+    status = models.IntegerField(blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
     job_id = models.AutoField(primary_key=True)
     job_name = models.CharField(max_length=255, blank=True, null=True)
     days = models.IntegerField(blank=True, null=True)
-    status = models.IntegerField(blank=True, null=True)
+
     class Meta:
         
         db_table = 'job_certification'
@@ -153,6 +151,8 @@ class Orders(models.Model):
     seller_comm = models.IntegerField(blank=True, null=True)
     buyer_comm = models.IntegerField(blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
+    received = models.IntegerField(blank=True, null=True)
+    seller_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
@@ -189,6 +189,7 @@ class Products(models.Model):
     seller_id = models.IntegerField(blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
+    paid = models.IntegerField(blank=True, null=True)
 
     class Meta:
         

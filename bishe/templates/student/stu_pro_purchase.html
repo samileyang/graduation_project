@@ -3,6 +3,7 @@
     <div class="container">
         <table class="table table-hover">
             <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_products'">商品发布</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_cart'">购物车</button>
             <tr>
                 <th scope="col">发布学生</th>
                 <th scope="col">商品名称</th>
@@ -20,7 +21,11 @@
                     <td>{{ product.price_org }}</td>
                     <td>{{ product.price_cur }}</td>
                     <td>{{ product.location }}</td>
-                    <td><button>购买</button></td>
+                    {% if product.paid == 0 %}
+                        <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/buy_products?pro_id={{ product.pro_id }}'">购买</button></td>
+                    {% else %}
+                        <td><button type="button" class="btn btn-default" disabled="disabled">售罄</button></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

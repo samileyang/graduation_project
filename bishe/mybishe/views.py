@@ -77,7 +77,7 @@ def stu_sp_certification(request):
 	return render(request,'student/stu_sp_certification.html',{'certifications':certifications})
 
 def stu_products(request):
-	try:
+	if request.method =='POST':
 		pro_name = request.POST.get('product_name')
 		price_org = request.POST.get('price_org')
 		price_cur = request.POST.get('price_cur')
@@ -87,7 +87,7 @@ def stu_products(request):
 		products = models.Products(pro_name = pro_name,price_org = price_org,price_cur = price_cur,seller_id = seller_id,location = location,status = status)
 		products.save()
 		return render(request,'student/stu_products.html')
-	except:
+	if request.method =="GET":
 		return render(request,'student/stu_products.html')
 
 def instructor_pro_review(request):
@@ -95,6 +95,22 @@ def instructor_pro_review(request):
 	return render(request,'instructor/instructor_pro_review.html',{'products':products})
 
 def stu_pro_purchase(request):
+	products = models.Products.objects.filter(status=1)
+	return render(request,'student/stu_pro_purchase.html',{'products':products})
+
+def buy_products(request):
+	pro_id = request.GET.get('pro_id',None)
+	buyer_id = request.session.get('stu_id')
+	myproduct = models.Products.objects.get(pro_id = pro_id)
+	price_cur = myproduct.price_cur
+	seller_id = myproduct.seller_id
+	myproduct.paid = 1
+	myproduct.save()
+	moneychange = models.Student.objects.get(stu_id= buyer_id)
+	moneychange.money -= price_cur
+	moneychange.save()
+	addproduct = models.Orders(product_id = pro_id,buyer_id = buyer_id,price = price_cur,received = 0,seller_id = seller_id)
+	addproduct.save()
 	products = models.Products.objects.filter(status=1)
 	return render(request,'student/stu_pro_purchase.html',{'products':products})
 
@@ -240,3 +256,22 @@ def job_review(request):
 def instructor_job_review(request):
 	jobs = models.JobCertification.objects.all()
 	return render(request,'instructor/instructor_job_review.html',{'jobs':jobs})
+
+def received_products(request):
+	product_id = request.GET.get('product_id')
+	myproduct = models.Orders.objects.get(product_id = product_id)
+	myproduct.received = 1
+	price = myproduct.price
+	seller_id = myproduct.seller_id
+	myproduct.save()
+	stu_id = request.session.get('stu_id')
+	moneychange = models.Student.objects.get(stu_id= seller_id)
+	moneychange.money += price
+	moneychange.save()
+	products = models.Orders.objects.filter(buyer_id =stu_id)
+	return render(request,'student/stu_cart.html',{'products':products})
+
+def stu_cart(request):
+	stu_id = request.session.get('stu_id')
+	products = models.Orders.objects.filter(buyer_id =stu_id)
+	return render(request,'student/stu_cart.html',{'products':products})

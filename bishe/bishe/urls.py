@@ -50,4 +50,7 @@ urlpatterns = [
     url(r'^stu_job_certification/',views.stu_job_certification),
     url(r'^job_review/',views.job_review),
     url(r'^instructor_job_review/',views.instructor_job_review),
+    url(r'^buy_products/',views.buy_products),
+    url(r'^received_products/',views.received_products),
+    url(r'^stu_cart/',views.stu_cart),
 ]
