@@ -73,8 +73,22 @@ def stu_book_return(request):
 
 
 def stu_sp_certification(request):
-	certifications = models.Rules.objects.all()
-	return render(request,'student/stu_sp_certification.html',{'certifications':certifications})
+	if request.method =='GET':
+		certifications = models.Rules.objects.all()
+		return render(request,'student/stu_sp_certification.html',{'certifications':certifications})
+	if request.method =='POST':
+		rule_name = request.POST.get('rule_name')
+		print(rule_name)
+		stu_id = request.session.get('stu_id')
+		comment = request.POST.get('comments')
+		print(comment)
+		getrule = models.Rules.objects.get(rule_name = rule_name)
+		rule_id = getrule.rule_id
+		score = getrule.score
+		addorder = models.AddCreditOrder(stu_id = stu_id,rule_id = rule_id,rule_name = rule_name,score = score,status = 0,comment = comment)
+		addorder.save()
+		certifications = models.Rules.objects.all()
+		return render(request,'student/stu_sp_certification.html',{'certifications':certifications})		
 
 def stu_products(request):
 	if request.method =='POST':
@@ -127,7 +141,6 @@ def stu_choose_course(request):
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
 def stu_book_lost(request):
-
 	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
@@ -167,8 +180,16 @@ def stu_skills_order(request):
 	return render(request,'student/stu_skills_order.html',{'courses':courses})
 
 def instructor_sp_confirm(request):
-	students = models.AddCreditOrder.objects.filter(status = 0)
-	return render(request,'instructor/instructor_sp_confirm.html',{"students":students})
+	rules = models.AddCreditOrder.objects.filter(status = 0)
+	return render(request,'instructor/instructor_sp_confirm.html',{"rules":rules})
+
+def add_review(request):
+	add_id = request.GET.get('add_id')
+	c_order = models.AddCreditOrder.objects.get(add_id=add_id)
+	c_order.status = 1
+	c_order.save()
+	rules = models.AddCreditOrder.objects.filter(status = 0)
+	return render(request,'instructor/instructor_sp_confirm.html',{"rules":rules})
 
 def teacher_login(request):
 	if request.method == 'GET':

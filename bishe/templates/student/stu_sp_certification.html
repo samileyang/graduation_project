@@ -1,7 +1,7 @@
 {% extends "student/stu_header.html" %}
 {% block context %}
     <div class="container">
-        <form action="/stu_sp_certification/" method="Post">
+        <form action="/stu_sp_certification/" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="rule_name">选择你要认证的论文or学生工作</label>

@@ -14,7 +14,8 @@ class AddCreditOrder(models.Model):
     rule_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
-
+    rule_name = models.CharField(max_length=255, blank=True, null=True)
+    comment = models.CharField(max_length=255, blank=True, null=True)
     class Meta:
         
         db_table = 'add_credit_order'

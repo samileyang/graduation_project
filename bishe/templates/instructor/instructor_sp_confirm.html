@@ -3,21 +3,21 @@
     <div class="container">
         <table class="table table-hover">
             <tr>
-                <th scope="col">申请学生</th>
-                <th scope="col">学生姓名</th>
-                <th scope="col">申请编号</th>
+                <th scope="col">学号</th>
+                <th scope="col">编号</th>
                 <th scope="col">申请内容</th>
+                <th scope="col">个人陈述</th>
                 <th scope="col">确认</th>
             </tr>
             </thead>
             <tbody>
-            {% for student in students %}
+            {% for rule in rules %}
                 <tr>
-                    <td>{{ student.stu_id }}</td>
-                    <td>{{ student.student.stu_name }}</td>
-                    <td>{{ student.rule_id }}</td>
-                    <td>{{ student.rules.rule_name }}</td>
-                    <td><button>确认</button></td>
+                    <td>{{ rule.stu_id }}</td>
+                    <td>{{ rule.rule_id }}</td>
+                    <td>{{ rule.rule_name }}</td>
+                    <td>{{ rule.comment }}</td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/add_review?add_id={{ rule.add_id }}'">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

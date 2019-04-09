@@ -53,4 +53,5 @@ urlpatterns = [
     url(r'^buy_products/',views.buy_products),
     url(r'^received_products/',views.received_products),
     url(r'^stu_cart/',views.stu_cart),
+    url(r'^add_review/',views.add_review),
 ]
