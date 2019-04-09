@@ -54,4 +54,7 @@ urlpatterns = [
     url(r'^received_products/',views.received_products),
     url(r'^stu_cart/',views.stu_cart),
     url(r'^add_review/',views.add_review),
+    url(r'^stu_pay_penalty/',views.stu_pay_penalty),
+    url(r'^pay_penalty/',views.pay_penalty),
+    url(r'^stu_course/',views.stu_course),
 ]

@@ -1,0 +1,24 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">罚款类型</th>
+                <th scope="col">罚款金额</th>
+                <th scope="col">缴纳</th>
+                <th scope="col">选择</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for penalty in penaltys %}
+                <tr>
+                    <td>{{ penalty.pen_type }}</td>
+                    <td>{{ penalty.pen_money }}</td>
+                    <td><button class="btn btn-danger" onclick="window.location.href='/pay_penalty?stu_pen_id={{ penalty.stu_pen_id }}'">缴纳</button></td>
+                    <td><button class="btn btn-primary">申诉</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}

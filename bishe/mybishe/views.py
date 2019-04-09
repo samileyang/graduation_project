@@ -50,7 +50,7 @@ def stu_borrow_order(request):
 	delta = datetime.timedelta(days=90)
 	n_days = now + delta
 	price = mybook.price
-	borrow_order = models.BorrowOrder(stu_id = stu_id,book_id=book_id,startdate=now,supposedate = n_days, penatly_status = 0,appeal_status = 0, return_status = 0,price = price)
+	borrow_order = models.BorrowOrder(stu_id = stu_id,book_id=book_id,startdate=now,supposedate = n_days,return_status = 0,price = price)
 	mybook.status = '1'
 	mybook.save()
 	borrow_order.save()
@@ -65,11 +65,20 @@ def stu_book_return(request):
 	book_id = request.GET.get('book_id',None)
 	borrow_order = models.BorrowOrder.objects.get(return_status = '0', book_id = book_id)
 	models.Borrow.objects.filter(book_id = book_id).update(status = '0')
+	now = datetime.datetime.now()
 	borrow_order.return_status = 1
 	borrow_order.actdate = datetime.datetime.now()
+	if datetime.datetime.now() > borrow_order.supposedate:
+		pen_money = (datetime.datetime.now() - borrow_order.supposedate).days
+		borrow_id = borrow_order.borrow_id
+		stu_id = request.session.get('stu_id')
+		penatly = models.Penalty(borrow_id = borrow_id,pen_money = pen_money,stu_id = stu_id,pen_type="逾期",paid = 0, appeal = 0)
+		penatly.save()
+	else:
+		pass
 	borrow_order.save()
 	orders = models.BorrowOrder.objects.filter(return_status = '0')
-	return render(request,'jwc/library_return.html',{'orders':orders})
+	return render(request,'jwc/library_return.html',{'orders':orders,'now':now})
 
 
 def stu_sp_certification(request):
@@ -148,14 +157,15 @@ def book_lost(request):
 	borrow_id = request.GET.get('borrow_id',None)
 	mybook = models.BorrowOrder.objects.get(borrow_id=borrow_id)
 	mybook.actdate = datetime.datetime.now()
-	mybook.penatly_status = 1
 	mybook.return_status = 1
 	stu_id = mybook.stu_id
 	students = models.Student.objects.get(stu_id = stu_id)
 	price = mybook.price
-	penatly = models.Penalty(borrow_id = borrow_id,stu_id = stu_id, pen_money = price)
+	students.money = students.money - price
+	penatly = models.Penalty(borrow_id = borrow_id,stu_id = stu_id, pen_money = price,pen_type = "丢书")
 	mybook.save()
 	penatly.save()
+	students.save()
 	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
@@ -296,3 +306,26 @@ def stu_cart(request):
 	stu_id = request.session.get('stu_id')
 	products = models.Orders.objects.filter(buyer_id =stu_id)
 	return render(request,'student/stu_cart.html',{'products':products})
+
+def stu_pay_penalty(request):
+	stu_id = request.session.get('stu_id')
+	penaltys = models.Penalty.objects.filter(paid = 0, appeal = 0, stu_id = stu_id)
+	return render(request,'student/stu_pay_penalty.html',{'penaltys':penaltys})
+
+def pay_penalty(request):
+	stu_id = request.session.get('stu_id')
+	stu_pen_id = request.GET.get('stu_pen_id')
+	mypen = models.Penalty.objects.get(stu_pen_id=stu_pen_id)
+	price = mypen.pen_money
+	mypen.paid = 1
+	mypen.save()
+	moneylose = models.Student.objects.get(stu_id = stu_id)
+	moneylose.money = moneylose.money-price
+	moneylose.save()
+	penaltys = models.Penalty.objects.filter(paid = 0, appeal = 0, stu_id = stu_id)
+	return render(request,'student/stu_pay_penalty.html',{'penaltys':penaltys})	
+
+def stu_course(request):
+	stu_id = request.session.get('stu_id')
+	courses = model.StudentChoice.objects.filter(stu_id = stu_id)
+	return render(request,'student/stu_course.html',{'courses':courses})

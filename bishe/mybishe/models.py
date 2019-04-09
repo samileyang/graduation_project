@@ -16,6 +16,7 @@ class AddCreditOrder(models.Model):
     status = models.IntegerField(blank=True, null=True)
     rule_name = models.CharField(max_length=255, blank=True, null=True)
     comment = models.CharField(max_length=255, blank=True, null=True)
+
     class Meta:
         
         db_table = 'add_credit_order'
@@ -39,8 +40,6 @@ class BorrowOrder(models.Model):
     startdate = models.DateTimeField(blank=True, null=True)
     supposedate = models.DateTimeField(blank=True, null=True)
     actdate = models.DateTimeField(blank=True, null=True)
-    penatly_status = models.IntegerField(blank=True, null=True)
-    appeal_status = models.IntegerField(blank=True, null=True)
     return_status = models.IntegerField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
@@ -94,6 +93,7 @@ class CultivatePlan(models.Model):
     class Meta:
         
         db_table = 'cultivate_plan'
+
 
 class Dorm(models.Model):
     bed_id = models.AutoField(primary_key=True)
@@ -173,9 +173,13 @@ class PenAppeal(models.Model):
 
 class Penalty(models.Model):
     stu_pen_id = models.AutoField(primary_key=True)
+    pen_type = models.CharField(max_length=255, blank=True, null=True)
     borrow_id = models.IntegerField(blank=True, null=True)
     pen_money = models.IntegerField(blank=True, null=True)
+    paid = models.IntegerField(blank=True, null=True)
+    appeal = models.IntegerField(blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
+    teacher_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
