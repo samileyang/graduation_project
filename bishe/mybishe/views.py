@@ -173,12 +173,16 @@ def teacher_give_score(request):
 	students = models.StudentChoice.objects.filter(score__isnull=True)
 	return render(request,'teacher/teacher_give_score.html',{'students':students})
 
+def load_give_score(request):
+	students = models.StudentChoice.objects.filter(score__isnull=True)
+	return render(request,'teacher/teacher_give_score.html',{'students':students})
+	
 def give_score(request):
+	if request.method == 'get':
+		return render(request,'teacher/teacher_give_score.html',{'students':students})
 	student_choice_id = request.GET.get('student_choice_id',None)
 	print(student_choice_id)
-	score = request.POST['score_{}'.format(student_choice_id)]
-	print('score_{}'.format(student_choice_id))
-	print(score)
+	score = request.POST['score']
 	give_score = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
 	give_score.score = score
 	give_score.save()
@@ -327,5 +331,10 @@ def pay_penalty(request):
 
 def stu_course(request):
 	stu_id = request.session.get('stu_id')
-	courses = model.StudentChoice.objects.filter(stu_id = stu_id)
+	courses = models.StudentChoice.objects.filter(stu_id = stu_id)
 	return render(request,'student/stu_course.html',{'courses':courses})
+
+def teacher_course(request):
+	teacher_id = request.session.get('teacher_id')
+	courses = models.TeacherChoice.objects.filter(teacher_id = teacher_id)
+	return render(request,'teacher/teacher_course.html',{'courses':courses})

@@ -5,7 +5,6 @@
             <tr>
                 <th scope="col">学生编号</th>
                 <th scope="col">课程</th>
-                <th scope="col">分数</th>
                 <th scope="col">确认</th>
             </tr>
             </thead>
@@ -15,12 +14,9 @@
                     <td>{{ student.stu_id }}</td>
                     <td>{{ student.course_id }}</td>
                     <td>
-                        <form action = "/give_score/" method="post">
-                            {% csrf_token %}
-                            <input name="score_{{ student.student_choice_id }}" id = "score_{{ student.student_choice_id }}">
-                        </form>
+                        <button type="submit" class="btn btn-primary" onclick="window.location.href='/give_score?student_choice_id = {{ student.student_choice_id }}'" >确认</button>
+                        <input type="hidden" name="student_choice_id" value="{{ student.student_choice_id }}">
                     </td>
-                    <td><button type="submit" class="btn btn-primary">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

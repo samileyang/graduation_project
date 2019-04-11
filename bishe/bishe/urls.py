@@ -57,4 +57,5 @@ urlpatterns = [
     url(r'^stu_pay_penalty/',views.stu_pay_penalty),
     url(r'^pay_penalty/',views.pay_penalty),
     url(r'^stu_course/',views.stu_course),
+    url(r'^teacher_course/',views.teacher_course),
 ]
