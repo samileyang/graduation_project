@@ -15,7 +15,7 @@
                     <td>{{ product.seller_id }}</td>
                     <td>{{ product.pro_name }}</td>
                     <td>{{ product.location }}</td>
-                    <td><button>确认</button></td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/pro_review?pro_id={{ product.pro_id }}'">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

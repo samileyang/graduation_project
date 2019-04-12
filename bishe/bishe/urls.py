@@ -45,7 +45,6 @@ urlpatterns = [
     url(r'^stu_delete_order/',views.stu_delete_order),
     url(r'^stu_borrow_order/',views.stu_borrow_order),
     url(r'^stu_book_return/',views.stu_book_return),
-    url(r'^give_score/',views.give_score),
     url(r'^book_lost/',views.book_lost),
     url(r'^stu_job_certification/',views.stu_job_certification),
     url(r'^job_review/',views.job_review),
@@ -58,4 +57,7 @@ urlpatterns = [
     url(r'^pay_penalty/',views.pay_penalty),
     url(r'^stu_course/',views.stu_course),
     url(r'^teacher_course/',views.teacher_course),
+    url(r'^stu_buyer_comment/',views.stu_buyer_comment),
+    url(r'^stu_seller_comment/',views.stu_seller_comment),
+    url(r'^pro_review/',views.pro_review),
 ]

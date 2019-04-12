@@ -170,24 +170,19 @@ def book_lost(request):
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
 def teacher_give_score(request):
-	students = models.StudentChoice.objects.filter(score__isnull=True)
-	return render(request,'teacher/teacher_give_score.html',{'students':students})
-
-def load_give_score(request):
-	students = models.StudentChoice.objects.filter(score__isnull=True)
-	return render(request,'teacher/teacher_give_score.html',{'students':students})
-	
-def give_score(request):
-	if request.method == 'get':
+	if request.method == 'GET':
+		students = models.StudentChoice.objects.filter(score__isnull=True)
 		return render(request,'teacher/teacher_give_score.html',{'students':students})
-	student_choice_id = request.GET.get('student_choice_id',None)
-	print(student_choice_id)
-	score = request.POST['score']
-	give_score = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
-	give_score.score = score
-	give_score.save()
-	students = models.StudentChoice.objects.filter(score__isnull=True)
-	return render(request,'teacher/teacher_give_score.html',{'students':students})
+	if request.method =='POST':
+		student_choice_id = request.POST.get('student_choice_id')
+		print(student_choice_id)
+		score = request.POST.get('score')
+		print(score)
+		addscore = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
+		addscore.score = score
+		addscore.save()
+		students = models.StudentChoice.objects.filter(score__isnull=True)
+		return render(request,'teacher/teacher_give_score.html',{'students':students})
 
 def stu_skills_order(request):
 	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'))
@@ -338,3 +333,39 @@ def teacher_course(request):
 	teacher_id = request.session.get('teacher_id')
 	courses = models.TeacherChoice.objects.filter(teacher_id = teacher_id)
 	return render(request,'teacher/teacher_course.html',{'courses':courses})
+
+def stu_buyer_comment(request):
+	stu_id =request.session.get('stu_id')
+	if request.method == 'GET':
+		buyers = models.Orders.objects.filter(buyer_comm__isnull=True,buyer_id = stu_id)
+		return render(request,'student/stu_buyer_comment.html',{'buyers':buyers})
+	if  request.method == 'POST':
+		order_id = request.POST.get('order_id')
+		score = request.POST.get('score')
+		addscore = models.Orders.objects.get(order_id = order_id)
+		addscore.buyer_comm = score
+		addscore.save()
+		buyers = models.Orders.objects.filter(buyer_comm__isnull=True,buyer_id = stu_id)
+		return render(request,'student/stu_buyer_comment.html',{'buyers':buyers})
+
+def stu_seller_comment(request):
+	stu_id =request.session.get('stu_id')
+	if request.method == 'GET':
+		buyers = models.Orders.objects.filter(seller_comm__isnull=True,seller_id = stu_id)
+		return render(request,'student/stu_seller_comment.html',{'buyers':buyers})
+	if  request.method == 'POST':
+		order_id = request.POST.get('order_id')
+		score = request.POST.get('score')
+		addscore = models.Orders.objects.get(order_id = order_id)
+		addscore.seller_comm = score
+		addscore.save()
+		buyers = models.Orders.objects.filter(seller_comm__isnull=True,seller_id = stu_id)
+		return render(request,'student/stu_seller_comment.html',{'buyers':buyers})
+
+def pro_review(request):
+	pro_id = request.GET.get('pro_id')
+	changestatus = models.Products.objects.get(pro_id = pro_id)
+	changestatus.status =1
+	changestatus.save()
+	products = models.Products.objects.filter(status = 0)
+	return render(request,'instructor/instructor_pro_review.html',{'products':products})

@@ -1,15 +1,16 @@
-{% extends "teacher/teacher_header.html" %}
+{% extends "student/stu_header.html" %}
 {% block context %}
     <div class="container">
         <table class="table table-hover">
-            <form action="/teacher_give_score/" method="post">
+            <form action="/stu_seller_comment/" method="post">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_buyer_comment'">买方评价</button>
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="student_choice_id">选课代码</label>
-                    <select type="int" class="form-control" name="student_choice_id" id="student_choice_id"  placeholder="请选择学生选课代码">
-                        <option>请选择学生选课代码</option>
-                        {%for student in students%}
-                        <option>{{student.student_choice_id}}</option>
+                    <label for="order_id">购买序列号</label>
+                    <select type="int" class="form-control" name="order_id" id="order_id"  placeholder="请选择购买序列号">
+                        <option>请选择购买序列号</option>
+                        {%for buyer in buyers %}
+                        <option>{{buyer.order_id}}</option>
                         {%endfor%}
                     </select>
                 </div>
