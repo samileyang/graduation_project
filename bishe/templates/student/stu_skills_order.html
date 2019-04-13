@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ course.student_choice_id }}</td>
                     <td>{{ course.score }}</td>
-                    <td><button>确认</button></td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/skills_order?credit_id={{ course.credit_id }}'">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

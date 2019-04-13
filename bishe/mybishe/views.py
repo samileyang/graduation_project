@@ -369,3 +369,7 @@ def pro_review(request):
 	changestatus.save()
 	products = models.Products.objects.filter(status = 0)
 	return render(request,'instructor/instructor_pro_review.html',{'products':products})
+
+def skills_order(request):
+	credit_id = request.GET.get('credit_id')
+	
