@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 13/04/2019 21:49:45
+ Date: 14/04/2019 16:09:00
 */
 
 SET NAMES utf8mb4;
@@ -326,12 +326,20 @@ CREATE TABLE `certification`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `credit`;
 CREATE TABLE `credit`  (
+  `status` int(255) NULL DEFAULT NULL,
   `credit_id` int(11) NOT NULL AUTO_INCREMENT,
   `stu_id` int(11) NULL DEFAULT NULL,
   `year` year NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`credit_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of credit
+-- ----------------------------
+INSERT INTO `credit` VALUES (1, 1, 1, 2019, 100);
+INSERT INTO `credit` VALUES (1, 2, 1, 2019, 100);
+INSERT INTO `credit` VALUES (0, 3, 1, 2019, 100);
 
 -- ----------------------------
 -- Table structure for cultivate_plan
@@ -475,35 +483,8 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-27 12:59:23.075345');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-28 16:02:19.979317');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
-
--- ----------------------------
--- Table structure for dorm
--- ----------------------------
-DROP TABLE IF EXISTS `dorm`;
-CREATE TABLE `dorm`  (
-  `bed_id` int(255) NOT NULL AUTO_INCREMENT,
-  `dorm_id` int(255) NULL DEFAULT NULL,
-  `status` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`bed_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 305 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of dorm
--- ----------------------------
-INSERT INTO `dorm` VALUES (101, 1, 1);
-INSERT INTO `dorm` VALUES (102, 1, 1);
-INSERT INTO `dorm` VALUES (103, 1, 0);
-INSERT INTO `dorm` VALUES (104, 1, 0);
-INSERT INTO `dorm` VALUES (201, 2, 1);
-INSERT INTO `dorm` VALUES (202, 2, 1);
-INSERT INTO `dorm` VALUES (203, 2, 0);
-INSERT INTO `dorm` VALUES (204, 2, 0);
-INSERT INTO `dorm` VALUES (301, 3, 0);
-INSERT INTO `dorm` VALUES (302, 3, 0);
-INSERT INTO `dorm` VALUES (303, 3, 0);
-INSERT INTO `dorm` VALUES (304, 3, 0);
 
 -- ----------------------------
 -- Table structure for instructor
@@ -544,16 +525,6 @@ INSERT INTO `job_certification` VALUES (1, 1, 4, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 5, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 6, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 7, NULL, NULL);
-
--- ----------------------------
--- Table structure for lost_history
--- ----------------------------
-DROP TABLE IF EXISTS `lost_history`;
-CREATE TABLE `lost_history`  (
-  `lost_id` int(11) NOT NULL AUTO_INCREMENT,
-  `borrow_id` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`lost_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for major
@@ -725,17 +696,18 @@ CREATE TABLE `student_choice`  (
   `score` int(255) NULL DEFAULT NULL,
   `stu_id` int(11) NULL DEFAULT NULL,
   `course_id` int(11) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_choice
 -- ----------------------------
-INSERT INTO `student_choice` VALUES (1, 1, 100, 1, 1);
-INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2);
-INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1);
-INSERT INTO `student_choice` VALUES (4, 14, NULL, 1, 3);
-INSERT INTO `student_choice` VALUES (5, 15, NULL, 1, 4);
+INSERT INTO `student_choice` VALUES (1, 1, 100, 1, 1, 1);
+INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2, 1);
+INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1, 0);
+INSERT INTO `student_choice` VALUES (4, 14, NULL, 1, 3, 0);
+INSERT INTO `student_choice` VALUES (6, 15, NULL, 1, 4, 0);
 
 -- ----------------------------
 -- Table structure for teacher
