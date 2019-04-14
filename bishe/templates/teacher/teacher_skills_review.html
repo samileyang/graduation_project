@@ -1,4 +1,4 @@
-{% extends "student/stu_header.html" %}
+{% extends "teacher/teacher_header.html" %}
 {% block context %}
     <div class="container">
         <table class="table table-hover">
@@ -9,11 +9,11 @@
             </tr>
             </thead>
             <tbody>
-            {% for course in courses %}
+            {% for credit in credits %}
                 <tr>
-                    <td>{{ course.student_choice_id }}</td>
-                    <td>{{ course.score }}</td>
-                    <td><button class="btn btn-primary" onclick="window.location.href='/skills_order?student_choice_id={{ course.student_choice_id }}'">确认</button></td>
+                    <td>{{ credit.stu_id }}</td>
+                    <td>{{ credit.year }}</td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/skills_review?credit_id={{ credit.credit_id }}'">确认</button></td>
                 </tr>
             {% endfor %}
             </tbody>

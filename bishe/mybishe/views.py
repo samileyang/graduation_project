@@ -185,7 +185,7 @@ def teacher_give_score(request):
 		return render(request,'teacher/teacher_give_score.html',{'students':students})
 
 def stu_skills_order(request):
-	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'))
+	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'),status = 0)
 	return render(request,'student/stu_skills_order.html',{'courses':courses})
 
 def instructor_sp_confirm(request):
@@ -246,7 +246,7 @@ def stu_choose_order(request):
 	teacher_choice_id = request.GET.get('teacher_choice_id',None)
 	stu_id = request.session.get("stu_id")
 	course_id = teacher_course.course_id
-	save_course = models.StudentChoice(teacher_choice_id= teacher_choice_id,stu_id = stu_id, course_id =course_id)
+	save_course = models.StudentChoice(teacher_choice_id= teacher_choice_id,stu_id = stu_id, course_id =course_id, status=0)
 	save_course.save()
 	students = models.StudentChoice.objects.filter(stu_id=request.session.get("stu_id"))
 	stu_list = []
@@ -371,5 +371,28 @@ def pro_review(request):
 	return render(request,'instructor/instructor_pro_review.html',{'products':products})
 
 def skills_order(request):
+	student_choice_id = request.GET.get('student_choice_id')
+	changestatus = models.StudentChoice.objects.get(student_choice_id=student_choice_id)
+	changestatus.status = 1
+	changestatus.save()
+	score = 100
+	year = 2019
+	stu_id = request.session.get('stu_id')
+	status = 0
+	addcredit = models.Credit(stu_id = stu_id,year =year,score = score, status =status)
+	addcredit.save()
+	courses = models.StudentChoice.objects.filter(score__gte=90, stu_id = request.session.get('stu_id'),status = 0)
+	return render(request,'student/stu_skills_order.html',{'courses':courses})
+
+def teacher_skills_review(request):
+	credits = models.Credit.objects.filter(status = 0)
+	return render(request,'teacher/teacher_skills_review.html',{'credits':credits})
+
+def skills_review(request):
 	credit_id = request.GET.get('credit_id')
+	changestatus = models.Credit.objects.get(credit_id = credit_id)
+	changestatus.status = 1
+	changestatus.save()
+	credits = models.Credit.objects.filter(status = 0)
+	return render(request,'teacher/teacher_skills_review.html',{'credits':credits})
 	

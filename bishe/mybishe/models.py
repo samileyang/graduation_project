@@ -72,7 +72,7 @@ class Credit(models.Model):
     stu_id = models.IntegerField(blank=True, null=True)
     year = models.TextField(blank=True, null=True)  # This field type is a guess.
     score = models.IntegerField(blank=True, null=True)
-
+    status = models.IntegerField(blank=True, null=True)
     class Meta:
         
         db_table = 'credit'
@@ -245,7 +245,7 @@ class StudentChoice(models.Model):
     score = models.IntegerField(blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
     course_id = models.IntegerField(blank=True, null=True)
-
+    status = models.IntegerField(blank=True, null=True)
     class Meta:
         
         db_table = 'student_choice'

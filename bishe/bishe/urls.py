@@ -60,4 +60,7 @@ urlpatterns = [
     url(r'^stu_buyer_comment/',views.stu_buyer_comment),
     url(r'^stu_seller_comment/',views.stu_seller_comment),
     url(r'^pro_review/',views.pro_review),
+    url(r'^skills_order/',views.skills_order),
+    url(r'^skills_review/',views.skills_review),
+    url(r'^teacher_skills_review/',views.teacher_skills_review),
 ]
