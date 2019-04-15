@@ -1,0 +1,30 @@
+{% extends "student/stu_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <form action="/stu_appeal/" method="post">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_seller_comment'">学生申诉</button>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="order_id">申诉序列号</label>
+                    <select type="int" class="form-control" name="order_id" id="order_id"  placeholder="请选择购买序列号">
+                        <option>申诉序列号</option>
+                        {%for appeal in appeals%}
+                        <option>{{appeal.order_id}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tea_id">教师编号</label>
+                        <select type="int" class="form-control" name="tea_id" id="tea_id"  placeholder="请选择教师编号">
+                        <option>申诉序列号</option>
+                        {%for teacher in teachers %}
+                        <option>{{ teacher.teacher_id }}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+        </table>
+    </div>
+{% endblock context %}

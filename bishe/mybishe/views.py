@@ -395,4 +395,33 @@ def skills_review(request):
 	changestatus.save()
 	credits = models.Credit.objects.filter(status = 0)
 	return render(request,'teacher/teacher_skills_review.html',{'credits':credits})
-	
+
+def instructor_index(request):
+	losts = models.BorrowOrder.objects.filter(return_status = 0)
+	counts = 0
+	for lost in losts:
+		if (datetime.datetime.now()-lost.supposedate).days >180:
+			lost.actdate = datetime.datetime.now()
+			lost.return_status = 1
+			price = lost.price
+			borrow_id =lost.borrow_id
+			stu_id = lost.stu_id
+			addlost = model.Penalty(stu_id = stu_id,pen_money = price,type = '丢书')
+			student = model.Student.objects.get(stu_id = stu_id)
+			student.money -= price
+			student.save()
+			lost.save()
+			addlost.save()
+			counts = count+1
+	message = "有{}个借阅被判定为自动丢书".format(counts)
+	return render(request,'instructor/instructor_index.html',{'message':message})
+
+def stu_appeal(request):
+	if request.method == 'GET':
+		teachers =models.Teacher.objects.all()
+		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),appeal =0,paid =0)
+		return render(request,'student/stu_appeal.html',{'teachers':teachers,'appeals':appeals})
+	if request.method == 'POST':
+		teachers =models.Teacher.objects.all()
+		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),appeal =0,paid =0)
+		return render(request,'student/stu_appeal.html',{'teachers':teachers,'appeals':appeals})

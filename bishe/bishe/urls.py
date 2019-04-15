@@ -63,4 +63,5 @@ urlpatterns = [
     url(r'^skills_order/',views.skills_order),
     url(r'^skills_review/',views.skills_review),
     url(r'^teacher_skills_review/',views.teacher_skills_review),
+    url(r'^instructor_index/',views.instructor_index),
 ]
