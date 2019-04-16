@@ -64,4 +64,7 @@ urlpatterns = [
     url(r'^skills_review/',views.skills_review),
     url(r'^teacher_skills_review/',views.teacher_skills_review),
     url(r'^instructor_index/',views.instructor_index),
+    url(r'^stu_appeal/',views.stu_appeal),
+    url(r'^teacher_pen_review/',views.teacher_pen_review),
+    url(r'^pen_review/',views.pen_review),
 ]

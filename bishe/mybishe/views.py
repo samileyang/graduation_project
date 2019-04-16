@@ -419,9 +419,28 @@ def instructor_index(request):
 def stu_appeal(request):
 	if request.method == 'GET':
 		teachers =models.Teacher.objects.all()
-		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),appeal =0,paid =0)
+		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),paid =0)
 		return render(request,'student/stu_appeal.html',{'teachers':teachers,'appeals':appeals})
 	if request.method == 'POST':
+		order_id = request.POST.get('order_id')
+		teacher_id = request.POST.get('tea_id')
+		addpen = models.PenAppeal(stu_pen_id = order_id,status = 0, teacher_id = teacher_id)
+		changestatus = models.Penalty.objects.get(stu_pen_id = order_id)
+		changestatus.appeal = 1
+		changestatus.save()		
+		addpen.save()
 		teachers =models.Teacher.objects.all()
-		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),appeal =0,paid =0)
+		appeals =models.Penalty.objects.filter(stu_id = request.session.get('stu_id'),paid =0)
 		return render(request,'student/stu_appeal.html',{'teachers':teachers,'appeals':appeals})
+
+def teacher_pen_review(request):
+	pens = models.PenAppeal.objects.filter(teacher_id = request.session.get('teacher_id'),status =0)
+	return render(request,'teacher/teacher_pen_review.html',{'pens':pens})
+
+def pen_review(request):
+	pen_id =request.GET.get('pen_id')
+	changestatus = models.PenAppeal.objects.get(pen_appeal_id = pen_id)
+	changestatus.status = 1
+	changestatus.save()
+	pens = models.PenAppeal.objects.filter(teacher_id = request.session.get('teacher_id'),status =0)
+	return render(request,'teacher/teacher_pen_review.html',{'pens':pens})

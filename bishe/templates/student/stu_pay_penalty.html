@@ -15,7 +15,11 @@
                     <td>{{ penalty.pen_type }}</td>
                     <td>{{ penalty.pen_money }}</td>
                     <td><button class="btn btn-danger" onclick="window.location.href='/pay_penalty?stu_pen_id={{ penalty.stu_pen_id }}'">缴纳</button></td>
-                    <td><button class="btn btn-primary" onclick="window.location.href='/stu_appeal'>申诉</button></td>
+                    {%if penalty.appeal == 0%}
+                        <td><button class="btn btn-primary" onclick="window.location.href='/stu_appeal'">申诉</button></td>
+                    {%else%}
+                        <td><button class="btn btn-default">已申诉</button></td>
+                    {%endif%}                 
                 </tr>
             {% endfor %}
             </tbody>

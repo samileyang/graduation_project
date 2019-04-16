@@ -10,7 +10,7 @@
                     <select type="int" class="form-control" name="order_id" id="order_id"  placeholder="请选择购买序列号">
                         <option>申诉序列号</option>
                         {%for appeal in appeals%}
-                        <option>{{appeal.order_id}}</option>
+                        <option>{{appeal.stu_pen_id}}</option>
                         {%endfor%}
                     </select>
                 </div>
@@ -19,7 +19,7 @@
                         <select type="int" class="form-control" name="tea_id" id="tea_id"  placeholder="请选择教师编号">
                         <option>申诉序列号</option>
                         {%for teacher in teachers %}
-                        <option>{{ teacher.teacher_id }}</option>
+                        <option>{{ teacher.tea_id }}</option>
                         {%endfor%}
                     </select>
                 </div>

@@ -1,0 +1,20 @@
+{% extends "teacher/teacher_header.html" %}
+{% block context %}
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">学生申诉编号</th>
+                <th scope="col">申请</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pen in pens %}
+                <tr>
+                    <td>{{ pen.stu_pen_id }}</td>
+                    <td><button class="btn btn-primary" onclick="window.location.href='/pen_review?pen_id={{ pen.pen_appeal_id }}'">确认</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock context %}
