@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 15/04/2019 23:25:27
+ Date: 16/04/2019 16:59:48
 */
 
 SET NAMES utf8mb4;
@@ -339,7 +339,7 @@ CREATE TABLE `credit`  (
 -- ----------------------------
 INSERT INTO `credit` VALUES (1, 1, 1, 2019, 100);
 INSERT INTO `credit` VALUES (1, 2, 1, 2019, 100);
-INSERT INTO `credit` VALUES (0, 3, 1, 2019, 100);
+INSERT INTO `credit` VALUES (1, 3, 1, 2019, 100);
 
 -- ----------------------------
 -- Table structure for cultivate_plan
@@ -483,7 +483,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-29 18:21:52.254591');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-30 15:55:38.066868');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -514,7 +514,7 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of job_certification
@@ -525,6 +525,8 @@ INSERT INTO `job_certification` VALUES (1, 1, 4, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 5, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 6, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 7, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 1, 8, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 1, 9, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for major
@@ -571,12 +573,17 @@ INSERT INTO `orders` VALUES (1, 1, 1, 100, 100, 3999, 1, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `pen_appeal`;
 CREATE TABLE `pen_appeal`  (
-  `pen_appeal_id` int(11) NOT NULL,
+  `pen_appeal_id` int(11) NOT NULL AUTO_INCREMENT,
   `stu_pen_id` int(11) NULL DEFAULT NULL,
   `teacher_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`pen_appeal_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pen_appeal
+-- ----------------------------
+INSERT INTO `pen_appeal` VALUES (3, 8, 1, 1);
 
 -- ----------------------------
 -- Table structure for penalty
@@ -599,7 +606,7 @@ CREATE TABLE `penalty`  (
 -- ----------------------------
 INSERT INTO `penalty` VALUES (6, '逾期', 29, 60, 1, 0, 1, NULL);
 INSERT INTO `penalty` VALUES (7, '逾期', 28, 32, 1, 0, 1, NULL);
-INSERT INTO `penalty` VALUES (8, '逾期', 27, 1, 0, 0, 1, NULL);
+INSERT INTO `penalty` VALUES (8, '逾期', 27, 1, 0, 1, 1, NULL);
 INSERT INTO `penalty` VALUES (9, '丢书', 32, 10, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (10, '丢书', 33, 20, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (11, '丢书', 33, 20, NULL, NULL, 1, NULL);
@@ -698,7 +705,7 @@ CREATE TABLE `student_choice`  (
   `course_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_choice
@@ -706,8 +713,6 @@ CREATE TABLE `student_choice`  (
 INSERT INTO `student_choice` VALUES (1, 1, 100, 1, 1, 1);
 INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2, 1);
 INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1, 0);
-INSERT INTO `student_choice` VALUES (4, 14, NULL, 1, 3, 0);
-INSERT INTO `student_choice` VALUES (6, 15, NULL, 1, 4, 0);
 
 -- ----------------------------
 -- Table structure for teacher
