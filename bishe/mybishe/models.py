@@ -67,12 +67,23 @@ class Certification(models.Model):
         db_table = 'certification'
 
 
+class Cheat(models.Model):
+    cheat_id = models.AutoField(primary_key=True)
+    stu_id = models.IntegerField(blank=True, null=True)
+    student_choice_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'cheat'
+
+
 class Credit(models.Model):
+    status = models.IntegerField(blank=True, null=True)
     credit_id = models.AutoField(primary_key=True)
     stu_id = models.IntegerField(blank=True, null=True)
     year = models.TextField(blank=True, null=True)  # This field type is a guess.
     score = models.IntegerField(blank=True, null=True)
-    status = models.IntegerField(blank=True, null=True)
+
     class Meta:
         
         db_table = 'credit'
@@ -95,15 +106,6 @@ class CultivatePlan(models.Model):
         db_table = 'cultivate_plan'
 
 
-class Dorm(models.Model):
-    bed_id = models.AutoField(primary_key=True)
-    dorm_id = models.IntegerField(blank=True, null=True)
-    status = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        
-        db_table = 'dorm'
-
 
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
@@ -125,15 +127,6 @@ class JobCertification(models.Model):
     class Meta:
         
         db_table = 'job_certification'
-
-
-class LostHistory(models.Model):
-    lost_id = models.AutoField(primary_key=True)
-    borrow_id = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        
-        db_table = 'lost_history'
 
 
 class Major(models.Model):
@@ -161,7 +154,7 @@ class Orders(models.Model):
 
 
 class PenAppeal(models.Model):
-    pen_appeal_id = models.IntegerField(primary_key=True)
+    pen_appeal_id = models.AutoField(primary_key=True)
     stu_pen_id = models.IntegerField(blank=True, null=True)
     teacher_id = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
@@ -246,6 +239,7 @@ class StudentChoice(models.Model):
     stu_id = models.IntegerField(blank=True, null=True)
     course_id = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
+
     class Meta:
         
         db_table = 'student_choice'

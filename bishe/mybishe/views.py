@@ -4,27 +4,25 @@ from django.db.models import F
 import datetime
 # Create your views here.
 def stu_info(request):
-	dorms = models.Dorm.objects.all()
-	majors = models.Major.objects.all()
-	educations = models.BorrowRule.objects.all()
-	instructors = models.Instructor.objects.all()
-	stu_pwd = request.POST.get('stu_pwd')
-	stu_name = request.POST.get('stu_name')
-	bed_id = request.POST.get('bed_id')
-	year = request.POST.get('year')
-	major_id = request.POST.get('major_id')
-	money = 100
-	stu_edu = request.POST.get('stu_edu')
-	instructor_id = request.POST.get('instructor_id')
-	students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major_id=major_id,stu_edu=stu_edu,instructor_id=instructor_id,bed_id=bed_id,money = money)
-	students.save()
-	try:
-		dorm = models.Dorm.objects.get(bed_id = bed_id)
-		dorm.status = 1
-		dorm.save()
-	except:
-		pass
-	return render(request,'jwc/stu_info.html',{'dorms': dorms,'majors' : majors,'educations': educations,'instructors': instructors})
+	if request.method == 'GET':
+		majors = models.Major.objects.all()
+		educations = models.BorrowRule.objects.all()
+		instructors = models.Instructor.objects.all()
+		return render(request,'jwc/stu_info.html',{'majors' : majors,'educations': educations,'instructors': instructors})
+	if request.method == 'POST':
+		majors = models.Major.objects.all()
+		educations = models.BorrowRule.objects.all()
+		instructors = models.Instructor.objects.all()
+		stu_pwd = request.POST.get('stu_pwd')
+		stu_name = request.POST.get('stu_name')
+		year = request.POST.get('year')
+		major_id = request.POST.get('major_id')
+		money = 100
+		stu_edu = request.POST.get('stu_edu')
+		instructor_id = request.POST.get('instructor_id')
+		students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major_id=major_id,stu_edu=stu_edu,instructor_id=instructor_id,money = money)
+		students.save()
+		return render(request,'jwc/stu_info.html',{'majors' : majors,'educations': educations,'instructors': instructors})
 
 def stu_login(request):
 	if request.method == 'GET':
@@ -444,3 +442,18 @@ def pen_review(request):
 	changestatus.save()
 	pens = models.PenAppeal.objects.filter(teacher_id = request.session.get('teacher_id'),status =0)
 	return render(request,'teacher/teacher_pen_review.html',{'pens':pens})
+
+def teacher_cheat(request):
+	if request.method == 'GET':
+		students = models.StudentChoice.objects.filter(score__isnull=True)
+		return render(request,'teacher/teacher_cheat.html',{'students':students})
+	if request.method == 'POST':
+		student_choice_id = request.POST.get('student_choice_id')
+		student =models.StudentChoice.objects.get(student_choice_id=student_choice_id)
+		student.score =0
+		stu_id = student.stu_id
+		student.save()
+		addcheat = models.Cheat(stu_id = stu_id,student_choice_id = student_choice_id)
+		addcheat.save()
+		students = models.StudentChoice.objects.filter(score__isnull=True)
+		return render(request,'teacher/teacher_cheat.html',{'students':students})

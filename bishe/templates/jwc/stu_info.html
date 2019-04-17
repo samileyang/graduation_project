@@ -34,17 +34,6 @@
                 <input type="text" class="form-control" name="stu_pwd" id="stu_pwd">
             </div>
             <div class="form-group">
-                <label for="bed_id">床位号</label>
-                <select type="text" class="form-control" name="bed_id" id="bed_id">
-                    <option>请选择：</option>
-                    {% for dorm in dorms %}
-                    {% if dorm.status == 0 %}
-                    <option> {{ dorm.bed_id }}</option>
-                    {% endif %}
-                    {% endfor %}
-                </select>                      
-            </div>
-            <div class="form-group">
                 <label for="stu_edu">学历</label>
                 <select type="text" class="form-control" name="stu_edu" id="stu_edu">
                     <option>请选择：</option>
