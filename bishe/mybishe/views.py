@@ -2,6 +2,7 @@ from django.shortcuts import render
 from mybishe import models
 from django.db.models import F
 import datetime
+from django.db.models import Sum,Count,Max,Min,Avg
 # Create your views here.
 def stu_info(request):
 	if request.method == 'GET':
@@ -457,3 +458,50 @@ def teacher_cheat(request):
 		addcheat.save()
 		students = models.StudentChoice.objects.filter(score__isnull=True)
 		return render(request,'teacher/teacher_cheat.html',{'students':students})
+
+def scholarship(request):
+	cleartable = models.Scholarship.objects.all()
+	cleartable.delete()
+	students = models.Student.objects.all()
+	stu_id_list = []
+	scholarship_list=[]
+	basic_money = 1000
+	i = 0
+	for student in students:
+		stu_id_list.append(student.stu_id)
+	print(stu_id_list)
+	for stu_id in stu_id_list:
+		find_student = models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))
+		scholarship_list.append([stu_id,find_student['score__avg']])
+	print(scholarship_list)
+	new_scholarship_list=sorted(scholarship_list, key=lambda x:x[1], reverse = True )
+	print(new_scholarship_list)
+	for _list in new_scholarship_list:
+		if i < 3:
+			addscholarship = models.Scholarship(stu_id = _list[0],status = 0, money = basic_money)
+			addscholarship.save()
+			print(_list)
+			print(basic_money)
+			basic_money -= 300
+			i +=1 
+		else:
+			break
+	return render(request,'scholarship.html')
+
+
+def stu_scholarship(request):
+	scholarships = models.Scholarship.objects.filter(stu_id = request.session.get('stu_id'),status =0)
+	return render(request,'student/stu_scholarship.html',{'scholarships':scholarships})
+
+def sch_order(request):
+	sch_id = request.GET.get('sch_id')
+	mysch = models.Scholarship.objects.get(sch_id = sch_id)
+	mysch.status = 1
+	stu_id = mysch.stu_id
+	money = mysch.money
+	addmoney = models.Student.objects.get(stu_id = stu_id)
+	addmoney.money += money
+	addmoney.save()
+	mysch.save()
+	scholarships = models.Scholarship.objects.filter(stu_id = request.session.get('stu_id'),status =0)
+	return render(request,'student/stu_scholarship.html',{'scholarships':scholarships})

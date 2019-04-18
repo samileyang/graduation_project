@@ -21,7 +21,6 @@ class AddCreditOrder(models.Model):
         
         db_table = 'add_credit_order'
 
-
 class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
@@ -206,9 +205,9 @@ class Rules(models.Model):
 
 class Scholarship(models.Model):
     sch_id = models.AutoField(primary_key=True)
-    student_choice_id = models.IntegerField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    stu_comm = models.CharField(max_length=255, blank=True, null=True)
+    stu_id = models.IntegerField(blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
+    money = models.IntegerField(blank=True, null=True)
 
     class Meta:
         
