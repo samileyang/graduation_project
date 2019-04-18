@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 17/04/2019 22:54:00
+ Date: 18/04/2019 22:29:23
 */
 
 SET NAMES utf8mb4;
@@ -499,7 +499,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-01 22:39:47.390168');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-02 22:04:10.172522');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -530,7 +530,7 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of job_certification
@@ -543,6 +543,7 @@ INSERT INTO `job_certification` VALUES (0, 1, 6, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 7, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 8, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 9, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 4, 10, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for major
@@ -677,11 +678,18 @@ INSERT INTO `rules` VALUES (3, '学生会会长', 5);
 DROP TABLE IF EXISTS `scholarship`;
 CREATE TABLE `scholarship`  (
   `sch_id` int(255) NOT NULL AUTO_INCREMENT,
-  `student_choice_id` int(255) NULL DEFAULT NULL,
-  `status` binary(255) NULL DEFAULT NULL,
-  `stu_comm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `stu_id` int(255) NULL DEFAULT NULL,
+  `status` int(255) NULL DEFAULT NULL,
+  `money` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`sch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of scholarship
+-- ----------------------------
+INSERT INTO `scholarship` VALUES (4, 2, 0, 1000);
+INSERT INTO `scholarship` VALUES (5, 3, 0, 700);
+INSERT INTO `scholarship` VALUES (6, 1, 1, 400);
 
 -- ----------------------------
 -- Table structure for student
@@ -704,11 +712,10 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 7896, '本科', 101, 1, 1);
+INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 8296, '本科', 101, 1, 1);
 INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, 1, 100, '本科', 201, 2, 1);
 INSERT INTO `student` VALUES (3, '000', 'tjy', 2015, 1, 100, '本科', 102, 1, 1);
 INSERT INTO `student` VALUES (4, '000', 'ljh', 2015, 1, 100, '本科', 202, 2, 1);
-INSERT INTO `student` VALUES (10, '000', 'wqp', 2016, 1, 100, '本科', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for student_choice
@@ -722,7 +729,7 @@ CREATE TABLE `student_choice`  (
   `course_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_choice
@@ -732,6 +739,12 @@ INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2, 1);
 INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1, 0);
 INSERT INTO `student_choice` VALUES (4, 14, 100, 1, 3, 0);
 INSERT INTO `student_choice` VALUES (5, 15, 0, 1, 4, 0);
+INSERT INTO `student_choice` VALUES (6, 1, 87, 3, 1, 0);
+INSERT INTO `student_choice` VALUES (7, 13, 98, 3, 2, 0);
+INSERT INTO `student_choice` VALUES (8, 14, 78, 3, 3, 0);
+INSERT INTO `student_choice` VALUES (9, 1, 70, 4, 1, 0);
+INSERT INTO `student_choice` VALUES (10, 13, 87, 4, 2, 0);
+INSERT INTO `student_choice` VALUES (11, 14, 66, 4, 3, 0);
 
 -- ----------------------------
 -- Table structure for teacher
