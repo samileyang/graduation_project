@@ -505,3 +505,19 @@ def sch_order(request):
 	mysch.save()
 	scholarships = models.Scholarship.objects.filter(stu_id = request.session.get('stu_id'),status =0)
 	return render(request,'student/stu_scholarship.html',{'scholarships':scholarships})
+
+#判断年级
+def test_grade(year):
+    if datetime.datetime.now().month in [1,2,3,4,5,6,7,8]:
+        i = 1
+    else:
+        i = 0
+    return (datetime.datetime.now().year-year)-i+1
+
+def credit_score(request):
+	stu_list = []
+	students = models.Student.objects.all()
+	for student in students:
+		stu_id = student.stu_id
+		thisstu = models.Student.objects.get(stu_id = stu_id)
+		
