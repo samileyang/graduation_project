@@ -106,7 +106,7 @@ def stu_products(request):
 		location = request.POST.get('location')
 		seller_id = request.session.get('stu_id',None)
 		status = 0
-		products = models.Products(pro_name = pro_name,price_org = price_org,price_cur = price_cur,seller_id = seller_id,location = location,status = status)
+		products = models.Products(pro_name = pro_name,price_org = price_org,price_cur = price_cur,seller_id = seller_id,location = location,status = status,paid =0)
 		products.save()
 		return render(request,'student/stu_products.html')
 	if request.method =="GET":

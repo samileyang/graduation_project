@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 18/04/2019 22:29:23
+ Date: 21/04/2019 22:49:26
 */
 
 SET NAMES utf8mb4;
@@ -259,7 +259,7 @@ CREATE TABLE `borrow`  (
 INSERT INTO `borrow` VALUES (1, '高等数学', 1, 10.00);
 INSERT INTO `borrow` VALUES (2, 'python', 1, 20.00);
 INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
-INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
+INSERT INTO `borrow` VALUES (4, '百年孤独', 1, 20.00);
 INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
 INSERT INTO `borrow` VALUES (6, '孟子', 0, 15.00);
 INSERT INTO `borrow` VALUES (7, '庄子', 0, 20.00);
@@ -280,7 +280,7 @@ CREATE TABLE `borrow_order`  (
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow_order
@@ -292,7 +292,11 @@ INSERT INTO `borrow_order` VALUES (30, 1, 4, '2019-04-09 15:51:58', '2019-07-08 
 INSERT INTO `borrow_order` VALUES (31, 1, 5, '2019-04-09 15:51:59', '2019-07-08 15:51:59', '2019-04-09 15:54:45', 1, 15.00);
 INSERT INTO `borrow_order` VALUES (32, 1, 1, '2019-04-09 15:54:52', '2019-07-08 15:54:52', '2019-04-09 15:54:56', 1, 10.00);
 INSERT INTO `borrow_order` VALUES (33, 1, 2, '2019-04-09 15:54:53', '2019-07-08 15:54:53', '2019-04-09 16:10:14', 1, 20.00);
-INSERT INTO `borrow_order` VALUES (34, 1, 3, '2019-04-09 15:54:54', '2019-07-08 15:54:54', NULL, 0, 20.00);
+INSERT INTO `borrow_order` VALUES (34, 1, 3, '2019-04-09 15:54:54', '2019-07-08 15:54:54', '2019-04-20 13:29:47', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (35, 1, 4, '2019-04-20 13:27:51', '2019-04-19 13:27:51', '2019-04-21 17:06:21', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (36, 1, 5, '2019-04-20 13:27:52', '2019-04-19 13:27:52', '2019-04-21 17:06:22', 1, 15.00);
+INSERT INTO `borrow_order` VALUES (37, 1, 6, '2019-04-20 13:27:53', '2019-07-19 13:27:53', '2019-04-21 17:06:23', 1, 15.00);
+INSERT INTO `borrow_order` VALUES (38, 1, 4, '2019-04-21 20:49:46', '2019-07-20 20:49:46', NULL, 0, 20.00);
 
 -- ----------------------------
 -- Table structure for borrow_rule
@@ -499,7 +503,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-02 22:04:10.172522');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-05 20:53:04.415712');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -530,7 +534,7 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of job_certification
@@ -544,6 +548,8 @@ INSERT INTO `job_certification` VALUES (0, 1, 7, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 8, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 1, 9, NULL, NULL);
 INSERT INTO `job_certification` VALUES (0, 4, 10, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 1, 11, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 1, 12, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for major
@@ -578,12 +584,14 @@ CREATE TABLE `orders`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE,
   INDEX `buyer_id`(`buyer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (1, 1, 1, 100, 100, 3999, 1, 1);
+INSERT INTO `orders` VALUES (2, 4, 1, NULL, NULL, 5999, 1, 1);
+INSERT INTO `orders` VALUES (3, 7, 1, NULL, NULL, 399, 0, 1);
 
 -- ----------------------------
 -- Table structure for pen_appeal
@@ -595,12 +603,13 @@ CREATE TABLE `pen_appeal`  (
   `teacher_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`pen_appeal_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pen_appeal
 -- ----------------------------
 INSERT INTO `pen_appeal` VALUES (3, 8, 1, 1);
+INSERT INTO `pen_appeal` VALUES (4, 8, 1, 0);
 
 -- ----------------------------
 -- Table structure for penalty
@@ -616,7 +625,7 @@ CREATE TABLE `penalty`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `teacher_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_pen_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of penalty
@@ -630,6 +639,9 @@ INSERT INTO `penalty` VALUES (11, '丢书', 33, 20, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (12, '丢书', 33, 20, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (13, '丢书', 33, 20, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (14, '丢书', 33, 20, NULL, NULL, 1, NULL);
+INSERT INTO `penalty` VALUES (15, '丢书', 34, 20, NULL, NULL, 1, NULL);
+INSERT INTO `penalty` VALUES (16, '逾期', 35, 2, 0, 0, 1, NULL);
+INSERT INTO `penalty` VALUES (17, '逾期', 36, 2, 0, 0, 1, NULL);
 
 -- ----------------------------
 -- Table structure for products
@@ -645,14 +657,16 @@ CREATE TABLE `products`  (
   `status` int(255) NULL DEFAULT NULL,
   `paid` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
 INSERT INTO `products` VALUES (1, 'iPhone', 5999, 3999, 1, '操场', 1, 1);
-INSERT INTO `products` VALUES (4, 'iPhone XR', 8999, 5999, 1, '南校', 1, 0);
+INSERT INTO `products` VALUES (4, 'iPhone XR', 8999, 5999, 1, '南校', 1, 1);
 INSERT INTO `products` VALUES (6, 'iphone XS', 8999, 6999, 1, '南校', 1, 0);
+INSERT INTO `products` VALUES (7, 'blabla', 599, 399, 1, '教超', 1, 1);
+INSERT INTO `products` VALUES (8, 'iphone XR', 8999, 6999, 1, '教超', 1, 0);
 
 -- ----------------------------
 -- Table structure for rules
@@ -707,12 +721,12 @@ CREATE TABLE `student`  (
   `dorm_id` int(255) NULL DEFAULT NULL,
   `instructor_id` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 8296, '本科', 101, 1, 1);
+INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 7877, '本科', 101, 1, 1);
 INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, 1, 100, '本科', 201, 2, 1);
 INSERT INTO `student` VALUES (3, '000', 'tjy', 2015, 1, 100, '本科', 102, 1, 1);
 INSERT INTO `student` VALUES (4, '000', 'ljh', 2015, 1, 100, '本科', 202, 2, 1);
@@ -738,7 +752,6 @@ INSERT INTO `student_choice` VALUES (1, 1, 100, 1, 1, 1);
 INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2, 1);
 INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1, 0);
 INSERT INTO `student_choice` VALUES (4, 14, 100, 1, 3, 0);
-INSERT INTO `student_choice` VALUES (5, 15, 0, 1, 4, 0);
 INSERT INTO `student_choice` VALUES (6, 1, 87, 3, 1, 0);
 INSERT INTO `student_choice` VALUES (7, 13, 98, 3, 2, 0);
 INSERT INTO `student_choice` VALUES (8, 14, 78, 3, 3, 0);
