@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 21/04/2019 22:49:26
+ Date: 22/04/2019 22:28:21
 */
 
 SET NAMES utf8mb4;
@@ -352,7 +352,7 @@ CREATE TABLE `credit`  (
   `year` year NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`credit_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of credit
@@ -360,6 +360,7 @@ CREATE TABLE `credit`  (
 INSERT INTO `credit` VALUES (1, 1, 1, 2019, 100);
 INSERT INTO `credit` VALUES (1, 2, 1, 2019, 100);
 INSERT INTO `credit` VALUES (1, 3, 1, 2019, 100);
+INSERT INTO `credit` VALUES (0, 4, 1, 2019, 100);
 
 -- ----------------------------
 -- Table structure for cultivate_plan
@@ -503,7 +504,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-05 20:53:04.415712');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-06 15:16:56.594862');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -534,22 +535,13 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of job_certification
 -- ----------------------------
 INSERT INTO `job_certification` VALUES (1, 1, 2, 'lalall', 9);
-INSERT INTO `job_certification` VALUES (1, 1, 3, NULL, NULL);
-INSERT INTO `job_certification` VALUES (1, 1, 4, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 5, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 6, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 7, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 8, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 9, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 4, 10, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 11, NULL, NULL);
-INSERT INTO `job_certification` VALUES (0, 1, 12, NULL, NULL);
+INSERT INTO `job_certification` VALUES (0, 1, 14, '数据分析师', 90);
 
 -- ----------------------------
 -- Table structure for major
@@ -751,7 +743,7 @@ CREATE TABLE `student_choice`  (
 INSERT INTO `student_choice` VALUES (1, 1, 100, 1, 1, 1);
 INSERT INTO `student_choice` VALUES (2, 13, 100, 1, 2, 1);
 INSERT INTO `student_choice` VALUES (3, 1, 100, 2, 1, 0);
-INSERT INTO `student_choice` VALUES (4, 14, 100, 1, 3, 0);
+INSERT INTO `student_choice` VALUES (4, 14, 100, 1, 3, 1);
 INSERT INTO `student_choice` VALUES (6, 1, 87, 3, 1, 0);
 INSERT INTO `student_choice` VALUES (7, 13, 98, 3, 2, 0);
 INSERT INTO `student_choice` VALUES (8, 14, 78, 3, 3, 0);
