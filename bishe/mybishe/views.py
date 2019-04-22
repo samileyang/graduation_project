@@ -520,4 +520,14 @@ def credit_score(request):
 	for student in students:
 		stu_id = student.stu_id
 		thisstu = models.Student.objects.get(stu_id = stu_id)
+		grade = test_grade(thisstu.year)
+		print(grade)
+		scholarship = models.Scholarship.objects.filter(status =1, stu_id = stu_id).annotate(Sum("money"))['money__sum']
+		print(scholarship)
+		gpa = models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))['score__avg']
+		print(gpa)
+		paper = models.AddCreditOrder.objects.filter(status =1, stu_id = stu_id).annotate(Sum("score"))['score__sum']
+		print(paper)
+		cheat = models.Cheat.objects.filter(stu_id = stu_id).annotate(Count("student_choice_id"))['student_choice_id__count']
+		print(cheat)
 		
