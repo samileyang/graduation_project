@@ -33,5 +33,5 @@
 学生丢书罚款~~  
 **信用评估**  
 
-
+修改stu_index,certification的bug
 
