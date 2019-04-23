@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from mybishe import models
 from django.db.models import F
 import datetime
 from django.db.models import Sum,Count,Max,Min,Avg
+import inspect
+import re
 # Create your views here.
 def stu_info(request):
 	if request.method == 'GET':
@@ -32,10 +34,9 @@ def stu_login(request):
 		user = models.Student.objects.get(stu_id = request.POST['stu_id'])
 		request.session['stu_name'] = user.stu_name
 		request.session['stu_id'] = user.stu_id
-		return render(request,'student/stu_index.html')
+		return redirect('/stu_index/')
 
-def stu_index(request):
-	return render(request,'student/stu_index.html')
+
 
 def stu_library_borrow(request):
 	borrows = models.Borrow.objects.filter(status ='0')
@@ -515,6 +516,8 @@ def test_grade(year):
     return (datetime.datetime.now().year-year)-i+1
 
 def credit_score(request):
+	cleartable = models.SepScore.objects.all()
+	cleartable.delete()
 	stu_scholarship = []
 	stu_gpa = []
 	stu_paper = []
@@ -549,10 +552,47 @@ def credit_score(request):
 		stu_c.append([stu_id,s_c+b_c])
 		penatly = test_none(models.Penalty.objects.filter(stu_id = stu_id,paid =1).aggregate(Sum('pen_money'))['pen_money__sum'])
 		stu_penalty.append([stu_id,penatly])
-		stu_total_labor.append(stu_id,)
+	#print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
+	stu_scholarship = sorted_rank(stu_scholarship)
+	score_type = 'stu_scholarship'
+	'''	savedata = models.SepScore(score_type = 'stu_scholarship',stu_id = stu_scholarship[0],score = stu_scholarship[1],rank = stu_scholarship[2])
+	savedata.save()'''
+	savedata(stu_scholarship,score_type)
+	stu_gpa = sorted_rank(stu_gpa)
+	savedata(stu_gpa,'stu_gpa')
+	'''	savedata = models.SepScore(score_type = 'stu_gpa',stu_id = stu_gpa[0],score =stu_gpa[1],rank = stu_gpa[2])
+	savedata.save()	'''
+	stu_paper = sorted_rank(stu_paper)
+	savedata(stu_paper,'stu_paper')
+	'''	savedata = models.SepScore(score_type = 'stu_paper',stu_id = stu_paper[0],score = stu_paper[1],rank = stu_paper[2])
+	savedata.save()	'''
+	stu_job = sorted_rank(stu_job)
+	savedata(stu_job,'stu_job')
+	'''	savedata = models.SepScore(score_type = 'stu_job',stu_id = stu_job[0],score =stu_job[1],rank = stu_job[2])
+	savedata.save()	'''
+	stu_cheat = sorted_rank(stu_cheat)
+	savedata(stu_cheat,'stu_cheat')
+	'''	savedata = models.SepScore(score_type = 'stu_cheat',stu_id = stu_cheat[0],score = stu_cheat[1],rank = stu_cheat[2])
+	savedata.save()	'''
+	stu_c = sorted_rank(stu_c)
+	savedata(stu_c,'stu_c')
+	'''	savedata = models.SepScore(score_type = 'stu_c',stu_id = stu_c[0],score = stu_c[1],rank = stu_c[2])
+	savedata.save()	'''
+	stu_credit = sorted_rank(stu_credit)
+	savedata(stu_credit,'stu_credit')
+	'''	savedata = models.SepScore(score_type = 'stu_credit',stu_id = stu_credit[0],score =stu_credit[1],rank = stu_credit[2])
+	savedata.save()	'''
+	stu_penalty = sorted_rank(stu_penalty)
+	savedata(stu_penalty,'stu_penalty')
+	'''	savedata = models.SepScore(score_type = 'stu_penalty',stu_id = stu_penalty[0],score = stu_penalty[1],rank = stu_penalty[2])
+	savedata.save()	'''
 	print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
 	return render(request,'credit_score.html')
 
+def savedata(yourlist,score_type):
+	for ylist in yourlist:
+		savedata = models.SepScore(score_type =score_type ,stu_id = ylist[0],score =ylist[1],rank = ylist[2])
+		savedata.save()	
 
 def test_none(number):
 	if number == None:
@@ -560,3 +600,32 @@ def test_none(number):
 	else:
 		number = number
 	return number
+
+def stu_index(request):
+	stu_id = request.session.get('stu_id')
+	student = models.Student.objects.get(stu_id = stu_id)
+	money = student.money
+	grade = test_grade(int(student.stu_year))
+	name = student.stu_name
+	scholarship = models.SepScore.objects.get(score_type = 'stu_scholarship',stu_id = stu_id)
+	gpa = models.SepScore.objects.get(score_type = 'stu_gpa',stu_id = stu_id)
+	paper = models.SepScore.objects.get(score_type = 'stu_paper',stu_id = stu_id)
+	job =  models.SepScore.objects.get(score_type = 'stu_job',stu_id = stu_id)
+	cheat = models.SepScore.objects.get(score_type = 'stu_cheat',stu_id = stu_id)
+	c = models.SepScore.objects.get(score_type = 'stu_c',stu_id = stu_id)
+	credit = models.SepScore.objects.get(score_type = 'stu_credit',stu_id = stu_id)
+	penalty = models.SepScore.objects.get(score_type = 'stu_penalty',stu_id = stu_id)
+	print(stu_id,money,grade,name)
+	return render(request,'student/stu_index.html',{'grade':grade,'money':money,'name':name})
+
+def sorted_rank(yourlist):
+    newlist = sorted(yourlist,key = lambda x:x[1],reverse =True)
+    for i in range(len(yourlist)):
+        newlist[i].append(i+1)
+    return newlist
+
+def varname(p):
+    for line in inspect.getframeinfo(inspect.currentframe().f_back)[3]:
+        m = re.search(r'\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)', line)
+        if m:
+            return m.group(1)
