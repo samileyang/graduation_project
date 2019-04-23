@@ -515,19 +515,48 @@ def test_grade(year):
     return (datetime.datetime.now().year-year)-i+1
 
 def credit_score(request):
-	stu_list = []
+	stu_scholarship = []
+	stu_gpa = []
+	stu_paper = []
+	stu_job =[]
+	stu_cheat = []
+	stu_c =[]
+	stu_credit=[]
+	stu_penalty=[]
+	stu_total_labor = []
+	stu_total_debt =[]
 	students = models.Student.objects.all()
 	for student in students:
 		stu_id = student.stu_id
 		thisstu = models.Student.objects.get(stu_id = stu_id)
-		grade = test_grade(thisstu.year)
-		print(grade)
-		scholarship = models.Scholarship.objects.filter(status =1, stu_id = stu_id).annotate(Sum("money"))['money__sum']
-		print(scholarship)
-		gpa = models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))['score__avg']
-		print(gpa)
-		paper = models.AddCreditOrder.objects.filter(status =1, stu_id = stu_id).annotate(Sum("score"))['score__sum']
-		print(paper)
-		cheat = models.Cheat.objects.filter(stu_id = stu_id).annotate(Count("student_choice_id"))['student_choice_id__count']
-		print(cheat)
-		
+		grade = test_grade(int(thisstu.stu_year))
+		scholarship = test_none(models.Scholarship.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("money"))['money__sum'])
+		stu_scholarship.append([stu_id,scholarship])
+		gpa = test_none(models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))['score__avg'])
+		stu_gpa.append([stu_id,gpa])
+		paper = test_none(models.AddCreditOrder.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("score"))['score__sum'])
+		stu_paper.append([stu_id,paper])
+		cheat = models.Cheat.objects.filter(stu_id = stu_id).count()		
+		stu_cheat.append([stu_id,cheat])
+		credit= models.Credit.objects.filter(stu_id = stu_id,status = 1).count()		
+		stu_credit.append([stu_id,credit])
+		job = test_none(models.JobCertification.objects.filter(stu_id = stu_id,status = 1).aggregate(Sum('days'))['days__sum'])	
+		stu_job.append([stu_id,job])
+		s_c = models.Orders.objects.filter(buyer_id = stu_id,seller_comm__isnull=False).aggregate(Avg('seller_comm'))['seller_comm__avg']		
+		b_c = models.Orders.objects.filter(seller_id = stu_id,buyer_comm__isnull=False).aggregate(Avg('buyer_comm'))['buyer_comm__avg']
+		s_c = test_none(s_c)
+		b_c = test_none(b_c)
+		stu_c.append([stu_id,s_c+b_c])
+		penatly = test_none(models.Penalty.objects.filter(stu_id = stu_id,paid =1).aggregate(Sum('pen_money'))['pen_money__sum'])
+		stu_penalty.append([stu_id,penatly])
+		stu_total_labor.append(stu_id,)
+	print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
+	return render(request,'credit_score.html')
+
+
+def test_none(number):
+	if number == None:
+		number = 0
+	else:
+		number = number
+	return number
