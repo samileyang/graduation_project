@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 22/04/2019 22:28:21
+ Date: 23/04/2019 22:40:33
 */
 
 SET NAMES utf8mb4;
@@ -360,7 +360,7 @@ CREATE TABLE `credit`  (
 INSERT INTO `credit` VALUES (1, 1, 1, 2019, 100);
 INSERT INTO `credit` VALUES (1, 2, 1, 2019, 100);
 INSERT INTO `credit` VALUES (1, 3, 1, 2019, 100);
-INSERT INTO `credit` VALUES (0, 4, 1, 2019, 100);
+INSERT INTO `credit` VALUES (1, 4, 1, 2019, 100);
 
 -- ----------------------------
 -- Table structure for cultivate_plan
@@ -504,7 +504,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-06 15:16:56.594862');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-07 20:49:51.347579');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -696,6 +696,53 @@ CREATE TABLE `scholarship`  (
 INSERT INTO `scholarship` VALUES (4, 2, 0, 1000);
 INSERT INTO `scholarship` VALUES (5, 3, 0, 700);
 INSERT INTO `scholarship` VALUES (6, 1, 1, 400);
+
+-- ----------------------------
+-- Table structure for sep_score
+-- ----------------------------
+DROP TABLE IF EXISTS `sep_score`;
+CREATE TABLE `sep_score`  (
+  `score_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `stu_id` int(11) NULL DEFAULT NULL,
+  `score` int(255) NULL DEFAULT NULL,
+  `rank` int(255) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sep_score
+-- ----------------------------
+INSERT INTO `sep_score` VALUES ('stu_scholarship', 1, 400, 1);
+INSERT INTO `sep_score` VALUES ('stu_scholarship', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_scholarship', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_scholarship', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_gpa', 1, 100, 1);
+INSERT INTO `sep_score` VALUES ('stu_gpa', 2, 100, 2);
+INSERT INTO `sep_score` VALUES ('stu_gpa', 3, 87, 3);
+INSERT INTO `sep_score` VALUES ('stu_gpa', 4, 74, 4);
+INSERT INTO `sep_score` VALUES ('stu_paper', 1, 10, 1);
+INSERT INTO `sep_score` VALUES ('stu_paper', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_paper', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_paper', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_job', 1, 9, 1);
+INSERT INTO `sep_score` VALUES ('stu_job', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_job', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_job', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_cheat', 1, 1, 1);
+INSERT INTO `sep_score` VALUES ('stu_cheat', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_cheat', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_cheat', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_c', 1, 200, 1);
+INSERT INTO `sep_score` VALUES ('stu_c', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_c', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_c', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_credit', 1, 4, 1);
+INSERT INTO `sep_score` VALUES ('stu_credit', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_credit', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_credit', 4, 0, 4);
+INSERT INTO `sep_score` VALUES ('stu_penalty', 1, 92, 1);
+INSERT INTO `sep_score` VALUES ('stu_penalty', 2, 0, 2);
+INSERT INTO `sep_score` VALUES ('stu_penalty', 3, 0, 3);
+INSERT INTO `sep_score` VALUES ('stu_penalty', 4, 0, 4);
 
 -- ----------------------------
 -- Table structure for student
