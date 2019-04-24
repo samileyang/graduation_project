@@ -217,6 +217,7 @@ class Scholarship(models.Model):
 
 
 class SepScore(models.Model):
+    sep_id = models.AutoField(primary_key=True)
     score_type = models.CharField(max_length=255, blank=True, null=True)
     stu_id = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)

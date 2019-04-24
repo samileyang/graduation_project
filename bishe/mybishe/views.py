@@ -607,7 +607,7 @@ def stu_index(request):
 	money = student.money
 	grade = test_grade(int(student.stu_year))
 	name = student.stu_name
-	scholarship = models.SepScore.objects.get(score_type = 'stu_scholarship',stu_id = stu_id)
+	scholarship = models.SepScore.objects.get(score_type='stu_scholarship',stu_id=stu_id)
 	gpa = models.SepScore.objects.get(score_type = 'stu_gpa',stu_id = stu_id)
 	paper = models.SepScore.objects.get(score_type = 'stu_paper',stu_id = stu_id)
 	job =  models.SepScore.objects.get(score_type = 'stu_job',stu_id = stu_id)
@@ -616,7 +616,7 @@ def stu_index(request):
 	credit = models.SepScore.objects.get(score_type = 'stu_credit',stu_id = stu_id)
 	penalty = models.SepScore.objects.get(score_type = 'stu_penalty',stu_id = stu_id)
 	print(stu_id,money,grade,name)
-	return render(request,'student/stu_index.html',{'grade':grade,'money':money,'name':name})
+	return render(request,'student/stu_index.html',{'grade':grade,'money':money,'name':name,'scholarship':scholarship,'gpa':gpa,'paper':paper,'job':job,'cheat':cheat,'c':c,'credit':credit,'penalty':penalty})
 
 def sorted_rank(yourlist):
     newlist = sorted(yourlist,key = lambda x:x[1],reverse =True)
