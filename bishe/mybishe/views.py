@@ -629,3 +629,8 @@ def varname(p):
         m = re.search(r'\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)', line)
         if m:
             return m.group(1)
+
+def labor_index(request):
+	students = models.Student.objects.all()
+	for student in students:
+		
