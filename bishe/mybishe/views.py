@@ -630,7 +630,29 @@ def varname(p):
         if m:
             return m.group(1)
 
-def labor_index(request):
+def other_index(request):
 	students = models.Student.objects.all()
+	score_list = []
 	for student in students:
+		stu_id = student.stu_id
+		stu_name = student.stu_name
+		stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
+		stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
+		stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
+		stu_job = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_job').score
+		stu_cheat = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_cheat').score
+		stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
+		stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
+		stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
+		stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job-stu_cheat+stu_c+stu_credit-stu_penalty
+		score_list.append([stu_id,stu_name,stu_score])
+	print(score_list)
+	newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
+	for i in range(len(newlist)):
+		newlist[i].append(i+1)
+	print(newlist)
+	return render(request,'other_index.html')
+
+def save_score(data):
+	for da in data:
 		
