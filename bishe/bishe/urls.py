@@ -72,4 +72,6 @@ urlpatterns = [
     url(r'^stu_scholarship/',views.stu_scholarship),
     url(r'^sch_order/',views.sch_order),
     url(r'^credit_score/',views.credit_score),
+    url(r'^other_index/',views.other_index),
+    
 ]

@@ -22,7 +22,6 @@ class AddCreditOrder(models.Model):
         db_table = 'add_credit_order'
 
 
-
 class Borrow(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
@@ -107,7 +106,6 @@ class CultivatePlan(models.Model):
         db_table = 'cultivate_plan'
 
 
-
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
     instructor_name = models.CharField(max_length=255, blank=True, null=True)
@@ -128,6 +126,17 @@ class JobCertification(models.Model):
     class Meta:
         
         db_table = 'job_certification'
+
+
+class LaborScore(models.Model):
+    stu_id = models.IntegerField(primary_key=True)
+    stu_name = models.CharField(max_length=255, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+    rank = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'labor_score'
 
 
 class Major(models.Model):

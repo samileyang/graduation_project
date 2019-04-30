@@ -650,9 +650,14 @@ def other_index(request):
 	newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
 	for i in range(len(newlist)):
 		newlist[i].append(i+1)
-	print(newlist)
-	return render(request,'other_index.html')
+	add_labor_score(newlist)
+	labors = models.LaborScore.objects.all()
+	return render(request,'other_index.html',{'labors':labors})
 
-def save_score(data):
-	for da in data:
-		
+def add_labor_score(yourlists):
+	cleartable = models.LaborScore.objects.all()
+	cleartable.delete()
+	for yourlist in yourlists:
+		savedata = models.LaborScore(stu_id = yourlist[0],stu_name = yourlist[1],score = yourlist[2],rank = yourlist[3])
+		savedata.save()
+
