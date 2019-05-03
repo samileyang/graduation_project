@@ -3,7 +3,7 @@
 
     <div class="container">
         <table class="table table-hover">
-            <h3 align="center">课程表</h3>
+            <h3 align="center">个人首页</h3>
             </thead>
             <tbody>
                 <tr>
@@ -40,10 +40,14 @@
                 	<td>技能部分排名：{{credit.rank}}</td>
                 </tr>
                 <tr>
-                	<td>违纪部分得分：{{penalty.score}}</td>
-                	<td>违纪部分排名：{{penalty.rank}}</td>
+                	<td>罚款部分得分：{{penalty.score}}</td>
+                	<td>罚款部分排名：{{penalty.rank}}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="alert alert-info" role="alert">
+        <strong>注意</strong>
+        上述维度每部分满分200分
     </div>
 {% endblock context %}

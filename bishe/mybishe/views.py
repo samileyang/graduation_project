@@ -685,6 +685,8 @@ def labor_score(request):
 		for student in students:
 			stu_id = student.stu_id
 			stu_name = student.stu_name
+			thisstu = models.Student.objects.get(stu_id = stu_id)
+			grade = test_grade(int(thisstu.stu_year)) 
 			stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
 			stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
 			stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
@@ -693,7 +695,8 @@ def labor_score(request):
 			stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
 			stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
 			stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
-			stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job+stu_cheat+stu_c+stu_credit+stu_penalty
+			stu_score = 0.05*grade*50+0*stu_scholarship+0.1*stu_gpa+0.05*stu_paper+0.2*stu_job+0.2*stu_cheat+0*stu_c+0.2*stu_credit+0.2*stu_penalty
+
 			score_list.append([stu_id,stu_name,stu_score])
 		print(score_list)
 		newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
@@ -723,6 +726,8 @@ def debt_score(request):
 		for student in students:
 			stu_id = student.stu_id
 			stu_name = student.stu_name
+			thisstu = models.Student.objects.get(stu_id = stu_id)
+			grade = test_grade(int(thisstu.stu_year)) 
 			stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
 			stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
 			stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
@@ -731,7 +736,7 @@ def debt_score(request):
 			stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
 			stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
 			stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
-			stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job+stu_cheat+stu_c+stu_credit+stu_penalty
+			stu_score = 0.1*grade*50+0.15*stu_scholarship+0*stu_gpa+0.1*stu_paper+0.1*stu_job+0.25*stu_cheat+0.05*stu_c+0*stu_credit+0.25*stu_penalty
 			score_list.append([stu_id,stu_name,stu_score])
 		print(score_list)
 		newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
