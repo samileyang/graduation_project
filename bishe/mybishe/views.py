@@ -461,33 +461,36 @@ def teacher_cheat(request):
 		return render(request,'teacher/teacher_cheat.html',{'students':students})
 
 def scholarship(request):
-	cleartable = models.Scholarship.objects.all()
-	cleartable.delete()
-	students = models.Student.objects.all()
-	stu_id_list = []
-	scholarship_list=[]
-	basic_money = 1000
-	i = 0
-	for student in students:
-		stu_id_list.append(student.stu_id)
-	print(stu_id_list)
-	for stu_id in stu_id_list:
-		find_student = models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))
-		scholarship_list.append([stu_id,find_student['score__avg']])
-	print(scholarship_list)
-	new_scholarship_list=sorted(scholarship_list, key=lambda x:x[1], reverse = True )
-	print(new_scholarship_list)
-	for _list in new_scholarship_list:
-		if i < 3:
-			addscholarship = models.Scholarship(stu_id = _list[0],status = 0, money = basic_money)
-			addscholarship.save()
-			print(_list)
-			print(basic_money)
-			basic_money -= 300
-			i +=1 
-		else:
-			break
-	return render(request,'scholarship.html')
+	if request.method == 'GET':
+		return render(request,'scholarship.html')
+	if request.method == 'POST':
+		cleartable = models.Scholarship.objects.all()
+		cleartable.delete()
+		students = models.Student.objects.all()
+		stu_id_list = []
+		scholarship_list=[]
+		basic_money = 1000
+		i = 0
+		for student in students:
+			stu_id_list.append(student.stu_id)
+		print(stu_id_list)
+		for stu_id in stu_id_list:
+			find_student = models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))
+			scholarship_list.append([stu_id,find_student['score__avg']])
+		print(scholarship_list)
+		new_scholarship_list=sorted(scholarship_list, key=lambda x:x[1], reverse = True )
+		print(new_scholarship_list)
+		for _list in new_scholarship_list:
+			if i < 3:
+				addscholarship = models.Scholarship(stu_id = _list[0],status = 0, money = basic_money)
+				addscholarship.save()
+				print(_list)
+				print(basic_money)
+				basic_money -= 300
+				i +=1 
+			else:
+				break
+		return render(request,'scholarship.html')
 
 
 def stu_scholarship(request):
@@ -516,78 +519,120 @@ def test_grade(year):
     return (datetime.datetime.now().year-year)-i+1
 
 def credit_score(request):
-	cleartable = models.SepScore.objects.all()
-	cleartable.delete()
-	stu_scholarship = []
-	stu_gpa = []
-	stu_paper = []
-	stu_job =[]
-	stu_cheat = []
-	stu_c =[]
-	stu_credit=[]
-	stu_penalty=[]
-	stu_total_labor = []
-	stu_total_debt =[]
-	students = models.Student.objects.all()
-	for student in students:
-		stu_id = student.stu_id
-		thisstu = models.Student.objects.get(stu_id = stu_id)
-		grade = test_grade(int(thisstu.stu_year))
-		scholarship = test_none(models.Scholarship.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("money"))['money__sum'])
-		stu_scholarship.append([stu_id,scholarship])
-		gpa = test_none(models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))['score__avg'])
-		stu_gpa.append([stu_id,gpa])
-		paper = test_none(models.AddCreditOrder.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("score"))['score__sum'])
-		stu_paper.append([stu_id,paper])
-		cheat = models.Cheat.objects.filter(stu_id = stu_id).count()		
-		stu_cheat.append([stu_id,cheat])
-		credit= models.Credit.objects.filter(stu_id = stu_id,status = 1).count()		
-		stu_credit.append([stu_id,credit])
-		job = test_none(models.JobCertification.objects.filter(stu_id = stu_id,status = 1).aggregate(Sum('days'))['days__sum'])	
-		stu_job.append([stu_id,job])
-		s_c = models.Orders.objects.filter(buyer_id = stu_id,seller_comm__isnull=False).aggregate(Avg('seller_comm'))['seller_comm__avg']		
-		b_c = models.Orders.objects.filter(seller_id = stu_id,buyer_comm__isnull=False).aggregate(Avg('buyer_comm'))['buyer_comm__avg']
-		s_c = test_none(s_c)
-		b_c = test_none(b_c)
-		stu_c.append([stu_id,s_c+b_c])
-		penatly = test_none(models.Penalty.objects.filter(stu_id = stu_id,paid =1).aggregate(Sum('pen_money'))['pen_money__sum'])
-		stu_penalty.append([stu_id,penatly])
-	#print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
-	stu_scholarship = sorted_rank(stu_scholarship)
-	score_type = 'stu_scholarship'
-	'''	savedata = models.SepScore(score_type = 'stu_scholarship',stu_id = stu_scholarship[0],score = stu_scholarship[1],rank = stu_scholarship[2])
-	savedata.save()'''
-	savedata(stu_scholarship,score_type)
-	stu_gpa = sorted_rank(stu_gpa)
-	savedata(stu_gpa,'stu_gpa')
-	'''	savedata = models.SepScore(score_type = 'stu_gpa',stu_id = stu_gpa[0],score =stu_gpa[1],rank = stu_gpa[2])
-	savedata.save()	'''
-	stu_paper = sorted_rank(stu_paper)
-	savedata(stu_paper,'stu_paper')
-	'''	savedata = models.SepScore(score_type = 'stu_paper',stu_id = stu_paper[0],score = stu_paper[1],rank = stu_paper[2])
-	savedata.save()	'''
-	stu_job = sorted_rank(stu_job)
-	savedata(stu_job,'stu_job')
-	'''	savedata = models.SepScore(score_type = 'stu_job',stu_id = stu_job[0],score =stu_job[1],rank = stu_job[2])
-	savedata.save()	'''
-	stu_cheat = sorted_rank(stu_cheat)
-	savedata(stu_cheat,'stu_cheat')
-	'''	savedata = models.SepScore(score_type = 'stu_cheat',stu_id = stu_cheat[0],score = stu_cheat[1],rank = stu_cheat[2])
-	savedata.save()	'''
-	stu_c = sorted_rank(stu_c)
-	savedata(stu_c,'stu_c')
-	'''	savedata = models.SepScore(score_type = 'stu_c',stu_id = stu_c[0],score = stu_c[1],rank = stu_c[2])
-	savedata.save()	'''
-	stu_credit = sorted_rank(stu_credit)
-	savedata(stu_credit,'stu_credit')
-	'''	savedata = models.SepScore(score_type = 'stu_credit',stu_id = stu_credit[0],score =stu_credit[1],rank = stu_credit[2])
-	savedata.save()	'''
-	stu_penalty = sorted_rank(stu_penalty)
-	savedata(stu_penalty,'stu_penalty')
-	'''	savedata = models.SepScore(score_type = 'stu_penalty',stu_id = stu_penalty[0],score = stu_penalty[1],rank = stu_penalty[2])
-	savedata.save()	'''
-	print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
-	return render(request,'credit_score.html')
+	if request.method == 'GET':
+		return render(request,'instructor/credit_score.html')
+	if request.method =='POST':
+		cleartable = models.SepScore.objects.all()
+		cleartable.delete()
+		stu_scholarship = []
+		stu_gpa = []
+		stu_paper = []
+		stu_job =[]
+		stu_cheat = []
+		stu_c =[]
+		stu_credit=[]
+		stu_penalty=[]
+		stu_total_labor = []
+		stu_total_debt =[]
+		students = models.Student.objects.all()
+		for student in students:
+			stu_id = student.stu_id
+			thisstu = models.Student.objects.get(stu_id = stu_id)
+			grade = test_grade(int(thisstu.stu_year))
+			scholarship = test_none(models.Scholarship.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("money"))['money__sum'])
+			if scholarship == 0:
+				scholarship = 100
+			else:
+				scholarship = scholarship/10 +100
+			if scholarship>200:
+				scholarship =200
+			stu_scholarship.append([stu_id,scholarship])
+			gpa = test_none(models.StudentChoice.objects.filter(score__isnull=False,stu_id = stu_id).aggregate(Avg("score"))['score__avg'])
+			stu_gpa.append([stu_id,gpa*2])
+			paper = test_none(models.AddCreditOrder.objects.filter(status =1, stu_id = stu_id).aggregate(Sum("score"))['score__sum'])
+			if paper == 0:
+				paper = 100
+			else:
+				paper = 100+paper
+			if paper > 200:
+				paper =200
+			stu_paper.append([stu_id,paper])
+			cheat = models.Cheat.objects.filter(stu_id = stu_id).count()
+			if cheat > 0:
+				cheat = 0
+			else:
+				cheat =200		
+			stu_cheat.append([stu_id,cheat])
+			credit= models.Credit.objects.filter(stu_id = stu_id,status = 1).count()
+			if credit ==0:
+				credit =100
+			else:
+				credit = 100+20*credit
+			if credit > 200:
+				credit = 200
+			stu_credit.append([stu_id,credit])
+			job = test_none(models.JobCertification.objects.filter(stu_id = stu_id,status = 1).aggregate(Sum('days'))['days__sum'])	
+			if job == 0:
+				job = 50
+			else:
+				job = 50+job
+			if job > 200:
+				job =200
+			stu_job.append([stu_id,job])
+			s_c = models.Orders.objects.filter(buyer_id = stu_id,seller_comm__isnull=False).aggregate(Avg('seller_comm'))['seller_comm__avg']		
+			b_c = models.Orders.objects.filter(seller_id = stu_id,buyer_comm__isnull=False).aggregate(Avg('buyer_comm'))['buyer_comm__avg']
+			s_c = test_none(s_c)
+			b_c = test_none(b_c)
+			if (s_c+b_c) == 0:
+				s_b = 200
+			else:
+				s_b = s_c+b_c
+			stu_c.append([stu_id,s_b])
+			penatly = test_none(models.Penalty.objects.filter(stu_id = stu_id,paid =1).aggregate(Sum('pen_money'))['pen_money__sum'])
+			yourpen = penatly
+			if penatly == 0:
+				newscore =200
+			else:
+				newscore = 200-yourpen*5
+			if newscore <0:
+				newscore =0
+			stu_penalty.append([stu_id,newscore])
+		#print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
+		stu_scholarship = sorted_rank(stu_scholarship)
+		score_type = 'stu_scholarship'
+		'''	savedata = models.SepScore(score_type = 'stu_scholarship',stu_id = stu_scholarship[0],score = stu_scholarship[1],rank = stu_scholarship[2])
+		savedata.save()'''
+		savedata(stu_scholarship,score_type)
+		stu_gpa = sorted_rank(stu_gpa)
+		savedata(stu_gpa,'stu_gpa')
+		'''	savedata = models.SepScore(score_type = 'stu_gpa',stu_id = stu_gpa[0],score =stu_gpa[1],rank = stu_gpa[2])
+		savedata.save()	'''
+		stu_paper = sorted_rank(stu_paper)
+		savedata(stu_paper,'stu_paper')
+		'''	savedata = models.SepScore(score_type = 'stu_paper',stu_id = stu_paper[0],score = stu_paper[1],rank = stu_paper[2])
+		savedata.save()	'''
+		stu_job = sorted_rank(stu_job)
+		savedata(stu_job,'stu_job')
+		'''	savedata = models.SepScore(score_type = 'stu_job',stu_id = stu_job[0],score =stu_job[1],rank = stu_job[2])
+		savedata.save()	'''
+		stu_cheat = sorted_rank(stu_cheat)
+		savedata(stu_cheat,'stu_cheat')
+		'''	savedata = models.SepScore(score_type = 'stu_cheat',stu_id = stu_cheat[0],score = stu_cheat[1],rank = stu_cheat[2])
+		savedata.save()	'''
+		stu_c = sorted_rank(stu_c)
+		savedata(stu_c,'stu_c')
+		'''	savedata = models.SepScore(score_type = 'stu_c',stu_id = stu_c[0],score = stu_c[1],rank = stu_c[2])
+		savedata.save()	'''
+		stu_credit = sorted_rank(stu_credit)
+		savedata(stu_credit,'stu_credit')
+		'''	savedata = models.SepScore(score_type = 'stu_credit',stu_id = stu_credit[0],score =stu_credit[1],rank = stu_credit[2])
+		savedata.save()	'''
+		stu_penalty = sorted_rank(stu_penalty)
+		savedata(stu_penalty,'stu_penalty')
+		'''	savedata = models.SepScore(score_type = 'stu_penalty',stu_id = stu_penalty[0],score = stu_penalty[1],rank = stu_penalty[2])
+		savedata.save()	'''
+		print(stu_scholarship,stu_gpa,stu_paper,stu_job,stu_cheat,stu_c,stu_credit,stu_penalty,sep ='\n')
+		return render(request,'instructor/credit_score.html')
 
 def savedata(yourlist,score_type):
 	for ylist in yourlist:
@@ -630,29 +675,36 @@ def varname(p):
         if m:
             return m.group(1)
 
-def other_index(request):
-	students = models.Student.objects.all()
-	score_list = []
-	for student in students:
-		stu_id = student.stu_id
-		stu_name = student.stu_name
-		stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
-		stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
-		stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
-		stu_job = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_job').score
-		stu_cheat = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_cheat').score
-		stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
-		stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
-		stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
-		stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job-stu_cheat+stu_c+stu_credit-stu_penalty
-		score_list.append([stu_id,stu_name,stu_score])
-	print(score_list)
-	newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
-	for i in range(len(newlist)):
-		newlist[i].append(i+1)
-	add_labor_score(newlist)
+def labor_score(request):
+	if request.method == 'GET':
+		labors = models.LaborScore.objects.all()
+		return render(request,'instructor/labor_score.html')
+	if request.method =='POST':
+		students = models.Student.objects.all()
+		score_list = []
+		for student in students:
+			stu_id = student.stu_id
+			stu_name = student.stu_name
+			stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
+			stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
+			stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
+			stu_job = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_job').score
+			stu_cheat = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_cheat').score
+			stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
+			stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
+			stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
+			stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job+stu_cheat+stu_c+stu_credit+stu_penalty
+			score_list.append([stu_id,stu_name,stu_score])
+		print(score_list)
+		newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
+		for i in range(len(newlist)):
+			newlist[i].append(i+1)
+		add_labor_score(newlist)
+		return render(request,'instructor/labor_score.html')
+
+def labor_index(request):
 	labors = models.LaborScore.objects.all()
-	return render(request,'other_index.html',{'labors':labors})
+	return render(request,'labor_index.html',{'labors':labors})
 
 def add_labor_score(yourlists):
 	cleartable = models.LaborScore.objects.all()
@@ -661,3 +713,40 @@ def add_labor_score(yourlists):
 		savedata = models.LaborScore(stu_id = yourlist[0],stu_name = yourlist[1],score = yourlist[2],rank = yourlist[3])
 		savedata.save()
 
+def debt_score(request):
+	if request.method == 'GET':
+		labors = models.DebtScore.objects.all()
+		return render(request,'instructor/debt_score.html')
+	if request.method =='POST':
+		students = models.Student.objects.all()
+		score_list = []
+		for student in students:
+			stu_id = student.stu_id
+			stu_name = student.stu_name
+			stu_scholarship = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_scholarship').score
+			stu_gpa = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_gpa').score
+			stu_paper = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_paper').score
+			stu_job = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_job').score
+			stu_cheat = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_cheat').score
+			stu_c = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_c').score
+			stu_credit = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_credit').score
+			stu_penalty = models.SepScore.objects.get(stu_id = stu_id,score_type = 'stu_penalty').score
+			stu_score = stu_scholarship+stu_gpa+stu_paper+stu_job+stu_cheat+stu_c+stu_credit+stu_penalty
+			score_list.append([stu_id,stu_name,stu_score])
+		print(score_list)
+		newlist = sorted(score_list,key = lambda x:x[2],reverse = True)
+		for i in range(len(newlist)):
+			newlist[i].append(i+1)
+		add_debt_score(newlist)
+		return render(request,'instructor/debt_score.html')
+
+def add_debt_score(yourlists):
+	cleartable = models.DebtScore.objects.all()
+	cleartable.delete()
+	for yourlist in yourlists:
+		savedata = models.DebtScore(stu_id = yourlist[0],stu_name = yourlist[1],score = yourlist[2],rank = yourlist[3])
+		savedata.save()
+
+def debt_index(request):
+	debts =  models.DebtScore.objects.all()
+	return render(request,'debt_index.html',{'debts':debts})

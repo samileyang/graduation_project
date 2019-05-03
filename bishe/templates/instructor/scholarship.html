@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The blah</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="/static/js/jquery-1.12.4.js"></script>
+</head>
+<body>
+  <div style="height:100%; padding: 10% 30%">
+  	<h3>奖学金申请</h3>
+        <form action="/scholarship/" method="post">
+        	{% csrf_token %}
+          <button type="submit" class="btn btn-primary">发起</button>
+        </form>
+  </div>
+</body>
+</html>
+

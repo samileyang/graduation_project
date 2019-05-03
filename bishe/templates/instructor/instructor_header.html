@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="menu">
@@ -14,7 +16,17 @@
     <ul style="margin-left: 20px;margin-top:10px">
         <li style="margin: 0 0 0 10px" onclick="window.location.href='/emp_main'">辅导员|系统</li>
         <li style="margin: 0 0 0 10px"><a href="/instructor_sp_confirm">论文/学生工作申请</a></li>
-        <li style="margin: 0 0 0 10px"><a href="">信用评价</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            发起信用评级
+            </a>
+        <ul class="dropdown-menu" style="background-color:white; min-width:80px">
+            <li><a href="/credit_score" style="color:black">总体信用分评价</a></li>
+            <li><a href="/scholarship" style="color:black">奖学金申请</a></li>
+            <li><a href="/labor_score" style="color:black">人才招募</a></li>
+            <li><a href="/debt_score" style="color:black">贷款发放</a></li>
+        </ul>
+        </li>
         <li style="margin: 0 0 0 10px"><a href="/instructor_pro_review">商品认证</a></li>
         <li style="margin: 0 0 0 10px"><a href="/instructor_job_review">校外工作认证</a></li>
 

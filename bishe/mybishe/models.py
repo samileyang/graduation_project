@@ -106,6 +106,16 @@ class CultivatePlan(models.Model):
         db_table = 'cultivate_plan'
 
 
+class DebtScore(models.Model):
+    stu_id = models.IntegerField(primary_key=True)
+    stu_name = models.CharField(max_length=255, blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
+    rank = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        
+        db_table = 'debt_score'
+
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
     instructor_name = models.CharField(max_length=255, blank=True, null=True)
