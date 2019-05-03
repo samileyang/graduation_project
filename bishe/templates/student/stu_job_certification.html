@@ -1,5 +1,8 @@
 {% extends "student/stu_header.html" %}
 {% block context %}
+    <div class="page_header">
+        <h3 align="center">工作认证</h3>
+    </div>
     <div class="container">
         <form action="/stu_job_certification/" method="Post">
             {% csrf_token %}

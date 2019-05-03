@@ -1,9 +1,11 @@
 {% extends "student/stu_header.html" %}
 {% block context %}
+    <div class="page_header">
+        <h3 align="center">卖家评价</h3>
+    </div>
     <div class="container">
         <table class="table table-hover">
             <form action="/stu_seller_comment/" method="post">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_buyer_comment'">买方评价</button>
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="order_id">购买序列号</label>
