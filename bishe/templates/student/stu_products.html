@@ -6,7 +6,6 @@
     <div class="container">
         <form action="/stu_products/" method="Post">
             {% csrf_token %}
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/stu_pro_purchase'">商品购买</button>
             <div class="form-group">
                 <label for="product_name">商品名称</label>
                 <input type="text" class="form-control" name="product_name" id="product_name">

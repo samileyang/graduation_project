@@ -76,5 +76,6 @@ urlpatterns = [
     url(r'^labor_index/',views.labor_index),
     url(r'^debt_score/',views.debt_score),
     url(r'^debt_index/',views.debt_index),
+    url(r'^stu_index/',views.show_photo),
     
 ]

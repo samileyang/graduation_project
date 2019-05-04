@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from mybishe import models
 from django.db.models import F
 import datetime
 from django.db.models import Sum,Count,Max,Min,Avg
 import inspect
 import re
+import matplotlib.pyplot as plt # plt 用于显示图片
+import matplotlib.image as mpimg # mpimg 用于读取图片
 # Create your views here.
 def stu_info(request):
 	if request.method == 'GET':
@@ -462,7 +464,7 @@ def teacher_cheat(request):
 
 def scholarship(request):
 	if request.method == 'GET':
-		return render(request,'scholarship.html')
+		return render(request,'instructor/scholarship.html')
 	if request.method == 'POST':
 		cleartable = models.Scholarship.objects.all()
 		cleartable.delete()
@@ -490,7 +492,7 @@ def scholarship(request):
 				i +=1 
 			else:
 				break
-		return render(request,'scholarship.html')
+		return render(request,'instructor/scholarship.html')
 
 
 def stu_scholarship(request):
@@ -755,3 +757,7 @@ def add_debt_score(yourlists):
 def debt_index(request):
 	debts =  models.DebtScore.objects.all()
 	return render(request,'debt_index.html',{'debts':debts})
+
+def show_photo(request):
+	photos = mpimg.imread('C:/Users/16437/Desktop/test2.jpg')
+	return render(request,'student/stu_index.html',{'photos':photos})
