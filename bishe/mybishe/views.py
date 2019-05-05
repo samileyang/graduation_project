@@ -7,6 +7,7 @@ import inspect
 import re
 import matplotlib.pyplot as plt # plt 用于显示图片
 import matplotlib.image as mpimg # mpimg 用于读取图片
+import numpy as np
 # Create your views here.
 def stu_info(request):
 	if request.method == 'GET':
@@ -663,6 +664,22 @@ def stu_index(request):
 	credit = models.SepScore.objects.get(score_type = 'stu_credit',stu_id = stu_id)
 	penalty = models.SepScore.objects.get(score_type = 'stu_penalty',stu_id = stu_id)
 	print(stu_id,money,grade,name)
+	data = np.array([scholarship.score,gpa.score,paper.score,job.score,cheat.score,c.score,credit.score,penalty.score])
+	dataLenth = 8
+	labels = np.array(['奖学金','绩点','学生工作','校外工作','校内纪律','二手商品','技能','罚款情况'])
+	print(data)
+	angles = np.linspace(0, 2*np.pi, dataLenth, endpoint=False)
+	data = np.concatenate((data, [data[0]])) # 闭合
+	angles = np.concatenate((angles, [angles[0]])) # 闭合
+	fig = plt.figure()
+	ax = fig.add_subplot(111, polar=True)# polar参数！！
+	ax.set_rlim(0,200)
+	ax.plot(angles, data,'bo-', linewidth=2)# 画线
+	ax.fill(angles, data, facecolor='r', alpha=0.25)# 填充
+	ax.set_thetagrids(angles * 180/np.pi, labels, fontproperties="SimHei")
+	ax.set_title("{}的雷达图".format(student.stu_name), va='bottom', fontproperties="SimHei")
+	ax.grid(True)
+	plt.savefig('C:/Users/16437/Desktop/毕设/bishe/static/img/test1.jpg')
 	return render(request,'student/stu_index.html',{'grade':grade,'money':money,'name':name,'scholarship':scholarship,'gpa':gpa,'paper':paper,'job':job,'cheat':cheat,'c':c,'credit':credit,'penalty':penalty})
 
 def sorted_rank(yourlist):
@@ -761,3 +778,4 @@ def debt_index(request):
 def show_photo(request):
 	photos = mpimg.imread('C:/Users/16437/Desktop/test2.jpg')
 	return render(request,'student/stu_index.html',{'photos':photos})
+
