@@ -22,6 +22,11 @@
                     <td>{{ rule.comment }}</td>
                     <td><button class="btn btn-primary" onclick="window.location.href='/add_review?add_id={{ rule.add_id }}'">确认</button></td>
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    暂时没有需要通过的申请 
+                </div>
             {% endfor %}
             </tbody>
         </table>

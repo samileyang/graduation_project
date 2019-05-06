@@ -18,6 +18,11 @@
                     <td>{{ course.score }}</td>
                     <td><button class="btn btn-primary" onclick="window.location.href='/skills_order?student_choice_id={{ course.student_choice_id }}'">确认</button></td>
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    你没有可以申请的技能
+                </div>
             {% endfor %}
             </tbody>
         </table>

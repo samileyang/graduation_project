@@ -20,6 +20,11 @@
                     <td>{{ order.supposedate }}</td>
                     <td><button class="btn btn-primary" onclick="window.location.href='/stu_book_return?book_id={{ order.book_id }}'">归还</button></td>
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    暂时没有需要归还的图书
+                </div>
             {% endfor %}
             </tbody>
         </table>

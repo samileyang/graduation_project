@@ -24,6 +24,11 @@
                         <td><button class="btn btn-default">已申诉</button></td>
                     {%endif%}                 
                 </tr>
+            {% empty%}
+                <div class="alert alert-info" role="alert">
+                    <strong>恭喜</strong>
+                    你没有罚款需要缴纳
+                </div>
             {% endfor %}
             </tbody>
         </table>

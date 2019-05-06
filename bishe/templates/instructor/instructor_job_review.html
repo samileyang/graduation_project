@@ -21,6 +21,11 @@
                     <td><button class="btn btn-primary" onclick="window.location.href='/job_review?job_id={{ job.job_id }}'">确认</button></td>
                 </tr>
                 {% endif %}
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    暂时没有需要通过的校外工作申请
+                </div>
             {% endfor %}
             </tbody>
         </table>

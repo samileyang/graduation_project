@@ -20,6 +20,11 @@
                     <td>{{ product.location }}</td>
                     <td><button class="btn btn-primary" onclick="window.location.href='/pro_review?pro_id={{ product.pro_id }}'">确认</button></td>
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    暂时没有需要通过申请的商品
+                </div>
             {% endfor %}
             </tbody>
         </table>

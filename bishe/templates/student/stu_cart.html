@@ -23,6 +23,11 @@
                         <td><button type="button" class="btn btn-default" disabled="disabled">已经收货</button></td>
                     {% endif %}
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉 </strong>
+                    你还没有待确认的商品，快去<a href="/stu_pro_purchase" style="color: blue"><span class="glyphicon glyphicon-hand-right"></span>商品页面</a>看看吧  
+                </div>
             {% endfor %}
             </tbody>
         </table>
