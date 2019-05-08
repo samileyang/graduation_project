@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="menu">
@@ -15,7 +17,15 @@
         <li style="font-size: 15px" onclick="window.location.href='/emp_main'">教务处|系统  </li>
         <li style="font-size: 16px, margin: 0 0 0 10px" ><a href="/stu_info">学生信息录入</a></li>
         <li style="font-size: 16px, margin: 0 0 0 10px" ><a href="/library_return">图书归还</a></li>
-
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            查看信用分
+            </a>
+        <ul class="dropdown-menu" style="background-color:white; min-width:80px">
+            <li><a href="/labor_index" style="color:black">人才招募信用分</a></li>
+            <li><a href="/debt_index" style="color:black">贷款发放信用分</a></li>
+        </ul>
+        </li>
     </ul>
     <ul style="float: right">
         

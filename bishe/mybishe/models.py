@@ -107,14 +107,15 @@ class CultivatePlan(models.Model):
 
 
 class DebtScore(models.Model):
-    stu_id = models.IntegerField(primary_key=True)
+    stu_id = models.IntegerField(blank=True, null=True)
     stu_name = models.CharField(max_length=255, blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
-    rank = models.CharField(max_length=255, blank=True, null=True)
+    rank = models.IntegerField(primary_key=True, max_length=255)
 
     class Meta:
         
         db_table = 'debt_score'
+
 
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
@@ -139,10 +140,10 @@ class JobCertification(models.Model):
 
 
 class LaborScore(models.Model):
-    stu_id = models.IntegerField(primary_key=True)
+    stu_id = models.IntegerField(blank=True, null=True)
     stu_name = models.CharField(max_length=255, blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
-    rank = models.IntegerField(blank=True, null=True)
+    rank = models.IntegerField(primary_key=True)
 
     class Meta:
         
@@ -252,7 +253,7 @@ class Student(models.Model):
     stu_pwd = models.CharField(max_length=255, blank=True, null=True)
     stu_name = models.CharField(max_length=255, blank=True, null=True)
     stu_year = models.TextField(blank=True, null=True)  # This field type is a guess.
-    major_id = models.IntegerField(blank=True, null=True)
+    major_name = models.CharField(max_length=255, blank=True, null=True)
     money = models.IntegerField(blank=True, null=True)
     stu_edu = models.CharField(max_length=255, blank=True, null=True)
     bed_id = models.IntegerField(blank=True, null=True)

@@ -22,11 +22,11 @@ def stu_info(request):
 		stu_pwd = request.POST.get('stu_pwd')
 		stu_name = request.POST.get('stu_name')
 		year = request.POST.get('year')
-		major_id = request.POST.get('major_id')
+		major_name = request.POST.get('major_id')
 		money = 100
 		stu_edu = request.POST.get('stu_edu')
 		instructor_id = request.POST.get('instructor_id')
-		students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major_id=major_id,stu_edu=stu_edu,instructor_id=instructor_id,money = money)
+		students = models.Student(stu_pwd = stu_pwd,stu_name=stu_name,stu_year=year,major_name=major_name,stu_edu=stu_edu,instructor_id=instructor_id,money = money)
 		students.save()
 		return render(request,'jwc/stu_info.html',{'majors' : majors,'educations': educations,'instructors': instructors})
 
@@ -153,7 +153,7 @@ def stu_choose_course(request):
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
 def stu_book_lost(request):
-	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
+	books = models.BorrowOrder.objects.filter(stu_id = request.session.get('stu_id'),return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
 def book_lost(request):
@@ -169,7 +169,7 @@ def book_lost(request):
 	mybook.save()
 	penatly.save()
 	students.save()
-	books = models.BorrowOrder.objects.filter(stu_id = 1,return_status = 0)
+	books = models.BorrowOrder.objects.filter(stu_id = request.session.get('stu_id'),return_status = 0)
 	return render(request,'student/stu_book_lost.html',{'books':books})
 
 def teacher_give_score(request):
@@ -268,14 +268,14 @@ def stu_delete_order(request):
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
 def stu_job_certification(request):
-	try:
+	if request.method == 'GET':
+		return render(request,'student/stu_job_certification.html')
+	if request.method == 'POST':
 		stu_id = request.session.get('stu_id')
 		job_name = request.POST.get("job_name")
 		days = request.POST.get("days")
 		jobs = models.JobCertification(stu_id = stu_id,job_name = job_name,days=days,status = 0)
 		jobs.save()
-		return render(request,'student/stu_job_certification.html')
-	except:
 		return render(request,'student/stu_job_certification.html')
 
 def job_review(request):

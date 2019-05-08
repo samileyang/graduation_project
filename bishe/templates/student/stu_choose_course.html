@@ -14,21 +14,23 @@
             </thead>
             <tbody>
             {% for course in courses %}
+                
                 <tr>
+                    <td>{{ course.course_id }}</td>
+                    <td>{{ course.teacher_id }}</td>
+                    <td>{{ course.time }}</td>
                     {% if course.course_id not in stu_list %}
-                    <td>{{ course.course_id }}</td>
-                    <td>{{ course.teacher_id }}</td>
-                    <td>{{ course.time }}</td>
-                    <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/stu_choose_order?teacher_choice_id={{ course.teacher_choice_id }}'">选择</button></td>
-                </tr>
-                <tr>
+                        <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/stu_choose_order?teacher_choice_id={{ course.teacher_choice_id }}'">选择</button></td>
                     {% else %}
-                    <td>{{ course.course_id }}</td>
-                    <td>{{ course.teacher_id }}</td>
-                    <td>{{ course.time }}</td>
-                    <td><button type="submit" class="btn btn-danger" onclick="window.location.href='/stu_delete_order?teacher_choice_id={{ course.teacher_choice_id }}'">取消</button></td>
+                        <td><button type="submit" class="btn btn-danger" onclick="window.location.href='/stu_delete_order?teacher_choice_id={{ course.teacher_choice_id }}'">取消</button></td>
                     {% endif %}
                 </tr>
+                
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    老师暂时没有选课
+                </div>
             {% endfor %}
             </tbody>
         </table>

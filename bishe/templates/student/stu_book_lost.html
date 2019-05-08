@@ -18,6 +18,11 @@
                     <td>{{ book.price }}</td>
                     <td><button type="submit" class="btn btn-primary" onclick="window.location.href='/book_lost?borrow_id={{ book.borrow_id }}'">丢失</button></td>
                 </tr>
+            {% empty %}
+                <div class="alert alert-info" role="alert">
+                    <strong>抱歉</strong>
+                    你暂时没有正在借阅的图书
+                </div>
             {% endfor %}
             </tbody>
         </table>
