@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 06/05/2019 20:51:04
+ Date: 08/05/2019 22:01:24
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,20 @@ CREATE TABLE `add_credit_order`  (
   `rule_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`add_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of add_credit_order
+-- ----------------------------
+INSERT INTO `add_credit_order` VALUES (7, 1, 1, 10, 1, 'A类期刊一作', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (8, 1, 12, 5, 1, '口笔译', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (9, 3, 13, 1, 1, '普通话等级', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (10, 5, 3, 5, 1, '学生会会长', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (11, 6, 11, 5, 1, '英语6级', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (12, 10, 14, 3, 1, '人力资源', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (13, 10, 2, 1, 1, '志愿者', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (14, 11, 2, 1, 1, '志愿者', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (15, 14, 4, 3, 1, '学生会部员', 'qwdqdwqd');
 
 -- ----------------------------
 -- Table structure for auth_group
@@ -244,13 +257,13 @@ CREATE TABLE `borrow`  (
   `status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`book_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow
 -- ----------------------------
 INSERT INTO `borrow` VALUES (1, '高等数学', 1, 10.00);
-INSERT INTO `borrow` VALUES (2, 'python', 1, 20.00);
+INSERT INTO `borrow` VALUES (2, 'python', 0, 20.00);
 INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
 INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
 INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
@@ -258,6 +271,11 @@ INSERT INTO `borrow` VALUES (6, '孟子', 0, 15.00);
 INSERT INTO `borrow` VALUES (7, '庄子', 0, 20.00);
 INSERT INTO `borrow` VALUES (8, 'java', 0, 30.00);
 INSERT INTO `borrow` VALUES (9, 'R', 0, 19.00);
+INSERT INTO `borrow` VALUES (10, 'bootstrap', 0, 50.00);
+INSERT INTO `borrow` VALUES (11, '线性代数', 0, 30.00);
+INSERT INTO `borrow` VALUES (12, '概率论', 0, 23.00);
+INSERT INTO `borrow` VALUES (13, '托福', 0, 20.00);
+INSERT INTO `borrow` VALUES (14, 'GMAT', 0, 15.00);
 
 -- ----------------------------
 -- Table structure for borrow_order
@@ -273,7 +291,17 @@ CREATE TABLE `borrow_order`  (
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of borrow_order
+-- ----------------------------
+INSERT INTO `borrow_order` VALUES (39, 2, 1, '2019-05-07 10:23:35', '2019-08-05 10:23:35', '2019-05-07 10:26:40', 1, 10.00);
+INSERT INTO `borrow_order` VALUES (40, 2, 3, '2019-05-07 10:23:35', '2019-08-05 10:23:35', '2019-05-07 10:27:32', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (41, 2, 6, '2019-05-07 10:23:37', '2019-08-05 10:23:37', '2019-05-07 10:49:39', 1, 15.00);
+INSERT INTO `borrow_order` VALUES (42, 12, 4, '2019-05-07 10:46:40', '2019-08-05 10:46:40', '2019-05-07 10:49:40', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (43, 12, 7, '2019-05-07 10:46:40', '2019-08-05 10:46:40', '2019-05-07 10:49:40', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (44, 12, 9, '2019-05-07 10:46:41', '2019-08-05 10:46:41', '2019-05-07 10:49:40', 1, 19.00);
 
 -- ----------------------------
 -- Table structure for borrow_rule
@@ -324,7 +352,24 @@ CREATE TABLE `credit`  (
   `year` year NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`credit_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of credit
+-- ----------------------------
+INSERT INTO `credit` VALUES (0, 5, 1, 2019, 100);
+INSERT INTO `credit` VALUES (0, 6, 2, 2019, 100);
+INSERT INTO `credit` VALUES (0, 7, 2, 2019, 100);
+INSERT INTO `credit` VALUES (0, 8, 3, 2019, 100);
+INSERT INTO `credit` VALUES (0, 9, 4, 2019, 100);
+INSERT INTO `credit` VALUES (0, 10, 5, 2019, 100);
+INSERT INTO `credit` VALUES (0, 11, 8, 2019, 100);
+INSERT INTO `credit` VALUES (0, 12, 11, 2019, 100);
+INSERT INTO `credit` VALUES (0, 13, 12, 2019, 100);
+INSERT INTO `credit` VALUES (0, 14, 12, 2019, 100);
+INSERT INTO `credit` VALUES (0, 15, 13, 2019, 100);
+INSERT INTO `credit` VALUES (0, 16, 13, 2019, 100);
+INSERT INTO `credit` VALUES (0, 17, 13, 2019, 100);
 
 -- ----------------------------
 -- Table structure for cultivate_plan
@@ -342,27 +387,53 @@ CREATE TABLE `cultivate_plan`  (
   `class` int(255) NULL DEFAULT NULL,
   `limit` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`course_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cultivate_plan
 -- ----------------------------
-INSERT INTO `cultivate_plan` VALUES (1, '大数据', 1, 3, 3, 1, '周一下午', 1, 0, 1);
-INSERT INTO `cultivate_plan` VALUES (2, 'Python', 1, 2, 3, 2, '周三上午', 1, 0, 1);
-INSERT INTO `cultivate_plan` VALUES (3, '基础会计', 3, 2, 2, 1, '周一上午', 0, 0, 2);
-INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0, 0, 1);
+INSERT INTO `cultivate_plan` VALUES (1, '大数据', 1, 3, 3, 1, '周一下午', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (2, 'Python', 1, 2, 3, 2, '周三上午', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (3, '基础会计', 3, 2, 2, 1, '周一上午', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (4, '建模', 2, 2, 3, 2, '周五上午', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (5, '税收学', 6, 6, 2, 1, 'xxx', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (6, '市场营销', 4, 3, 2, 1, 'xx', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (7, '人因工程', 7, 4, 2, 2, 'xx', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (8, '商务英语（中美）', 5, 2, 4, 1, 'x', 1, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (9, '经济学', 3, 2, 3, 1, 'xx', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (10, '电子商务', 7, 2, 1, 1, 'x', 0, 1, 1);
+INSERT INTO `cultivate_plan` VALUES (11, '数据库', 1, 3, 2, 1, 'xx', 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for debt_score
 -- ----------------------------
 DROP TABLE IF EXISTS `debt_score`;
 CREATE TABLE `debt_score`  (
-  `stu_id` int(11) NOT NULL,
+  `stu_id` int(11) NULL DEFAULT NULL,
   `stu_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  `rank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`stu_id`) USING BTREE
+  `rank` int(255) NOT NULL,
+  PRIMARY KEY (`rank`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of debt_score
+-- ----------------------------
+INSERT INTO `debt_score` VALUES (8, 'Ben', 170, 1);
+INSERT INTO `debt_score` VALUES (13, 'Bruce', 170, 2);
+INSERT INTO `debt_score` VALUES (6, 'Chris', 169, 3);
+INSERT INTO `debt_score` VALUES (4, 'ljh', 169, 4);
+INSERT INTO `debt_score` VALUES (7, 'Peter', 169, 5);
+INSERT INTO `debt_score` VALUES (2, 'xxc', 166, 6);
+INSERT INTO `debt_score` VALUES (3, 'tjy', 161, 7);
+INSERT INTO `debt_score` VALUES (1, 'yyh', 160, 8);
+INSERT INTO `debt_score` VALUES (5, 'Sam', 160, 9);
+INSERT INTO `debt_score` VALUES (12, 'Bill', 160, 10);
+INSERT INTO `debt_score` VALUES (14, 'Dennis', 155, 11);
+INSERT INTO `debt_score` VALUES (11, 'Arthur', 155, 12);
+INSERT INTO `debt_score` VALUES (9, 'Alice', 155, 13);
+INSERT INTO `debt_score` VALUES (15, 'Gabriel', 155, 14);
+INSERT INTO `debt_score` VALUES (10, 'Adam', 149, 15);
 
 -- ----------------------------
 -- Table structure for django_admin_log
@@ -480,7 +551,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'ZmQzNmIzMWIzYmUxZDFmZDUxYTY0ZWYzZjkwM2E2MzgxMjg2ZDViOTp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieHhjIiwic3R1X2lkIjoyLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-20 20:02:10.889429');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-05-21 18:38:55.066791');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -512,7 +583,16 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of job_certification
+-- ----------------------------
+INSERT INTO `job_certification` VALUES (1, 1, 25, '会计', 40);
+INSERT INTO `job_certification` VALUES (1, 3, 27, '前台', 60);
+INSERT INTO `job_certification` VALUES (1, 4, 29, '数据分析师', 90);
+INSERT INTO `job_certification` VALUES (1, 6, 32, '产品助理', 90);
+INSERT INTO `job_certification` VALUES (1, 7, 35, '会计', 90);
 
 -- ----------------------------
 -- Table structure for labor_score
@@ -522,9 +602,28 @@ CREATE TABLE `labor_score`  (
   `stu_id` int(11) NOT NULL,
   `stu_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
-  `rank` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`stu_id`) USING BTREE
+  `rank` int(255) NOT NULL,
+  PRIMARY KEY (`rank`, `stu_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of labor_score
+-- ----------------------------
+INSERT INTO `labor_score` VALUES (6, 'Chris', 159, 1);
+INSERT INTO `labor_score` VALUES (4, 'ljh', 159, 2);
+INSERT INTO `labor_score` VALUES (7, 'Peter', 158, 3);
+INSERT INTO `labor_score` VALUES (3, 'tjy', 152, 4);
+INSERT INTO `labor_score` VALUES (1, 'yyh', 150, 5);
+INSERT INTO `labor_score` VALUES (8, 'Ben', 142, 6);
+INSERT INTO `labor_score` VALUES (2, 'xxc', 142, 7);
+INSERT INTO `labor_score` VALUES (12, 'Bill', 141, 8);
+INSERT INTO `labor_score` VALUES (5, 'Sam', 140, 9);
+INSERT INTO `labor_score` VALUES (13, 'Bruce', 140, 10);
+INSERT INTO `labor_score` VALUES (11, 'Arthur', 139, 11);
+INSERT INTO `labor_score` VALUES (14, 'Dennis', 139, 12);
+INSERT INTO `labor_score` VALUES (15, 'Gabriel', 138, 13);
+INSERT INTO `labor_score` VALUES (9, 'Alice', 138, 14);
+INSERT INTO `labor_score` VALUES (10, 'Adam', 137, 15);
 
 -- ----------------------------
 -- Table structure for major
@@ -534,7 +633,7 @@ CREATE TABLE `major`  (
   `major_id` int(11) NOT NULL AUTO_INCREMENT,
   `major_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`major_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of major
@@ -542,6 +641,11 @@ CREATE TABLE `major`  (
 INSERT INTO `major` VALUES (1, '信管');
 INSERT INTO `major` VALUES (2, '管科');
 INSERT INTO `major` VALUES (3, '会计');
+INSERT INTO `major` VALUES (4, '工商');
+INSERT INTO `major` VALUES (5, '工商（中美合作）');
+INSERT INTO `major` VALUES (6, '税收');
+INSERT INTO `major` VALUES (7, '工业工程');
+INSERT INTO `major` VALUES (8, '电子商务');
 
 -- ----------------------------
 -- Table structure for orders
@@ -559,7 +663,13 @@ CREATE TABLE `orders`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE,
   INDEX `buyer_id`(`buyer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (4, 9, 10, 87, 100, 6999, 1, 1);
+INSERT INTO `orders` VALUES (5, 11, 10, 87, 100, 2699, 1, 3);
 
 -- ----------------------------
 -- Table structure for pen_appeal
@@ -587,7 +697,14 @@ CREATE TABLE `penalty`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `teacher_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_pen_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of penalty
+-- ----------------------------
+INSERT INTO `penalty` VALUES (18, '丢书', 39, 10, NULL, NULL, 2, NULL);
+INSERT INTO `penalty` VALUES (19, '丢书', 40, 20, NULL, NULL, 2, NULL);
+INSERT INTO `penalty` VALUES (20, '丢书', 40, 20, NULL, NULL, 2, NULL);
 
 -- ----------------------------
 -- Table structure for products
@@ -603,7 +720,16 @@ CREATE TABLE `products`  (
   `status` int(255) NULL DEFAULT NULL,
   `paid` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of products
+-- ----------------------------
+INSERT INTO `products` VALUES (9, 'iphone XR', 8999, 6999, 1, '南校', 1, 1);
+INSERT INTO `products` VALUES (10, 'ipad', 2999, 800, 3, '南校', 1, 0);
+INSERT INTO `products` VALUES (11, '笔记本电脑', 5699, 2699, 3, '教超', 1, 1);
+INSERT INTO `products` VALUES (12, '笔记本电脑', 2999, 800, 7, '南校', 1, 0);
+INSERT INTO `products` VALUES (13, '书籍', 99, 90, 13, '南校', 1, 0);
 
 -- ----------------------------
 -- Table structure for rules
@@ -614,14 +740,25 @@ CREATE TABLE `rules`  (
   `rule_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `score` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`rule_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rules
 -- ----------------------------
-INSERT INTO `rules` VALUES (1, 'A类期刊', 10);
+INSERT INTO `rules` VALUES (1, 'A类期刊一作', 10);
 INSERT INTO `rules` VALUES (2, '志愿者', 1);
 INSERT INTO `rules` VALUES (3, '学生会会长', 5);
+INSERT INTO `rules` VALUES (4, '学生会部员', 3);
+INSERT INTO `rules` VALUES (5, 'B类期刊一作', 8);
+INSERT INTO `rules` VALUES (6, 'A类期刊二作', 9);
+INSERT INTO `rules` VALUES (7, 'B类期刊二作', 7);
+INSERT INTO `rules` VALUES (8, '国家类奖励', 15);
+INSERT INTO `rules` VALUES (9, '市级奖励', 10);
+INSERT INTO `rules` VALUES (10, '英语四级', 3);
+INSERT INTO `rules` VALUES (11, '英语6级', 5);
+INSERT INTO `rules` VALUES (12, '口笔译', 5);
+INSERT INTO `rules` VALUES (13, '普通话等级', 1);
+INSERT INTO `rules` VALUES (14, '人力资源', 3);
 
 -- ----------------------------
 -- Table structure for scholarship
@@ -633,7 +770,14 @@ CREATE TABLE `scholarship`  (
   `status` int(255) NULL DEFAULT NULL,
   `money` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`sch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of scholarship
+-- ----------------------------
+INSERT INTO `scholarship` VALUES (7, 13, 1, 1000);
+INSERT INTO `scholarship` VALUES (8, 8, 1, 700);
+INSERT INTO `scholarship` VALUES (9, 2, 1, 400);
 
 -- ----------------------------
 -- Table structure for sep_score
@@ -646,7 +790,131 @@ CREATE TABLE `sep_score`  (
   `score` int(255) NULL DEFAULT NULL,
   `rank` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`sep_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 353 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 833 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sep_score
+-- ----------------------------
+INSERT INTO `sep_score` VALUES (713, 'stu_scholarship', 13, 200, 1);
+INSERT INTO `sep_score` VALUES (714, 'stu_scholarship', 8, 170, 2);
+INSERT INTO `sep_score` VALUES (715, 'stu_scholarship', 2, 140, 3);
+INSERT INTO `sep_score` VALUES (716, 'stu_scholarship', 1, 100, 4);
+INSERT INTO `sep_score` VALUES (717, 'stu_scholarship', 3, 100, 5);
+INSERT INTO `sep_score` VALUES (718, 'stu_scholarship', 4, 100, 6);
+INSERT INTO `sep_score` VALUES (719, 'stu_scholarship', 5, 100, 7);
+INSERT INTO `sep_score` VALUES (720, 'stu_scholarship', 6, 100, 8);
+INSERT INTO `sep_score` VALUES (721, 'stu_scholarship', 7, 100, 9);
+INSERT INTO `sep_score` VALUES (722, 'stu_scholarship', 9, 100, 10);
+INSERT INTO `sep_score` VALUES (723, 'stu_scholarship', 10, 100, 11);
+INSERT INTO `sep_score` VALUES (724, 'stu_scholarship', 11, 100, 12);
+INSERT INTO `sep_score` VALUES (725, 'stu_scholarship', 12, 100, 13);
+INSERT INTO `sep_score` VALUES (726, 'stu_scholarship', 14, 100, 14);
+INSERT INTO `sep_score` VALUES (727, 'stu_scholarship', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (728, 'stu_gpa', 13, 176, 1);
+INSERT INTO `sep_score` VALUES (729, 'stu_gpa', 8, 175, 2);
+INSERT INTO `sep_score` VALUES (730, 'stu_gpa', 2, 172, 3);
+INSERT INTO `sep_score` VALUES (731, 'stu_gpa', 1, 169, 4);
+INSERT INTO `sep_score` VALUES (732, 'stu_gpa', 11, 167, 5);
+INSERT INTO `sep_score` VALUES (733, 'stu_gpa', 14, 165, 6);
+INSERT INTO `sep_score` VALUES (734, 'stu_gpa', 12, 163, 7);
+INSERT INTO `sep_score` VALUES (735, 'stu_gpa', 4, 161, 8);
+INSERT INTO `sep_score` VALUES (736, 'stu_gpa', 15, 161, 9);
+INSERT INTO `sep_score` VALUES (737, 'stu_gpa', 6, 159, 10);
+INSERT INTO `sep_score` VALUES (738, 'stu_gpa', 3, 157, 11);
+INSERT INTO `sep_score` VALUES (739, 'stu_gpa', 9, 155, 12);
+INSERT INTO `sep_score` VALUES (740, 'stu_gpa', 5, 153, 13);
+INSERT INTO `sep_score` VALUES (741, 'stu_gpa', 7, 153, 14);
+INSERT INTO `sep_score` VALUES (742, 'stu_gpa', 10, 150, 15);
+INSERT INTO `sep_score` VALUES (743, 'stu_paper', 1, 115, 1);
+INSERT INTO `sep_score` VALUES (744, 'stu_paper', 5, 105, 2);
+INSERT INTO `sep_score` VALUES (745, 'stu_paper', 6, 105, 3);
+INSERT INTO `sep_score` VALUES (746, 'stu_paper', 10, 104, 4);
+INSERT INTO `sep_score` VALUES (747, 'stu_paper', 14, 103, 5);
+INSERT INTO `sep_score` VALUES (748, 'stu_paper', 3, 101, 6);
+INSERT INTO `sep_score` VALUES (749, 'stu_paper', 11, 101, 7);
+INSERT INTO `sep_score` VALUES (750, 'stu_paper', 2, 100, 8);
+INSERT INTO `sep_score` VALUES (751, 'stu_paper', 4, 100, 9);
+INSERT INTO `sep_score` VALUES (752, 'stu_paper', 7, 100, 10);
+INSERT INTO `sep_score` VALUES (753, 'stu_paper', 8, 100, 11);
+INSERT INTO `sep_score` VALUES (754, 'stu_paper', 9, 100, 12);
+INSERT INTO `sep_score` VALUES (755, 'stu_paper', 12, 100, 13);
+INSERT INTO `sep_score` VALUES (756, 'stu_paper', 13, 100, 14);
+INSERT INTO `sep_score` VALUES (757, 'stu_paper', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (758, 'stu_job', 4, 140, 1);
+INSERT INTO `sep_score` VALUES (759, 'stu_job', 6, 140, 2);
+INSERT INTO `sep_score` VALUES (760, 'stu_job', 7, 140, 3);
+INSERT INTO `sep_score` VALUES (761, 'stu_job', 3, 110, 4);
+INSERT INTO `sep_score` VALUES (762, 'stu_job', 1, 90, 5);
+INSERT INTO `sep_score` VALUES (763, 'stu_job', 2, 50, 6);
+INSERT INTO `sep_score` VALUES (764, 'stu_job', 5, 50, 7);
+INSERT INTO `sep_score` VALUES (765, 'stu_job', 8, 50, 8);
+INSERT INTO `sep_score` VALUES (766, 'stu_job', 9, 50, 9);
+INSERT INTO `sep_score` VALUES (767, 'stu_job', 10, 50, 10);
+INSERT INTO `sep_score` VALUES (768, 'stu_job', 11, 50, 11);
+INSERT INTO `sep_score` VALUES (769, 'stu_job', 12, 50, 12);
+INSERT INTO `sep_score` VALUES (770, 'stu_job', 13, 50, 13);
+INSERT INTO `sep_score` VALUES (771, 'stu_job', 14, 50, 14);
+INSERT INTO `sep_score` VALUES (772, 'stu_job', 15, 50, 15);
+INSERT INTO `sep_score` VALUES (773, 'stu_cheat', 1, 200, 1);
+INSERT INTO `sep_score` VALUES (774, 'stu_cheat', 2, 200, 2);
+INSERT INTO `sep_score` VALUES (775, 'stu_cheat', 3, 200, 3);
+INSERT INTO `sep_score` VALUES (776, 'stu_cheat', 4, 200, 4);
+INSERT INTO `sep_score` VALUES (777, 'stu_cheat', 5, 200, 5);
+INSERT INTO `sep_score` VALUES (778, 'stu_cheat', 6, 200, 6);
+INSERT INTO `sep_score` VALUES (779, 'stu_cheat', 7, 200, 7);
+INSERT INTO `sep_score` VALUES (780, 'stu_cheat', 8, 200, 8);
+INSERT INTO `sep_score` VALUES (781, 'stu_cheat', 9, 200, 9);
+INSERT INTO `sep_score` VALUES (782, 'stu_cheat', 10, 200, 10);
+INSERT INTO `sep_score` VALUES (783, 'stu_cheat', 11, 200, 11);
+INSERT INTO `sep_score` VALUES (784, 'stu_cheat', 12, 200, 12);
+INSERT INTO `sep_score` VALUES (785, 'stu_cheat', 13, 200, 13);
+INSERT INTO `sep_score` VALUES (786, 'stu_cheat', 14, 200, 14);
+INSERT INTO `sep_score` VALUES (787, 'stu_cheat', 15, 200, 15);
+INSERT INTO `sep_score` VALUES (788, 'stu_c', 2, 200, 1);
+INSERT INTO `sep_score` VALUES (789, 'stu_c', 4, 200, 2);
+INSERT INTO `sep_score` VALUES (790, 'stu_c', 5, 200, 3);
+INSERT INTO `sep_score` VALUES (791, 'stu_c', 6, 200, 4);
+INSERT INTO `sep_score` VALUES (792, 'stu_c', 7, 200, 5);
+INSERT INTO `sep_score` VALUES (793, 'stu_c', 8, 200, 6);
+INSERT INTO `sep_score` VALUES (794, 'stu_c', 9, 200, 7);
+INSERT INTO `sep_score` VALUES (795, 'stu_c', 11, 200, 8);
+INSERT INTO `sep_score` VALUES (796, 'stu_c', 12, 200, 9);
+INSERT INTO `sep_score` VALUES (797, 'stu_c', 13, 200, 10);
+INSERT INTO `sep_score` VALUES (798, 'stu_c', 14, 200, 11);
+INSERT INTO `sep_score` VALUES (799, 'stu_c', 15, 200, 12);
+INSERT INTO `sep_score` VALUES (800, 'stu_c', 1, 100, 13);
+INSERT INTO `sep_score` VALUES (801, 'stu_c', 3, 100, 14);
+INSERT INTO `sep_score` VALUES (802, 'stu_c', 10, 87, 15);
+INSERT INTO `sep_score` VALUES (803, 'stu_credit', 1, 100, 1);
+INSERT INTO `sep_score` VALUES (804, 'stu_credit', 2, 100, 2);
+INSERT INTO `sep_score` VALUES (805, 'stu_credit', 3, 100, 3);
+INSERT INTO `sep_score` VALUES (806, 'stu_credit', 4, 100, 4);
+INSERT INTO `sep_score` VALUES (807, 'stu_credit', 5, 100, 5);
+INSERT INTO `sep_score` VALUES (808, 'stu_credit', 6, 100, 6);
+INSERT INTO `sep_score` VALUES (809, 'stu_credit', 7, 100, 7);
+INSERT INTO `sep_score` VALUES (810, 'stu_credit', 8, 100, 8);
+INSERT INTO `sep_score` VALUES (811, 'stu_credit', 9, 100, 9);
+INSERT INTO `sep_score` VALUES (812, 'stu_credit', 10, 100, 10);
+INSERT INTO `sep_score` VALUES (813, 'stu_credit', 11, 100, 11);
+INSERT INTO `sep_score` VALUES (814, 'stu_credit', 12, 100, 12);
+INSERT INTO `sep_score` VALUES (815, 'stu_credit', 13, 100, 13);
+INSERT INTO `sep_score` VALUES (816, 'stu_credit', 14, 100, 14);
+INSERT INTO `sep_score` VALUES (817, 'stu_credit', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (818, 'stu_penalty', 1, 200, 1);
+INSERT INTO `sep_score` VALUES (819, 'stu_penalty', 2, 200, 2);
+INSERT INTO `sep_score` VALUES (820, 'stu_penalty', 3, 200, 3);
+INSERT INTO `sep_score` VALUES (821, 'stu_penalty', 4, 200, 4);
+INSERT INTO `sep_score` VALUES (822, 'stu_penalty', 5, 200, 5);
+INSERT INTO `sep_score` VALUES (823, 'stu_penalty', 6, 200, 6);
+INSERT INTO `sep_score` VALUES (824, 'stu_penalty', 7, 200, 7);
+INSERT INTO `sep_score` VALUES (825, 'stu_penalty', 8, 200, 8);
+INSERT INTO `sep_score` VALUES (826, 'stu_penalty', 9, 200, 9);
+INSERT INTO `sep_score` VALUES (827, 'stu_penalty', 10, 200, 10);
+INSERT INTO `sep_score` VALUES (828, 'stu_penalty', 11, 200, 11);
+INSERT INTO `sep_score` VALUES (829, 'stu_penalty', 12, 200, 12);
+INSERT INTO `sep_score` VALUES (830, 'stu_penalty', 13, 200, 13);
+INSERT INTO `sep_score` VALUES (831, 'stu_penalty', 14, 200, 14);
+INSERT INTO `sep_score` VALUES (832, 'stu_penalty', 15, 200, 15);
 
 -- ----------------------------
 -- Table structure for student
@@ -657,22 +925,33 @@ CREATE TABLE `student`  (
   `stu_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `stu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `stu_year` year NULL DEFAULT NULL,
-  `major_id` int(255) NULL DEFAULT NULL,
+  `major_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `money` int(255) NULL DEFAULT NULL,
   `stu_edu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `bed_id` int(255) NULL DEFAULT NULL,
   `dorm_id` int(255) NULL DEFAULT NULL,
   `instructor_id` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, 1, 100, '本科', 101, 1, 1);
-INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, 1, 100, '本科', 201, 2, 1);
-INSERT INTO `student` VALUES (3, '000', 'tjy', 2015, 1, 100, '本科', 102, 1, 1);
-INSERT INTO `student` VALUES (4, '000', 'ljh', 2015, 1, 100, '本科', 202, 2, 1);
+INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, '1', 7099, '本科', 101, 1, 1);
+INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, '1', 450, '本科', 201, 2, 1);
+INSERT INTO `student` VALUES (3, '000', 'tjy', 2015, '1', 2799, '本科', 102, 1, 1);
+INSERT INTO `student` VALUES (4, '000', 'ljh', 2015, '1', 100, '本科', 202, 2, 1);
+INSERT INTO `student` VALUES (5, '000', 'Sam', 2015, '2', 100, '本科', NULL, NULL, 1);
+INSERT INTO `student` VALUES (6, '000', 'Chris', 2015, '2', 100, '本科', NULL, NULL, 2);
+INSERT INTO `student` VALUES (7, '000', 'Peter', 2015, NULL, 100, '本科', NULL, NULL, 2);
+INSERT INTO `student` VALUES (8, '000', 'Ben', 2015, NULL, 800, '本科', NULL, NULL, 2);
+INSERT INTO `student` VALUES (9, '000', 'Alice', 2016, NULL, 100, '本科', NULL, NULL, 3);
+INSERT INTO `student` VALUES (10, '000', 'Adam', 2016, NULL, -9598, '本科', NULL, NULL, 1);
+INSERT INTO `student` VALUES (11, '000', 'Arthur', 2016, NULL, 100, '本科', NULL, NULL, 2);
+INSERT INTO `student` VALUES (12, '000', 'Bill', 2015, NULL, 100, '本科', NULL, NULL, 3);
+INSERT INTO `student` VALUES (13, '000', 'Bruce', 2016, NULL, 1100, '本科', NULL, NULL, 3);
+INSERT INTO `student` VALUES (14, '000', 'Dennis', 2016, NULL, 100, '本科', NULL, NULL, 1);
+INSERT INTO `student` VALUES (15, '000', 'Gabriel', 2016, NULL, 100, '本科', NULL, NULL, 3);
 
 -- ----------------------------
 -- Table structure for student_choice
@@ -686,7 +965,71 @@ CREATE TABLE `student_choice`  (
   `course_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of student_choice
+-- ----------------------------
+INSERT INTO `student_choice` VALUES (29, 33, 80, 1, 1, 0);
+INSERT INTO `student_choice` VALUES (30, 34, 85, 1, 3, 0);
+INSERT INTO `student_choice` VALUES (31, 35, 78, 1, 2, 0);
+INSERT INTO `student_choice` VALUES (32, 37, 95, 1, 4, 1);
+INSERT INTO `student_choice` VALUES (33, 33, 90, 2, 1, 1);
+INSERT INTO `student_choice` VALUES (34, 34, 98, 2, 3, 1);
+INSERT INTO `student_choice` VALUES (35, 35, 70, 2, 2, 0);
+INSERT INTO `student_choice` VALUES (36, 39, 87, 2, 9, 0);
+INSERT INTO `student_choice` VALUES (37, 43, 89, 3, 11, 0);
+INSERT INTO `student_choice` VALUES (38, 42, 66, 3, 10, 0);
+INSERT INTO `student_choice` VALUES (39, 40, 100, 3, 5, 1);
+INSERT INTO `student_choice` VALUES (40, 38, 60, 3, 7, 0);
+INSERT INTO `student_choice` VALUES (41, 36, 88, 4, 6, 0);
+INSERT INTO `student_choice` VALUES (42, 37, 92, 4, 4, 1);
+INSERT INTO `student_choice` VALUES (43, 38, 65, 4, 7, 0);
+INSERT INTO `student_choice` VALUES (44, 39, 78, 4, 9, 0);
+INSERT INTO `student_choice` VALUES (45, 39, 90, 5, 9, 1);
+INSERT INTO `student_choice` VALUES (46, 38, 80, 5, 7, 0);
+INSERT INTO `student_choice` VALUES (47, 41, 50, 5, 8, 0);
+INSERT INTO `student_choice` VALUES (48, 42, 87, 5, 10, 0);
+INSERT INTO `student_choice` VALUES (49, 35, 88, 6, 2, 0);
+INSERT INTO `student_choice` VALUES (50, 34, 66, 6, 3, 0);
+INSERT INTO `student_choice` VALUES (51, 38, 78, 6, 7, 0);
+INSERT INTO `student_choice` VALUES (52, 40, 87, 6, 5, 0);
+INSERT INTO `student_choice` VALUES (53, 33, 60, 7, 1, 0);
+INSERT INTO `student_choice` VALUES (54, 35, 78, 7, 2, 0);
+INSERT INTO `student_choice` VALUES (55, 43, 86, 7, 11, 0);
+INSERT INTO `student_choice` VALUES (56, 40, 83, 7, 5, 0);
+INSERT INTO `student_choice` VALUES (57, 34, 83, 8, 3, 0);
+INSERT INTO `student_choice` VALUES (58, 38, 87, 8, 7, 0);
+INSERT INTO `student_choice` VALUES (59, 33, 89, 8, 1, 0);
+INSERT INTO `student_choice` VALUES (60, 40, 91, 8, 5, 1);
+INSERT INTO `student_choice` VALUES (61, 34, 96, 9, 3, 0);
+INSERT INTO `student_choice` VALUES (62, 38, 70, 9, 7, 0);
+INSERT INTO `student_choice` VALUES (63, 41, 78, 9, 8, 0);
+INSERT INTO `student_choice` VALUES (64, 39, 66, 9, 9, 0);
+INSERT INTO `student_choice` VALUES (65, 39, 70, 10, 9, 0);
+INSERT INTO `student_choice` VALUES (66, 40, 87, 10, 5, 0);
+INSERT INTO `student_choice` VALUES (67, 34, 78, 10, 3, 0);
+INSERT INTO `student_choice` VALUES (68, 43, 66, 10, 11, 0);
+INSERT INTO `student_choice` VALUES (69, 34, 90, 11, 3, 1);
+INSERT INTO `student_choice` VALUES (70, 35, 87, 11, 2, 0);
+INSERT INTO `student_choice` VALUES (71, 41, 80, 11, 8, 0);
+INSERT INTO `student_choice` VALUES (72, 42, 78, 11, 10, 0);
+INSERT INTO `student_choice` VALUES (73, 35, 90, 12, 2, 1);
+INSERT INTO `student_choice` VALUES (74, 36, 99, 12, 6, 1);
+INSERT INTO `student_choice` VALUES (75, 37, 78, 12, 4, 0);
+INSERT INTO `student_choice` VALUES (76, 38, 60, 12, 7, 0);
+INSERT INTO `student_choice` VALUES (77, 39, 96, 13, 9, 1);
+INSERT INTO `student_choice` VALUES (78, 41, 95, 13, 8, 1);
+INSERT INTO `student_choice` VALUES (79, 40, 96, 13, 5, 1);
+INSERT INTO `student_choice` VALUES (80, 42, 66, 13, 10, 0);
+INSERT INTO `student_choice` VALUES (81, 35, 76, 14, 2, 0);
+INSERT INTO `student_choice` VALUES (82, 36, 83, 14, 6, 0);
+INSERT INTO `student_choice` VALUES (83, 38, 87, 14, 7, 0);
+INSERT INTO `student_choice` VALUES (84, 39, 85, 14, 9, 0);
+INSERT INTO `student_choice` VALUES (85, 41, 86, 15, 8, 0);
+INSERT INTO `student_choice` VALUES (86, 42, 83, 15, 10, 0);
+INSERT INTO `student_choice` VALUES (87, 39, 88, 15, 9, 0);
+INSERT INTO `student_choice` VALUES (88, 37, 65, 15, 4, 0);
 
 -- ----------------------------
 -- Table structure for teacher
@@ -698,12 +1041,15 @@ CREATE TABLE `teacher`  (
   `major_id` int(255) NULL DEFAULT NULL,
   `tea_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`tea_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
 INSERT INTO `teacher` VALUES (1, 'zxd', 1, '000');
+INSERT INTO `teacher` VALUES (2, 'nj', 1, '000');
+INSERT INTO `teacher` VALUES (3, 'lc', 1, '000');
+INSERT INTO `teacher` VALUES (4, 'yp', 1, '000');
 
 -- ----------------------------
 -- Table structure for teacher_choice
@@ -718,6 +1064,21 @@ CREATE TABLE `teacher_choice`  (
   `time` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `certification` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of teacher_choice
+-- ----------------------------
+INSERT INTO `teacher_choice` VALUES (33, 3, 1, 2019, 0, '周一下午', 1);
+INSERT INTO `teacher_choice` VALUES (34, 3, 3, 2019, 0, '周一上午', 0);
+INSERT INTO `teacher_choice` VALUES (35, 3, 2, 2019, 0, '周三上午', 1);
+INSERT INTO `teacher_choice` VALUES (36, 3, 6, 2019, 0, 'xx', 0);
+INSERT INTO `teacher_choice` VALUES (37, 2, 4, 2019, 0, '周五上午', 0);
+INSERT INTO `teacher_choice` VALUES (38, 2, 7, 2019, 0, 'xx', 0);
+INSERT INTO `teacher_choice` VALUES (39, 2, 9, 2019, 0, 'xx', 0);
+INSERT INTO `teacher_choice` VALUES (40, 1, 5, 2019, 0, 'xxx', 1);
+INSERT INTO `teacher_choice` VALUES (41, 1, 8, 2019, 0, 'x', 1);
+INSERT INTO `teacher_choice` VALUES (42, 1, 10, 2019, 0, 'x', 0);
+INSERT INTO `teacher_choice` VALUES (43, 1, 11, 2019, 0, 'xx', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
