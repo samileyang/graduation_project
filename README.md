@@ -9,7 +9,8 @@
 | Mysql | 5.7 |
 
 ## 启动方式  
-_for windows_ 找到`manage.py`根目录  
+_for windows_   
+找到`manage.py`根目录  
 输入`cmd`  
 随后输入 `python manage.py runserver`  
 __注意__ 修改`settings.py`中的数据库属性  
