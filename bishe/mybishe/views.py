@@ -3,10 +3,7 @@ from mybishe import models
 from django.db.models import F
 import datetime
 from django.db.models import Sum,Count,Max,Min,Avg
-import inspect
-import re
-import matplotlib.pyplot as plt # plt 用于显示图片
-import matplotlib.image as mpimg # mpimg 用于读取图片
+import matplotlib.pyplot as plt
 import numpy as np
 # Create your views here.
 def stu_info(request):
@@ -688,11 +685,6 @@ def sorted_rank(yourlist):
         newlist[i].append(i+1)
     return newlist
 
-def varname(p):
-    for line in inspect.getframeinfo(inspect.currentframe().f_back)[3]:
-        m = re.search(r'\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)', line)
-        if m:
-            return m.group(1)
 
 def labor_score(request):
 	if request.method == 'GET':
