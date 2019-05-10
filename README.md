@@ -15,6 +15,14 @@ _for windows_
 随后输入 `python manage.py runserver`  
 __注意__ 修改`settings.py`中的数据库属性  
 
+## 涉及的Python包  
+1. `datetime`  
+2. `django.db.models`中的`Sum`、`Count`、`Avg`、`F`  
+3. `matplotlib`  
+4. `numpy`  
+5. `django`  
+建议使用Anaconda的内置Python   
+
 ## 系统组成  
 1. 教务系统  
 2. 图书馆管理系统  
