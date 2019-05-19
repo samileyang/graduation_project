@@ -42,7 +42,6 @@ urlpatterns = [
     url(r'^instructor_login/',views.instructor_login),
     url(r'^teacher_choose_order/',views.teacher_choose_order),
     url(r'^stu_choose_order/',views.stu_choose_order),
-    url(r'^stu_delete_order/',views.stu_delete_order),
     url(r'^stu_borrow_order/',views.stu_borrow_order),
     url(r'^stu_book_return/',views.stu_book_return),
     url(r'^book_lost/',views.book_lost),
@@ -77,5 +76,5 @@ urlpatterns = [
     url(r'^debt_score/',views.debt_score),
     url(r'^debt_index/',views.debt_index),
     url(r'^stu_index/',views.show_photo),
-    
+    url(r'^stu_course_delete/',views.stu_course_delete),
 ]

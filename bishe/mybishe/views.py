@@ -255,15 +255,6 @@ def stu_choose_order(request):
 	courses = models.TeacherChoice.objects.all()
 	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
 
-def stu_delete_order(request):
-	models.StudentChoice.objects.get(teacher_choice_id = request.GET.get('teacher_choice_id',None)).delete()
-	students = models.StudentChoice.objects.filter(stu_id=request.session.get("stu_id"))
-	stu_list = []
-	for student in students:
-		stu_list.append(student.course_id)
-	courses = models.TeacherChoice.objects.all()
-	return render(request,'student/stu_choose_course.html',{'courses':courses,'stu_list':stu_list})
-
 def stu_job_certification(request):
 	if request.method == 'GET':
 		return render(request,'student/stu_job_certification.html')
@@ -325,6 +316,12 @@ def pay_penalty(request):
 	return render(request,'student/stu_pay_penalty.html',{'penaltys':penaltys})	
 
 def stu_course(request):
+	stu_id = request.session.get('stu_id')
+	courses = models.StudentChoice.objects.filter(stu_id = stu_id)
+	return render(request,'student/stu_course.html',{'courses':courses})
+
+def stu_course_delete(request):
+	models.StudentChoice.objects.get(student_choice_id = request.GET.get('student_choice_id',None)).delete()
 	stu_id = request.session.get('stu_id')
 	courses = models.StudentChoice.objects.filter(stu_id = stu_id)
 	return render(request,'student/stu_course.html',{'courses':courses})
