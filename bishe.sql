@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 19/05/2019 21:47:06
+ Date: 20/05/2019 20:30:21
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `add_credit_order`  (
   `rule_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   PRIMARY KEY (`add_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of add_credit_order
@@ -44,6 +44,8 @@ INSERT INTO `add_credit_order` VALUES (12, 10, 14, 3, 1, '人力资源', 'qwdqdw
 INSERT INTO `add_credit_order` VALUES (13, 10, 2, 1, 1, '志愿者', 'qwdqdwqd');
 INSERT INTO `add_credit_order` VALUES (14, 11, 2, 1, 1, '志愿者', 'qwdqdwqd');
 INSERT INTO `add_credit_order` VALUES (15, 14, 4, 3, 1, '学生会部员', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (16, 10, 2, 1, 0, '志愿者', 'qwdqdwqd');
+INSERT INTO `add_credit_order` VALUES (17, 8, 11, 5, 0, '英语6级', 'qwdqdwqd');
 
 -- ----------------------------
 -- Table structure for auth_group
@@ -265,14 +267,14 @@ CREATE TABLE `borrow`  (
 INSERT INTO `borrow` VALUES (1, '高等数学', 1, 10.00);
 INSERT INTO `borrow` VALUES (2, 'python', 1, 20.00);
 INSERT INTO `borrow` VALUES (3, 'SQL', 1, 20.00);
-INSERT INTO `borrow` VALUES (4, '百年孤独', 0, 20.00);
+INSERT INTO `borrow` VALUES (4, '百年孤独', 1, 20.00);
 INSERT INTO `borrow` VALUES (5, '论语', 0, 15.00);
 INSERT INTO `borrow` VALUES (6, '孟子', 0, 15.00);
 INSERT INTO `borrow` VALUES (7, '庄子', 0, 20.00);
 INSERT INTO `borrow` VALUES (8, 'java', 0, 30.00);
 INSERT INTO `borrow` VALUES (9, 'R', 0, 19.00);
-INSERT INTO `borrow` VALUES (10, 'bootstrap', 0, 50.00);
-INSERT INTO `borrow` VALUES (11, '线性代数', 0, 30.00);
+INSERT INTO `borrow` VALUES (10, 'bootstrap', 1, 50.00);
+INSERT INTO `borrow` VALUES (11, '线性代数', 1, 30.00);
 INSERT INTO `borrow` VALUES (12, '概率论', 0, 23.00);
 INSERT INTO `borrow` VALUES (13, '托福', 0, 20.00);
 INSERT INTO `borrow` VALUES (14, 'GMAT', 0, 15.00);
@@ -291,7 +293,7 @@ CREATE TABLE `borrow_order`  (
   `return_status` int(255) NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`borrow_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of borrow_order
@@ -304,6 +306,11 @@ INSERT INTO `borrow_order` VALUES (43, 12, 7, '2019-05-07 10:46:40', '2019-08-05
 INSERT INTO `borrow_order` VALUES (44, 12, 9, '2019-05-07 10:46:41', '2019-08-05 10:46:41', '2019-05-07 10:49:40', 1, 19.00);
 INSERT INTO `borrow_order` VALUES (45, 1, 2, '2019-05-19 11:03:03', '2019-08-17 11:03:03', '2019-05-19 11:03:18', 1, 20.00);
 INSERT INTO `borrow_order` VALUES (46, 1, 4, '2019-05-19 11:06:05', '2019-05-17 11:06:05', '2019-05-19 11:07:50', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (47, 1, 4, '2019-05-20 15:13:18', '2019-08-18 15:13:18', '2019-05-20 15:13:30', 1, 20.00);
+INSERT INTO `borrow_order` VALUES (48, 2, 6, '2019-05-20 15:28:35', '2019-08-18 15:28:35', '2019-05-20 15:28:48', 1, 15.00);
+INSERT INTO `borrow_order` VALUES (49, 1, 5, '2019-05-20 15:59:16', '2019-05-18 15:59:16', '2019-05-20 15:59:56', 1, 15.00);
+INSERT INTO `borrow_order` VALUES (50, 8, 10, '2019-05-20 20:20:39', '2019-08-18 20:20:39', NULL, 0, 50.00);
+INSERT INTO `borrow_order` VALUES (51, 8, 11, '2019-05-20 20:20:41', '2019-08-18 20:20:41', NULL, 0, 30.00);
 
 -- ----------------------------
 -- Table structure for borrow_rule
@@ -426,8 +433,8 @@ INSERT INTO `debt_score` VALUES (13, 'Bruce', 170, 2);
 INSERT INTO `debt_score` VALUES (6, 'Chris', 169, 3);
 INSERT INTO `debt_score` VALUES (4, 'ljh', 169, 4);
 INSERT INTO `debt_score` VALUES (7, 'Peter', 169, 5);
-INSERT INTO `debt_score` VALUES (2, 'xxc', 166, 6);
-INSERT INTO `debt_score` VALUES (3, 'tjy', 161, 7);
+INSERT INTO `debt_score` VALUES (3, 'tjy', 161, 6);
+INSERT INTO `debt_score` VALUES (2, 'xxc', 161, 7);
 INSERT INTO `debt_score` VALUES (1, 'yyh', 160, 8);
 INSERT INTO `debt_score` VALUES (5, 'Sam', 160, 9);
 INSERT INTO `debt_score` VALUES (12, 'Bill', 160, 10);
@@ -553,7 +560,7 @@ INSERT INTO `django_session` VALUES ('8akuwfn5lw0c4na5ykkwj8y8lxsusd5t', 'ZmUzMD
 INSERT INTO `django_session` VALUES ('a6gnwg09qll5vglulkmzgidb1sb5fk1a', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 08:12:45.467745');
 INSERT INTO `django_session` VALUES ('gkvnkxpy9iyox5mhfpy6r2kztsurc3zo', 'Njk4OTlmN2FjMjNiZWQxY2M2Yjk1MzA2YTYxZTExNDIwYzk5NDBhNjp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjF9', '2019-04-16 13:20:52.550860');
 INSERT INTO `django_session` VALUES ('no5bn0hmjdz4uj5lkthglhny0h9mvsb8', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-23 21:27:55.550042');
-INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-06-02 11:19:01.776798');
+INSERT INTO `django_session` VALUES ('qmr4tqdbmfeugyhjpwe387xfl9resoil', 'YmE3YWRhNDk3YTM1ZTQ4NmUwYWRjYWVlNjFjZTk0YjJkODU1NTlmYzp7InRlYWNoZXJfbmFtZSI6Inp4ZCIsInRlYWNoZXJfaWQiOjEsInN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-06-03 20:22:16.571963');
 INSERT INTO `django_session` VALUES ('vgx7be0tl5ku47i3a2k4pug90ymf70wj', 'ZWJlMjk2MjM5YTUyY2QwMzliNTA0NjBiNzIzNWFmNjgzZTI5YmJjOTp7InN0dV9uYW1lIjoieXloIiwic3R1X2lkIjoxLCJ0ZWFjaGVyX25hbWUiOiJ6eGQiLCJ0ZWFjaGVyX2lkIjoxLCJpbnN0cnVjdG9yX25hbWUiOiJcdThmODVcdTViZmNcdTU0NTgxIiwiaW5zdHJ1Y3Rvcl9pZCI6MX0=', '2019-04-16 03:07:47.777296');
 
 -- ----------------------------
@@ -585,7 +592,7 @@ CREATE TABLE `job_certification`  (
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `days` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of job_certification
@@ -595,6 +602,7 @@ INSERT INTO `job_certification` VALUES (1, 3, 27, '前台', 60);
 INSERT INTO `job_certification` VALUES (1, 4, 29, '数据分析师', 90);
 INSERT INTO `job_certification` VALUES (1, 6, 32, '产品助理', 90);
 INSERT INTO `job_certification` VALUES (1, 7, 35, '会计', 90);
+INSERT INTO `job_certification` VALUES (0, 10, 36, '家教', 40);
 
 -- ----------------------------
 -- Table structure for labor_score
@@ -665,13 +673,14 @@ CREATE TABLE `orders`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE,
   INDEX `buyer_id`(`buyer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (4, 9, 10, 87, 100, 6999, 1, 1);
 INSERT INTO `orders` VALUES (5, 11, 10, 87, 100, 2699, 1, 3);
+INSERT INTO `orders` VALUES (6, 14, 2, 100, 100, 39, 1, 1);
 
 -- ----------------------------
 -- Table structure for pen_appeal
@@ -704,7 +713,7 @@ CREATE TABLE `penalty`  (
   `stu_id` int(11) NULL DEFAULT NULL,
   `teacher_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`stu_pen_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of penalty
@@ -714,6 +723,8 @@ INSERT INTO `penalty` VALUES (19, '丢书', 40, 20, NULL, NULL, 2, NULL);
 INSERT INTO `penalty` VALUES (20, '丢书', 40, 20, NULL, NULL, 2, NULL);
 INSERT INTO `penalty` VALUES (21, '丢书', 45, 20, NULL, NULL, 1, NULL);
 INSERT INTO `penalty` VALUES (22, '逾期', 46, 2, 0, 1, 1, NULL);
+INSERT INTO `penalty` VALUES (23, '丢书', 47, 20, NULL, NULL, 1, NULL);
+INSERT INTO `penalty` VALUES (24, '逾期', 49, 2, 1, 0, 1, NULL);
 
 -- ----------------------------
 -- Table structure for products
@@ -729,7 +740,7 @@ CREATE TABLE `products`  (
   `status` int(255) NULL DEFAULT NULL,
   `paid` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`pro_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products
@@ -738,7 +749,7 @@ INSERT INTO `products` VALUES (9, 'iphone XR', 8999, 6999, 1, '南校', 1, 1);
 INSERT INTO `products` VALUES (10, 'ipad', 2999, 800, 3, '南校', 1, 0);
 INSERT INTO `products` VALUES (11, '笔记本电脑', 5699, 2699, 3, '教超', 1, 1);
 INSERT INTO `products` VALUES (12, '笔记本电脑', 2999, 800, 7, '南校', 1, 0);
-INSERT INTO `products` VALUES (13, '书籍', 99, 90, 13, '南校', 1, 0);
+INSERT INTO `products` VALUES (14, '托福词汇', 59, 39, 1, '南校', 1, 1);
 
 -- ----------------------------
 -- Table structure for rules
@@ -799,131 +810,131 @@ CREATE TABLE `sep_score`  (
   `score` int(255) NULL DEFAULT NULL,
   `rank` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`sep_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1073 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1313 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sep_score
 -- ----------------------------
-INSERT INTO `sep_score` VALUES (953, 'stu_scholarship', 13, 200, 1);
-INSERT INTO `sep_score` VALUES (954, 'stu_scholarship', 8, 170, 2);
-INSERT INTO `sep_score` VALUES (955, 'stu_scholarship', 2, 140, 3);
-INSERT INTO `sep_score` VALUES (956, 'stu_scholarship', 1, 100, 4);
-INSERT INTO `sep_score` VALUES (957, 'stu_scholarship', 3, 100, 5);
-INSERT INTO `sep_score` VALUES (958, 'stu_scholarship', 4, 100, 6);
-INSERT INTO `sep_score` VALUES (959, 'stu_scholarship', 5, 100, 7);
-INSERT INTO `sep_score` VALUES (960, 'stu_scholarship', 6, 100, 8);
-INSERT INTO `sep_score` VALUES (961, 'stu_scholarship', 7, 100, 9);
-INSERT INTO `sep_score` VALUES (962, 'stu_scholarship', 9, 100, 10);
-INSERT INTO `sep_score` VALUES (963, 'stu_scholarship', 10, 100, 11);
-INSERT INTO `sep_score` VALUES (964, 'stu_scholarship', 11, 100, 12);
-INSERT INTO `sep_score` VALUES (965, 'stu_scholarship', 12, 100, 13);
-INSERT INTO `sep_score` VALUES (966, 'stu_scholarship', 14, 100, 14);
-INSERT INTO `sep_score` VALUES (967, 'stu_scholarship', 15, 100, 15);
-INSERT INTO `sep_score` VALUES (968, 'stu_gpa', 13, 176, 1);
-INSERT INTO `sep_score` VALUES (969, 'stu_gpa', 8, 175, 2);
-INSERT INTO `sep_score` VALUES (970, 'stu_gpa', 2, 172, 3);
-INSERT INTO `sep_score` VALUES (971, 'stu_gpa', 1, 169, 4);
-INSERT INTO `sep_score` VALUES (972, 'stu_gpa', 11, 167, 5);
-INSERT INTO `sep_score` VALUES (973, 'stu_gpa', 14, 165, 6);
-INSERT INTO `sep_score` VALUES (974, 'stu_gpa', 12, 163, 7);
-INSERT INTO `sep_score` VALUES (975, 'stu_gpa', 4, 161, 8);
-INSERT INTO `sep_score` VALUES (976, 'stu_gpa', 15, 161, 9);
-INSERT INTO `sep_score` VALUES (977, 'stu_gpa', 6, 159, 10);
-INSERT INTO `sep_score` VALUES (978, 'stu_gpa', 3, 157, 11);
-INSERT INTO `sep_score` VALUES (979, 'stu_gpa', 9, 155, 12);
-INSERT INTO `sep_score` VALUES (980, 'stu_gpa', 5, 153, 13);
-INSERT INTO `sep_score` VALUES (981, 'stu_gpa', 7, 153, 14);
-INSERT INTO `sep_score` VALUES (982, 'stu_gpa', 10, 150, 15);
-INSERT INTO `sep_score` VALUES (983, 'stu_paper', 1, 115, 1);
-INSERT INTO `sep_score` VALUES (984, 'stu_paper', 5, 105, 2);
-INSERT INTO `sep_score` VALUES (985, 'stu_paper', 6, 105, 3);
-INSERT INTO `sep_score` VALUES (986, 'stu_paper', 10, 104, 4);
-INSERT INTO `sep_score` VALUES (987, 'stu_paper', 14, 103, 5);
-INSERT INTO `sep_score` VALUES (988, 'stu_paper', 3, 101, 6);
-INSERT INTO `sep_score` VALUES (989, 'stu_paper', 11, 101, 7);
-INSERT INTO `sep_score` VALUES (990, 'stu_paper', 2, 100, 8);
-INSERT INTO `sep_score` VALUES (991, 'stu_paper', 4, 100, 9);
-INSERT INTO `sep_score` VALUES (992, 'stu_paper', 7, 100, 10);
-INSERT INTO `sep_score` VALUES (993, 'stu_paper', 8, 100, 11);
-INSERT INTO `sep_score` VALUES (994, 'stu_paper', 9, 100, 12);
-INSERT INTO `sep_score` VALUES (995, 'stu_paper', 12, 100, 13);
-INSERT INTO `sep_score` VALUES (996, 'stu_paper', 13, 100, 14);
-INSERT INTO `sep_score` VALUES (997, 'stu_paper', 15, 100, 15);
-INSERT INTO `sep_score` VALUES (998, 'stu_job', 4, 140, 1);
-INSERT INTO `sep_score` VALUES (999, 'stu_job', 6, 140, 2);
-INSERT INTO `sep_score` VALUES (1000, 'stu_job', 7, 140, 3);
-INSERT INTO `sep_score` VALUES (1001, 'stu_job', 3, 110, 4);
-INSERT INTO `sep_score` VALUES (1002, 'stu_job', 1, 90, 5);
-INSERT INTO `sep_score` VALUES (1003, 'stu_job', 2, 50, 6);
-INSERT INTO `sep_score` VALUES (1004, 'stu_job', 5, 50, 7);
-INSERT INTO `sep_score` VALUES (1005, 'stu_job', 8, 50, 8);
-INSERT INTO `sep_score` VALUES (1006, 'stu_job', 9, 50, 9);
-INSERT INTO `sep_score` VALUES (1007, 'stu_job', 10, 50, 10);
-INSERT INTO `sep_score` VALUES (1008, 'stu_job', 11, 50, 11);
-INSERT INTO `sep_score` VALUES (1009, 'stu_job', 12, 50, 12);
-INSERT INTO `sep_score` VALUES (1010, 'stu_job', 13, 50, 13);
-INSERT INTO `sep_score` VALUES (1011, 'stu_job', 14, 50, 14);
-INSERT INTO `sep_score` VALUES (1012, 'stu_job', 15, 50, 15);
-INSERT INTO `sep_score` VALUES (1013, 'stu_cheat', 1, 200, 1);
-INSERT INTO `sep_score` VALUES (1014, 'stu_cheat', 2, 200, 2);
-INSERT INTO `sep_score` VALUES (1015, 'stu_cheat', 3, 200, 3);
-INSERT INTO `sep_score` VALUES (1016, 'stu_cheat', 4, 200, 4);
-INSERT INTO `sep_score` VALUES (1017, 'stu_cheat', 5, 200, 5);
-INSERT INTO `sep_score` VALUES (1018, 'stu_cheat', 6, 200, 6);
-INSERT INTO `sep_score` VALUES (1019, 'stu_cheat', 7, 200, 7);
-INSERT INTO `sep_score` VALUES (1020, 'stu_cheat', 8, 200, 8);
-INSERT INTO `sep_score` VALUES (1021, 'stu_cheat', 9, 200, 9);
-INSERT INTO `sep_score` VALUES (1022, 'stu_cheat', 10, 200, 10);
-INSERT INTO `sep_score` VALUES (1023, 'stu_cheat', 11, 200, 11);
-INSERT INTO `sep_score` VALUES (1024, 'stu_cheat', 12, 200, 12);
-INSERT INTO `sep_score` VALUES (1025, 'stu_cheat', 13, 200, 13);
-INSERT INTO `sep_score` VALUES (1026, 'stu_cheat', 14, 200, 14);
-INSERT INTO `sep_score` VALUES (1027, 'stu_cheat', 15, 200, 15);
-INSERT INTO `sep_score` VALUES (1028, 'stu_c', 2, 200, 1);
-INSERT INTO `sep_score` VALUES (1029, 'stu_c', 4, 200, 2);
-INSERT INTO `sep_score` VALUES (1030, 'stu_c', 5, 200, 3);
-INSERT INTO `sep_score` VALUES (1031, 'stu_c', 6, 200, 4);
-INSERT INTO `sep_score` VALUES (1032, 'stu_c', 7, 200, 5);
-INSERT INTO `sep_score` VALUES (1033, 'stu_c', 8, 200, 6);
-INSERT INTO `sep_score` VALUES (1034, 'stu_c', 9, 200, 7);
-INSERT INTO `sep_score` VALUES (1035, 'stu_c', 11, 200, 8);
-INSERT INTO `sep_score` VALUES (1036, 'stu_c', 12, 200, 9);
-INSERT INTO `sep_score` VALUES (1037, 'stu_c', 13, 200, 10);
-INSERT INTO `sep_score` VALUES (1038, 'stu_c', 14, 200, 11);
-INSERT INTO `sep_score` VALUES (1039, 'stu_c', 15, 200, 12);
-INSERT INTO `sep_score` VALUES (1040, 'stu_c', 1, 100, 13);
-INSERT INTO `sep_score` VALUES (1041, 'stu_c', 3, 100, 14);
-INSERT INTO `sep_score` VALUES (1042, 'stu_c', 10, 87, 15);
-INSERT INTO `sep_score` VALUES (1043, 'stu_credit', 13, 160, 1);
-INSERT INTO `sep_score` VALUES (1044, 'stu_credit', 2, 140, 2);
-INSERT INTO `sep_score` VALUES (1045, 'stu_credit', 12, 140, 3);
-INSERT INTO `sep_score` VALUES (1046, 'stu_credit', 1, 120, 4);
-INSERT INTO `sep_score` VALUES (1047, 'stu_credit', 3, 120, 5);
-INSERT INTO `sep_score` VALUES (1048, 'stu_credit', 4, 120, 6);
-INSERT INTO `sep_score` VALUES (1049, 'stu_credit', 5, 120, 7);
-INSERT INTO `sep_score` VALUES (1050, 'stu_credit', 8, 120, 8);
-INSERT INTO `sep_score` VALUES (1051, 'stu_credit', 11, 120, 9);
-INSERT INTO `sep_score` VALUES (1052, 'stu_credit', 6, 100, 10);
-INSERT INTO `sep_score` VALUES (1053, 'stu_credit', 7, 100, 11);
-INSERT INTO `sep_score` VALUES (1054, 'stu_credit', 9, 100, 12);
-INSERT INTO `sep_score` VALUES (1055, 'stu_credit', 10, 100, 13);
-INSERT INTO `sep_score` VALUES (1056, 'stu_credit', 14, 100, 14);
-INSERT INTO `sep_score` VALUES (1057, 'stu_credit', 15, 100, 15);
-INSERT INTO `sep_score` VALUES (1058, 'stu_penalty', 1, 200, 1);
-INSERT INTO `sep_score` VALUES (1059, 'stu_penalty', 2, 200, 2);
-INSERT INTO `sep_score` VALUES (1060, 'stu_penalty', 3, 200, 3);
-INSERT INTO `sep_score` VALUES (1061, 'stu_penalty', 4, 200, 4);
-INSERT INTO `sep_score` VALUES (1062, 'stu_penalty', 5, 200, 5);
-INSERT INTO `sep_score` VALUES (1063, 'stu_penalty', 6, 200, 6);
-INSERT INTO `sep_score` VALUES (1064, 'stu_penalty', 7, 200, 7);
-INSERT INTO `sep_score` VALUES (1065, 'stu_penalty', 8, 200, 8);
-INSERT INTO `sep_score` VALUES (1066, 'stu_penalty', 9, 200, 9);
-INSERT INTO `sep_score` VALUES (1067, 'stu_penalty', 10, 200, 10);
-INSERT INTO `sep_score` VALUES (1068, 'stu_penalty', 11, 200, 11);
-INSERT INTO `sep_score` VALUES (1069, 'stu_penalty', 12, 200, 12);
-INSERT INTO `sep_score` VALUES (1070, 'stu_penalty', 13, 200, 13);
-INSERT INTO `sep_score` VALUES (1071, 'stu_penalty', 14, 200, 14);
-INSERT INTO `sep_score` VALUES (1072, 'stu_penalty', 15, 200, 15);
+INSERT INTO `sep_score` VALUES (1193, 'stu_scholarship', 13, 200, 1);
+INSERT INTO `sep_score` VALUES (1194, 'stu_scholarship', 8, 170, 2);
+INSERT INTO `sep_score` VALUES (1195, 'stu_scholarship', 2, 140, 3);
+INSERT INTO `sep_score` VALUES (1196, 'stu_scholarship', 1, 100, 4);
+INSERT INTO `sep_score` VALUES (1197, 'stu_scholarship', 3, 100, 5);
+INSERT INTO `sep_score` VALUES (1198, 'stu_scholarship', 4, 100, 6);
+INSERT INTO `sep_score` VALUES (1199, 'stu_scholarship', 5, 100, 7);
+INSERT INTO `sep_score` VALUES (1200, 'stu_scholarship', 6, 100, 8);
+INSERT INTO `sep_score` VALUES (1201, 'stu_scholarship', 7, 100, 9);
+INSERT INTO `sep_score` VALUES (1202, 'stu_scholarship', 9, 100, 10);
+INSERT INTO `sep_score` VALUES (1203, 'stu_scholarship', 10, 100, 11);
+INSERT INTO `sep_score` VALUES (1204, 'stu_scholarship', 11, 100, 12);
+INSERT INTO `sep_score` VALUES (1205, 'stu_scholarship', 12, 100, 13);
+INSERT INTO `sep_score` VALUES (1206, 'stu_scholarship', 14, 100, 14);
+INSERT INTO `sep_score` VALUES (1207, 'stu_scholarship', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (1208, 'stu_gpa', 13, 176, 1);
+INSERT INTO `sep_score` VALUES (1209, 'stu_gpa', 8, 175, 2);
+INSERT INTO `sep_score` VALUES (1210, 'stu_gpa', 2, 172, 3);
+INSERT INTO `sep_score` VALUES (1211, 'stu_gpa', 1, 169, 4);
+INSERT INTO `sep_score` VALUES (1212, 'stu_gpa', 11, 167, 5);
+INSERT INTO `sep_score` VALUES (1213, 'stu_gpa', 14, 165, 6);
+INSERT INTO `sep_score` VALUES (1214, 'stu_gpa', 12, 163, 7);
+INSERT INTO `sep_score` VALUES (1215, 'stu_gpa', 4, 161, 8);
+INSERT INTO `sep_score` VALUES (1216, 'stu_gpa', 15, 161, 9);
+INSERT INTO `sep_score` VALUES (1217, 'stu_gpa', 6, 159, 10);
+INSERT INTO `sep_score` VALUES (1218, 'stu_gpa', 3, 157, 11);
+INSERT INTO `sep_score` VALUES (1219, 'stu_gpa', 9, 155, 12);
+INSERT INTO `sep_score` VALUES (1220, 'stu_gpa', 5, 153, 13);
+INSERT INTO `sep_score` VALUES (1221, 'stu_gpa', 7, 153, 14);
+INSERT INTO `sep_score` VALUES (1222, 'stu_gpa', 10, 150, 15);
+INSERT INTO `sep_score` VALUES (1223, 'stu_paper', 1, 115, 1);
+INSERT INTO `sep_score` VALUES (1224, 'stu_paper', 5, 105, 2);
+INSERT INTO `sep_score` VALUES (1225, 'stu_paper', 6, 105, 3);
+INSERT INTO `sep_score` VALUES (1226, 'stu_paper', 10, 104, 4);
+INSERT INTO `sep_score` VALUES (1227, 'stu_paper', 14, 103, 5);
+INSERT INTO `sep_score` VALUES (1228, 'stu_paper', 3, 101, 6);
+INSERT INTO `sep_score` VALUES (1229, 'stu_paper', 11, 101, 7);
+INSERT INTO `sep_score` VALUES (1230, 'stu_paper', 2, 100, 8);
+INSERT INTO `sep_score` VALUES (1231, 'stu_paper', 4, 100, 9);
+INSERT INTO `sep_score` VALUES (1232, 'stu_paper', 7, 100, 10);
+INSERT INTO `sep_score` VALUES (1233, 'stu_paper', 8, 100, 11);
+INSERT INTO `sep_score` VALUES (1234, 'stu_paper', 9, 100, 12);
+INSERT INTO `sep_score` VALUES (1235, 'stu_paper', 12, 100, 13);
+INSERT INTO `sep_score` VALUES (1236, 'stu_paper', 13, 100, 14);
+INSERT INTO `sep_score` VALUES (1237, 'stu_paper', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (1238, 'stu_job', 4, 140, 1);
+INSERT INTO `sep_score` VALUES (1239, 'stu_job', 6, 140, 2);
+INSERT INTO `sep_score` VALUES (1240, 'stu_job', 7, 140, 3);
+INSERT INTO `sep_score` VALUES (1241, 'stu_job', 3, 110, 4);
+INSERT INTO `sep_score` VALUES (1242, 'stu_job', 1, 90, 5);
+INSERT INTO `sep_score` VALUES (1243, 'stu_job', 2, 50, 6);
+INSERT INTO `sep_score` VALUES (1244, 'stu_job', 5, 50, 7);
+INSERT INTO `sep_score` VALUES (1245, 'stu_job', 8, 50, 8);
+INSERT INTO `sep_score` VALUES (1246, 'stu_job', 9, 50, 9);
+INSERT INTO `sep_score` VALUES (1247, 'stu_job', 10, 50, 10);
+INSERT INTO `sep_score` VALUES (1248, 'stu_job', 11, 50, 11);
+INSERT INTO `sep_score` VALUES (1249, 'stu_job', 12, 50, 12);
+INSERT INTO `sep_score` VALUES (1250, 'stu_job', 13, 50, 13);
+INSERT INTO `sep_score` VALUES (1251, 'stu_job', 14, 50, 14);
+INSERT INTO `sep_score` VALUES (1252, 'stu_job', 15, 50, 15);
+INSERT INTO `sep_score` VALUES (1253, 'stu_cheat', 1, 200, 1);
+INSERT INTO `sep_score` VALUES (1254, 'stu_cheat', 2, 200, 2);
+INSERT INTO `sep_score` VALUES (1255, 'stu_cheat', 3, 200, 3);
+INSERT INTO `sep_score` VALUES (1256, 'stu_cheat', 4, 200, 4);
+INSERT INTO `sep_score` VALUES (1257, 'stu_cheat', 5, 200, 5);
+INSERT INTO `sep_score` VALUES (1258, 'stu_cheat', 6, 200, 6);
+INSERT INTO `sep_score` VALUES (1259, 'stu_cheat', 7, 200, 7);
+INSERT INTO `sep_score` VALUES (1260, 'stu_cheat', 8, 200, 8);
+INSERT INTO `sep_score` VALUES (1261, 'stu_cheat', 9, 200, 9);
+INSERT INTO `sep_score` VALUES (1262, 'stu_cheat', 10, 200, 10);
+INSERT INTO `sep_score` VALUES (1263, 'stu_cheat', 11, 200, 11);
+INSERT INTO `sep_score` VALUES (1264, 'stu_cheat', 12, 200, 12);
+INSERT INTO `sep_score` VALUES (1265, 'stu_cheat', 13, 200, 13);
+INSERT INTO `sep_score` VALUES (1266, 'stu_cheat', 14, 200, 14);
+INSERT INTO `sep_score` VALUES (1267, 'stu_cheat', 15, 200, 15);
+INSERT INTO `sep_score` VALUES (1268, 'stu_c', 4, 200, 1);
+INSERT INTO `sep_score` VALUES (1269, 'stu_c', 5, 200, 2);
+INSERT INTO `sep_score` VALUES (1270, 'stu_c', 6, 200, 3);
+INSERT INTO `sep_score` VALUES (1271, 'stu_c', 7, 200, 4);
+INSERT INTO `sep_score` VALUES (1272, 'stu_c', 8, 200, 5);
+INSERT INTO `sep_score` VALUES (1273, 'stu_c', 9, 200, 6);
+INSERT INTO `sep_score` VALUES (1274, 'stu_c', 11, 200, 7);
+INSERT INTO `sep_score` VALUES (1275, 'stu_c', 12, 200, 8);
+INSERT INTO `sep_score` VALUES (1276, 'stu_c', 13, 200, 9);
+INSERT INTO `sep_score` VALUES (1277, 'stu_c', 14, 200, 10);
+INSERT INTO `sep_score` VALUES (1278, 'stu_c', 15, 200, 11);
+INSERT INTO `sep_score` VALUES (1279, 'stu_c', 1, 100, 12);
+INSERT INTO `sep_score` VALUES (1280, 'stu_c', 2, 100, 13);
+INSERT INTO `sep_score` VALUES (1281, 'stu_c', 3, 100, 14);
+INSERT INTO `sep_score` VALUES (1282, 'stu_c', 10, 87, 15);
+INSERT INTO `sep_score` VALUES (1283, 'stu_credit', 13, 160, 1);
+INSERT INTO `sep_score` VALUES (1284, 'stu_credit', 2, 140, 2);
+INSERT INTO `sep_score` VALUES (1285, 'stu_credit', 12, 140, 3);
+INSERT INTO `sep_score` VALUES (1286, 'stu_credit', 1, 120, 4);
+INSERT INTO `sep_score` VALUES (1287, 'stu_credit', 3, 120, 5);
+INSERT INTO `sep_score` VALUES (1288, 'stu_credit', 4, 120, 6);
+INSERT INTO `sep_score` VALUES (1289, 'stu_credit', 5, 120, 7);
+INSERT INTO `sep_score` VALUES (1290, 'stu_credit', 8, 120, 8);
+INSERT INTO `sep_score` VALUES (1291, 'stu_credit', 11, 120, 9);
+INSERT INTO `sep_score` VALUES (1292, 'stu_credit', 6, 100, 10);
+INSERT INTO `sep_score` VALUES (1293, 'stu_credit', 7, 100, 11);
+INSERT INTO `sep_score` VALUES (1294, 'stu_credit', 9, 100, 12);
+INSERT INTO `sep_score` VALUES (1295, 'stu_credit', 10, 100, 13);
+INSERT INTO `sep_score` VALUES (1296, 'stu_credit', 14, 100, 14);
+INSERT INTO `sep_score` VALUES (1297, 'stu_credit', 15, 100, 15);
+INSERT INTO `sep_score` VALUES (1298, 'stu_penalty', 2, 200, 1);
+INSERT INTO `sep_score` VALUES (1299, 'stu_penalty', 3, 200, 2);
+INSERT INTO `sep_score` VALUES (1300, 'stu_penalty', 4, 200, 3);
+INSERT INTO `sep_score` VALUES (1301, 'stu_penalty', 5, 200, 4);
+INSERT INTO `sep_score` VALUES (1302, 'stu_penalty', 6, 200, 5);
+INSERT INTO `sep_score` VALUES (1303, 'stu_penalty', 7, 200, 6);
+INSERT INTO `sep_score` VALUES (1304, 'stu_penalty', 8, 200, 7);
+INSERT INTO `sep_score` VALUES (1305, 'stu_penalty', 9, 200, 8);
+INSERT INTO `sep_score` VALUES (1306, 'stu_penalty', 10, 200, 9);
+INSERT INTO `sep_score` VALUES (1307, 'stu_penalty', 11, 200, 10);
+INSERT INTO `sep_score` VALUES (1308, 'stu_penalty', 12, 200, 11);
+INSERT INTO `sep_score` VALUES (1309, 'stu_penalty', 13, 200, 12);
+INSERT INTO `sep_score` VALUES (1310, 'stu_penalty', 14, 200, 13);
+INSERT INTO `sep_score` VALUES (1311, 'stu_penalty', 15, 200, 14);
+INSERT INTO `sep_score` VALUES (1312, 'stu_penalty', 1, 190, 15);
 
 -- ----------------------------
 -- Table structure for student
@@ -946,8 +957,8 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, '1', 7079, '本科', 101, 1, 1);
-INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, '1', 450, '本科', 201, 2, 1);
+INSERT INTO `student` VALUES (1, '000', 'yyh', 2015, '1', 7096, '本科', 101, 1, 1);
+INSERT INTO `student` VALUES (2, '000', 'xxc', 2015, '1', 411, '本科', 201, 2, 1);
 INSERT INTO `student` VALUES (3, '000', 'tjy', 2015, '1', 2799, '本科', 102, 1, 1);
 INSERT INTO `student` VALUES (4, '000', 'ljh', 2015, '1', 100, '本科', 202, 2, 1);
 INSERT INTO `student` VALUES (5, '000', 'Sam', 2015, '2', 100, '本科', NULL, NULL, 1);
@@ -974,7 +985,7 @@ CREATE TABLE `student_choice`  (
   `course_id` int(11) NULL DEFAULT NULL,
   `status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`student_choice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_choice
@@ -1039,6 +1050,7 @@ INSERT INTO `student_choice` VALUES (85, 41, 86, 15, 8, 0);
 INSERT INTO `student_choice` VALUES (86, 42, 83, 15, 10, 0);
 INSERT INTO `student_choice` VALUES (87, 39, 88, 15, 9, 0);
 INSERT INTO `student_choice` VALUES (88, 37, 65, 15, 4, 0);
+INSERT INTO `student_choice` VALUES (102, 36, NULL, 1, 6, 0);
 
 -- ----------------------------
 -- Table structure for teacher
