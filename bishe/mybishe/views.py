@@ -507,7 +507,6 @@ def sch_order(request):
 	scholarships = models.Scholarship.objects.filter(stu_id = request.session.get('stu_id'),status =0)
 	return render(request,'student/stu_scholarship.html',{'scholarships':scholarships})
 
-#判断年级
 def test_grade(year):
     if datetime.datetime.now().month in [1,2,3,4,5,6,7,8]:
         i = 1
@@ -663,13 +662,13 @@ def stu_index(request):
 	labels = np.array(['奖学金','绩点','学生工作','校外工作','校内纪律','二手商品','技能','罚款情况'])
 	print(data)
 	angles = np.linspace(0, 2*np.pi, dataLenth, endpoint=False)
-	data = np.concatenate((data, [data[0]])) # 闭合
-	angles = np.concatenate((angles, [angles[0]])) # 闭合
+	data = np.concatenate((data, [data[0]]))
+	angles = np.concatenate((angles, [angles[0]]))
 	fig = plt.figure()
-	ax = fig.add_subplot(111, polar=True)# polar参数！！
+	ax = fig.add_subplot(111, polar=True)
 	ax.set_rlim(0,200)
-	ax.plot(angles, data,'bo-', linewidth=2)# 画线
-	ax.fill(angles, data, facecolor='r', alpha=0.25)# 填充
+	ax.plot(angles, data,'bo-', linewidth=2)
+	ax.fill(angles, data, facecolor='r', alpha=0.25)
 	ax.set_thetagrids(angles * 180/np.pi, labels, fontproperties="SimHei")
 	ax.set_title("{}的雷达图".format(student.stu_name), va='bottom', fontproperties="SimHei")
 	ax.grid(True)
